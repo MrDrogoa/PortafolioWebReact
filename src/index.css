@@ -1,0 +1,9 @@
+@import "tailwindcss";
+
+.font-primary {
+  font-family: "Montserrat", sans-serif;
+}
+
+.font-secondary {
+  font-family: "DM Sans", sans-serif;
+}
