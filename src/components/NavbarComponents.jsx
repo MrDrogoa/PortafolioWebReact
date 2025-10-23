@@ -10,7 +10,7 @@ function NavbarComponents() {
         {/* Logo */}
         <Navimg />
         {/* Navigation Links */}
-        <div className="flex-1 flex justify-center">
+        <div className="flex-1 flex justify-end lg:justify-center">
           <NavList />
         </div>
       </section>

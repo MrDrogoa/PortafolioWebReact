@@ -103,3 +103,44 @@ Notas / próximos pasos sugeridos
 - Revisar `tailwind.config.js` para asegurar que `content` incluya `./index.html` y `./src/**/*.{js,jsx}`.
 
 Si quieres, aplico cualquiera de estos pasos por ti ahora (por ejemplo: mover/crear carpetas de assets, ajustar `index.css` o añadir el menú responsive).
+
+# Cambios realizados el 23 de octubre de 2025
+
+Resumen de lo implementado y revisado hoy:
+
+- Iconos
+  - Instalé y configuré `react-icons` (se añadió la dependencia al proyecto).
+  - Creé `src/components/icons/Icons.jsx` que reexporta los iconos que usamos (Github, Instagram, LinkedIn, WhatsApp, Menu), dejando el control de tamaño y color a los componentes que los consumen.
+  - Corregí importaciones incorrectas (por ejemplo `HiMenuAlt3` se importa desde `react-icons/hi`, no desde `react-icons/fa`).
+
+- Navbar y menú responsive
+  - Implementé `src/components/nav/NavList.jsx` con la versión de escritorio (lista horizontal) y un `MobileMenu` dinámico para pantallas pequeñas.
+  - El `MobileMenu` renderiza el dropdown dinámicamente desde el array `items` y cierra el menú al seleccionar una opción.
+  - Añadí control para mostrar el dropdown y propuesta para controlar su tamaño y comportamiento por clases Tailwind (`fixed` / `w-screen` / `h-64` / `overflow-auto`).
+
+- Hero & Social links
+  - Implementé `src/components/hero/HeroLinks.jsx` con una barra vertical de iconos sociales (componentes reutilizables) usando Tailwind; el hover aplica el color `#FF6F61`.
+  - Refactoricé `HeroLinks.jsx` para generar los iconos dinámicamente desde un array (menos código repetido).
+
+- Componentes y utilidades
+  - `src/components/ButtonComponents.jsx` convertido en componente reutilizable que acepta `children`, `className` y `onClick`.
+  - `src/components/nav/Navimg.jsx` importando correctamente el logo desde `src/assets/images/logo.svg` y envolviéndolo en un `Link`.
+
+- Arreglos y comprobaciones
+  - Revisé y corregí errores en consola relacionados con imports o nombres de iconos.
+  - Añadí el fondo global en `src/layout/Layout.jsx` (`min-h-screen bg-[#202023] text-white`).
+
+Cómo probar los cambios localmente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm install
+pnpm run dev
+```
+
+Luego abre la app y prueba:
+- Header: comprobar navbar en escritorio y el botón de menú en móvil.
+- Hero: ver la barra social vertical y los hover en `#FF6F61`.
+- Iconos: verificar que los iconos se muestren y respondan a `size` / `className`.
+
+Si quieres que añada cierre al hacer click fuera del dropdown, animaciones o que reemplace usos antiguos por las nuevas versiones de los componentes, lo hago ahora.
