@@ -7,7 +7,7 @@ function Navimg() {
     <div>
       {/* Logo */}
       <Link to="/">
-        <img src={Logo} alt="Logo" className="h-8" />
+        <img src={Logo} alt="Logo" />
       </Link>
     </div>
   );

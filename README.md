@@ -143,4 +143,109 @@ Luego abre la app y prueba:
 - Hero: ver la barra social vertical y los hover en `#FF6F61`.
 - Iconos: verificar que los iconos se muestren y respondan a `size` / `className`.
 
-Si quieres que añada cierre al hacer click fuera del dropdown, animaciones o que reemplace usos antiguos por las nuevas versiones de los componentes, lo hago ahora.
+## Cambios realizados el 28 de octubre de 2025
+
+Resumen de lo implementado y corregido hoy:
+
+- Hero (fondo/íconos)
+  - Creé/ajusté `src/components/hero/HeroIcons.jsx` y lo dejé como elemento decorativo dentro del contenedor del Hero: la imagen de la luna ahora usa `z-0` y `pointer-events-none` para quedar visible detrás del contenido del Hero sin interceptar eventos.
+  - Reemplacé implementaciones corruptas y limpié `src/components/HeroComponents.jsx` para asegurar que la imagen (HeroIcons) esté dentro del `section` relativo y el contenido use `z-10`/`z-20` para superponerse.
+  - `src/components/hero/HeroContent.jsx` fue actualizado para aceptar un `className` desde su padre (por ejemplo `z-10`) y así controlar el stacking correctamente.
+
+- Navegación y UI
+  - Mantuvimos y refinamos el `MobileMenu` en `src/components/nav/NavList.jsx` (dropdown dinámico y accesible).
+  - `src/components/nav/Navimg.jsx` y `src/components/NavbarComponents.jsx` se ajustaron para asegurar el logo y la estructura flex correcta (logo a la izquierda, menú centrado).
+
+- Componentes reutilizables
+  - `src/components/ButtonComponents.jsx` quedó como componente reutilizable (acepta `children`, `className`, `onClick`).
+  - Se creó/validó `src/components/icons/Icons.jsx` como módulo central de iconos para evitar imports duplicados y facilitar control de tamaño/color.
+
+- Corregidos errores y limpieza
+  - Se realizaron varias correcciones de imports rotos y duplicados (al editar archivos se produjo contenido duplicado en `HeroComponents.jsx`, ya corregido).
+  - Realicé comprobaciones de sintaxis con el linter/compilador en los archivos tocados: `HeroIcons.jsx`, `HeroComponents.jsx`, `hero/HeroContent.jsx` — no se detectaron errores de compilación.
+
+Cómo probar localmente (rápido)
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm install
+pnpm run dev
+```
+
+Después de arrancar, recarga la página (Ctrl+F5) y verifica:
+- Que la luna aparezca detrás del texto del Hero (si no la ves, dime y ajusto tamaño/posición/opacidad).
+- Que la barra social lateral se muestre y los hovers usen `#FF6F61`.
+
+Notas y próximos pasos sugeridos
+- Si quieres que la luna esté centrada o con otro tamaño/opacidad puedo aplicarlo ahora (ej.: `inset-0`, `transform -translate-...`, `w-96`, `opacity-60`).
+- Si quieres que haga el commit con los cambios y haga push a la rama `main`, indícame y lo preparo (necesitaré que autorices/ejecutes los comandos en tu máquina o me indiques que lo haga aquí si tienes remotos configurados).
+
+Registro rápido de archivos tocados hoy:
+
+- src/components/hero/HeroIcons.jsx — z-0, pointer-events-none, aria-hidden
+- src/components/HeroComponents.jsx — limpieza y posicionamiento correcto
+- src/components/hero/HeroContent.jsx — acepta `className` (para controlar z-index)
+- src/components/hero/HeroLinks.jsx — refactor dinámico y verificación
+- src/components/nav/NavList.jsx — mobile dropdown dinámico (ajustes menores)
+- src/components/nav/Navimg.jsx — import del logo corregido
+- src/components/ButtonComponents.jsx — reutilizable
+- src/components/icons/Icons.jsx — módulo de iconos
+- src/layout/Layout.jsx — background global aplicado
+
+# Cambios realizados el 3 de noviembre de 2025
+
+Resumen de lo implementado y revisado hoy:
+
+- Navbar con hover y dropdown
+  - Implementé efecto hover con subrayado animado color `#FF6F61` en todos los enlaces del navbar (escritorio y móvil).
+  - Añadí dropdown para "Proyectos" con tres categorías: "Diseño UX UI", "Front End" y "Frameworks".
+  - El dropdown funciona tanto en escritorio (hover) como en móvil (botón expandible con +/-).
+  - Todo implementado usando **solo Tailwind CSS** sin librerías adicionales.
+  - Archivo modificado: `src/components/nav/NavList.jsx`
+
+- Carousel con Splide.js
+  - Instalé la dependencia `@splidejs/splide` usando pnpm.
+  - Configuré Splide globalmente importando los estilos en `src/main.jsx`.
+  - Creé archivo de configuración reutilizable `src/utils/splideConfig.js` con opciones predefinidas (default, testimonial, portfolio).
+  - Implementé carousel en `src/components/main/Carousel.jsx` para mostrar herramientas/tecnologías.
+  - El carousel es completamente responsive (4→3→2→1 slides según breakpoints).
+  - Características: autoplay, pausar al hover, navegación con flechas, loop infinito.
+  - Integré iconos de `react-icons` para mostrar logos de tecnologías con colores personalizados.
+
+- Componentes y mejoras
+  - Actualicé `src/components/main/Carousel.jsx` para renderizar iconos como componentes React en lugar de emojis.
+  - Simplifiqué el código del carousel eliminando lógica condicional innecesaria.
+  - Los iconos ahora se importan desde `src/components/icons/Icons.jsx` y se pasan como componentes al array de herramientas.
+
+Cómo probar localmente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm install
+pnpm run dev
+```
+
+Prueba estas funcionalidades:
+- **Navbar**: Pasa el cursor sobre los enlaces para ver el subrayado animado coral.
+- **Dropdown**: Hover sobre "Proyectos" en escritorio o toca en móvil para ver las categorías.
+- **Carousel**: El carrusel de herramientas debe auto-deslizarse cada 3 segundos, pausar al hover y mostrar iconos coloridos.
+
+Archivos modificados/creados hoy
+
+- `src/components/nav/NavList.jsx` — hover con underline y dropdown de Proyectos
+- `src/main.jsx` — importación global de estilos de Splide
+- `src/utils/splideConfig.js` — configuraciones reutilizables para Splide (NUEVO)
+- `src/components/main/Carousel.jsx` — implementación del carousel con Splide y react-icons
+- `README.md` — actualizado con los cambios del día
+
+Dependencias instaladas
+
+- `@splidejs/splide@4.1.4` — Librería de carousel ligera y flexible
+
+Recursos útiles
+
+- [Documentación de Splide](https://splidejs.com/)
+- [Opciones de configuración](https://splidejs.com/guides/options/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [Tailwind CSS Hover Effects](https://tailwindcss.com/docs/hover-focus-and-other-states)
+

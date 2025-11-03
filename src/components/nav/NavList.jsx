@@ -7,7 +7,7 @@ function NavList() {
   const items = [
     { to: "/", label: "Inicio" },
     { to: "/experience", label: "Experiencia" },
-    { to: "/about", label: "Sobre mi" },
+    { to: "/about", label: "Sobre mí" },
     { to: "/projects", label: "Proyectos" },
     { to: "/contact", label: "Contacto" },
   ];

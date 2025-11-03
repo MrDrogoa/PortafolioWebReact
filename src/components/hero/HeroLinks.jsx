@@ -31,21 +31,19 @@ function HeroLinks() {
   ];
 
   return (
-    <div className="fixed top-1/2 transform -translate-y-1/2 z-10">
-      <div className="hidden lg:flex justify-center flex-col items-center gap-4 py-6 px-3 border-2 border-white rounded-lg bg-transparent">
-        {links.map(({ Icon, href, label }) => (
-          <a
-            key={label}
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label={label}
-            className="bg-white rounded-md p-1 flex items-center justify-center hover:bg-[#FF6F61] transition-colors "
-          >
-            <Icon className="text-2xl text-[#202023]" />
-          </a>
-        ))}
-      </div>
+    <div className="hidden lg:flex justify-center flex-col items-center gap-4 py-6 px-3 border-2 border-white rounded-lg bg-transparent text-white absolute left-5 top-1/2 -translate-y-1/2 z-10">
+      {links.map(({ Icon, href, label }) => (
+        <a
+          key={label}
+          href={href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={label}
+          className="bg-white rounded-md p-1 flex items-center justify-center hover:bg-[#FF6F61] transition-colors "
+        >
+          <Icon className="text-2xl text-[#202023]" />
+        </a>
+      ))}
     </div>
   );
 }
