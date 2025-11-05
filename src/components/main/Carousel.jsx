@@ -1,5 +1,6 @@
 import React, { useEffect, useRef } from "react";
 import Splide from "@splidejs/splide";
+import Titleh2 from "../Titleh2";
 // icons
 import {
   ReactIcon,
@@ -17,25 +18,27 @@ import {
   WordpressIcon,
   GitIcon,
   FireIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
 } from "../icons/Icons";
 import { defaultSplideOptions } from "../../utils/splideConfig";
-// Ya no necesitas importar los estilos aquí porque están en main.jsx
+// Estilos personalizados del carousel
+import "../../css/Carousel.css";
 
 function Carousel() {
   const splideRef = useRef(null);
+  const splideInstance = useRef(null);
 
   useEffect(() => {
     if (splideRef.current) {
       // Inicializa Splide usando las opciones globales
-      // Puedes personalizar mezclando con opciones adicionales
       const splide = new Splide(splideRef.current, {
         ...defaultSplideOptions,
-        // Aquí puedes sobrescribir opciones específicas si lo necesitas:
-        // interval: 4000,
-        // perPage: 5,
+        arrows: false, // Desactivar flechas automáticas de Splide
       });
 
       splide.mount();
+      splideInstance.current = splide; // Guardar instancia para usar en los botones
 
       // Cleanup al desmontar el componente
       return () => {
@@ -64,14 +67,12 @@ function Carousel() {
   ];
 
   return (
-    <section className="max-w-[1300px] m-auto py-14 md:py-20 px-4">
+    <section className="max-w-[1000px] m-auto pt-8 sm:pt-10 md:pt-30 px-4">
       <article>
-        <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold text-center mb-12">
-          Herramientas
-        </h2>
+        <Titleh2 className="mb-8 md:mb-16">Herramientas</Titleh2>
 
         {/* Splide Carousel */}
-        <div ref={splideRef} className="splide">
+        <div ref={splideRef} className="splide relative">
           <div className="splide__track">
             <ul className="splide__list">
               {tools.map((tool, index) => (
@@ -91,6 +92,22 @@ function Carousel() {
               ))}
             </ul>
           </div>
+
+          {/* Flechas de navegación personalizadas */}
+          <button
+            onClick={() => splideInstance.current?.go("<")}
+            className="absolute left-0 top-1/2 transform -translate-y-1/2"
+            aria-label="Previous slide"
+          >
+            <ArrowLeftIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:text-[#FF6F61] transition-colors" />
+          </button>
+          <button
+            onClick={() => splideInstance.current?.go(">")}
+            className="absolute right-0 top-1/2 transform -translate-y-1/2"
+            aria-label="Next slide"
+          >
+            <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:text-[#FF6F61] transition-colors" />
+          </button>
         </div>
       </article>
     </section>

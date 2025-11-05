@@ -3,7 +3,7 @@
 
 export const defaultSplideOptions = {
   type: "loop", // Carrusel infinito
-  perPage: 4, // Slides por página (desktop)
+  perPage: 3, // Slides por página (desktop)
   perMove: 1,
   gap: "2rem",
   autoplay: true,
@@ -12,7 +12,6 @@ export const defaultSplideOptions = {
   arrows: true,
   pagination: false,
   breakpoints: {
-    1024: { perPage: 3 },
     768: { perPage: 2 },
     640: { perPage: 1 },
   },

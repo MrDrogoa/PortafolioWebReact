@@ -42,7 +42,7 @@ function MobileMenu({ items }) {
         className="p-2"
         aria-label="Abrir menú"
       >
-        <MenuIcon className="w-7 h-7 text-white" />
+        <MenuIcon className="w-7 h-7 text-white cursor-pointer" />
       </button>
 
       {open && (

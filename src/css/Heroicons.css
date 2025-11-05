@@ -1,0 +1,40 @@
+/* Custom icons */
+@layer utilities {
+  /* Animaciones existentes */
+  .floating {
+    animation: floating 3s infinite;
+  }
+
+  @keyframes floating {
+    0% {
+      transform: translateY(1px);
+    }
+    50% {
+      transform: translateY(7px);
+    }
+    100% {
+      transform: translateY(1px);
+    }
+  }
+
+  /* Resto de tus animaciones */
+  .floating-slow {
+    animation: floating 3.8s infinite;
+  }
+
+  .floating-fast {
+    animation: floating 4s infinite;
+  }
+
+  .floating-slower {
+    animation: floating 3s infinite;
+  }
+
+  .floating-fasting {
+    animation: floating 3.8s infinite;
+  }
+
+  .floating-low {
+    animation: floating 4s infinite;
+  }
+}

@@ -14,6 +14,8 @@ import {
   FaWordpress,
   FaGitAlt,
   FaFire,
+  FaArrowRight,
+  FaArrowLeft,
 } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { BiLogoTailwindCss, BiLogoFigma } from "react-icons/bi";
@@ -45,6 +47,8 @@ export const NodeIcon = (props) => <FaNode {...props} />;
 export const WordpressIcon = (props) => <FaWordpress {...props} />;
 export const GitIcon = (props) => <FaGitAlt {...props} />;
 export const FireIcon = (props) => <FaFire {...props} />;
+export const ArrowRightIcon = (props) => <FaArrowRight {...props} />;
+export const ArrowLeftIcon = (props) => <FaArrowLeft {...props} />;
 
 export default {
   GithubIcon,
@@ -67,4 +71,6 @@ export default {
   WordpressIcon,
   GitIcon,
   FireIcon,
+  ArrowRightIcon,
+  ArrowLeftIcon,
 };

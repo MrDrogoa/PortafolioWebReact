@@ -249,3 +249,176 @@ Recursos útiles
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [Tailwind CSS Hover Effects](https://tailwindcss.com/docs/hover-focus-and-other-states)
 
+# Cambios realizados el 4 de noviembre de 2025
+
+Resumen de lo implementado y revisado:
+
+- React patterns y mejores prácticas
+  - Explicación detallada del patrón `array.map()` con destructuring en JSX.
+  - Ejemplo práctico en `src/components/hero/HeroLinks.jsx`: `links.map(({ Icon, href, label }) => ...)`.
+  - Se cambió `key={label}` a `key={href}` para mejor unicidad en la reconciliación de React.
+
+- Organización de CSS y estructura de carpetas
+  - Se creó `src/css/Carousel.css` para estilos personalizados del carousel.
+  - Corrección de ruta de importación: `import "../../css/Carousel.css"` desde `Carousel.jsx`.
+  - Recomendación de estructura: `src/css/` para estilos globales de componentes.
+
+- Customización de Splide Carousel con flechas personalizadas
+  - **Problema inicial**: Splide generaba flechas SVG por defecto que no se podían reemplazar con componentes React.
+  - **Intentos**: Se probó usar `.splide__arrows` wrapper con componentes custom (no funcionó).
+  - **Solución final**: 
+    - Desactivar flechas automáticas: `arrows: false` en configuración de Splide.
+    - Crear botones personalizados independientes con `onClick` handlers.
+    - Usar API de Splide: `splideInstance.current?.go("<")` y `go(">")` para navegación programática.
+  - Implementación:
+    ```jsx
+    const splideInstance = useRef(null);
+    splideInstance.current = splide; // Guardar instancia después de mount
+    
+    <button onClick={() => splideInstance.current?.go("<")}>
+      <ArrowLeftIcon />
+    </button>
+    ```
+  - Se integraron `ArrowLeftIcon` y `ArrowRightIcon` desde `src/components/icons/Icons.jsx`.
+  - Estilos aplicados con Tailwind:
+    - Botones circulares coral: `w-10 h-10 bg-[#FF6F61] rounded-full`
+    - Efectos hover: `hover:bg-[#FF8A7D] hover:scale-110 hover:opacity-100`
+    - Posicionamiento absoluto: `absolute left-0 -translate-x-12` (flechas fuera del carousel)
+    - Transiciones suaves: `transition-all duration-300`
+
+- Responsive design
+  - Explicación de clases responsivas de Tailwind para hover: `lg:hover:-translate-y-2`.
+  - Esto aplica el efecto hover solo en pantallas grandes (lg y superiores).
+  - Ejemplo discutido para `ButtonComponents.jsx` (hover translate solo en desktop).
+
+- Debugging y solución de problemas
+  - Múltiples iteraciones para resolver por qué las flechas personalizadas no aparecían.
+  - Root cause: Splide con `arrows: true` genera su propio HTML/SVG y sobrescribe contenido custom.
+  - Aprendizaje clave: Para customizar controles de librerías de terceros, desactivar generación automática y usar API programática.
+
+Archivos modificados/creados
+
+- `src/components/hero/HeroLinks.jsx` — cambio de key de label a href
+- `src/css/Carousel.css` — archivo de estilos custom para carousel (NUEVO)
+- `src/components/main/Carousel.jsx` — implementación de flechas personalizadas con Splide API
+- `src/utils/splideConfig.js` — actualizado con `arrows: true` por defecto (sobrescrito en Carousel.jsx)
+- `README.md` — documentación de cambios
+
+Código clave implementado
+
+```jsx
+// src/components/main/Carousel.jsx
+import { ArrowRightIcon, ArrowLeftIcon } from "../icons/Icons";
+
+const splideInstance = useRef(null);
+
+useEffect(() => {
+  const splide = new Splide(splideRef.current, {
+    ...defaultSplideOptions,
+    arrows: false, // Desactivar flechas automáticas
+  });
+  splide.mount();
+  splideInstance.current = splide; // Guardar para uso posterior
+  return () => splide.destroy();
+}, []);
+
+// Botones personalizados con navegación programática
+<button
+  onClick={() => splideInstance.current?.go("<")}
+  className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 
+             w-10 h-10 bg-[#FF6F61] hover:bg-[#FF8A7D] rounded-full 
+             flex items-center justify-center opacity-90 hover:opacity-100 
+             hover:scale-110 transition-all duration-300"
+>
+  <ArrowLeftIcon className="w-5 h-5 text-white" />
+</button>
+```
+
+Patrón aprendido
+
+- **Control programático de librerías**: Para customizar componentes UI de librerías (Splide, Swiper, etc.):
+  1. Desactivar generación automática de controles (`arrows: false`)
+  2. Almacenar instancia en `useRef`
+  3. Crear controles custom con handlers que llamen a la API (`splide.go()`)
+  4. Aplicar estilos completamente personalizados con Tailwind
+
+Este patrón se puede aplicar a:
+- Paginación custom
+- Controles de autoplay
+- Progress bars
+- Thumbnails navigation
+
+# Cambios realizados el 5 de noviembre de 2025
+
+Resumen de lo implementado y corregido hoy:
+
+- Posicionamiento y centrado de flechas del carousel
+  - **Problema**: Las flechas estaban abajo del carousel usando `flex justify-between`, no alineadas con los iconos.
+  - **Solución**: Posicionamiento absoluto para centrar verticalmente las flechas con los slides.
+  - Cambios aplicados:
+    - Añadido `relative` al contenedor `.splide` para contexto de posicionamiento.
+    - Flechas con `absolute left-0/right-0 top-1/2 -translate-y-1/2` para centrado vertical perfecto.
+    - Flechas fuera del carousel: `-translate-x-12` (izquierda) y `translate-x-12` (derecha).
+    - Ocultas en móviles: `hidden lg:flex` (solo visibles en pantallas grandes).
+  - Resultado: Flechas circulares coral flotando a los lados, perfectamente alineadas con los iconos de herramientas.
+
+- Configuración del favicon
+  - **Problema**: Favicon no se mostraba con ruta `href="../joDani/src/assets/images/logo.svg"`.
+  - **Causa**: En Vite, los archivos estáticos deben estar en `public/` y usar rutas absolutas desde raíz.
+  - **Solución aplicada**:
+    1. Copié `logo.svg` desde `src/assets/images/` a `public/logo.svg`.
+    2. Actualicé `index.html`: `href="/logo.svg"` (ruta desde raíz del servidor).
+    3. Cambié type de `image/x-icon` a `image/svg+xml` (correcto para SVG).
+  - Comando ejecutado: `cp src/assets/images/logo.svg public/logo.svg`
+  - Resultado: Favicon ahora visible correctamente en el navegador.
+
+- Corrección de errores de linting
+  - Error inicial: Conflicto entre clases `flex` y `hidden` en los botones de flechas.
+  - Causa: `hidden lg:flex` debe ir en ese orden, no `flex ... hidden lg:flex`.
+  - Solución: Reorganicé clases para poner `hidden lg:flex` al inicio, seguido de `items-center justify-center`.
+  - Verificación: `get_errors` confirmó "No errors found" después de la corrección.
+
+Archivos modificados
+
+- `src/components/main/Carousel.jsx` — posicionamiento absoluto de flechas con centrado vertical
+- `index.html` — corrección de ruta del favicon a `/logo.svg`
+- `public/logo.svg` — archivo copiado desde src/assets/images/ (NUEVO)
+- `README.md` — actualizado con cambios del 4 y 5 de noviembre
+
+Conceptos clave de Tailwind aplicados
+
+- **Posicionamiento absoluto con centrado**: 
+  ```jsx
+  className="absolute top-1/2 -translate-y-1/2" // Centra verticalmente
+  className="left-0 -translate-x-12" // Flecha izquierda fuera del contenedor
+  className="right-0 translate-x-12" // Flecha derecha fuera del contenedor
+  ```
+
+- **Responsive visibility**: 
+  ```jsx
+  className="hidden lg:flex" // Oculto en móvil, visible en desktop como flex
+  ```
+
+- **Vite static assets**:
+  - `public/` → archivos servidos sin procesamiento desde raíz (`/archivo.ext`)
+  - `src/assets/` → archivos procesados por Vite, solo accesibles via imports JS
+
+Cómo probar los cambios de hoy
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verifica:
+1. **Carousel**: Las flechas coral deben estar flotando a los lados del carousel, centradas con los iconos.
+2. **Favicon**: Recarga con Ctrl+Shift+R y verifica que el logo.svg aparezca en la pestaña del navegador.
+3. **Responsive**: En móvil (< 1024px) las flechas deben ocultarse automáticamente.
+
+Próximos pasos sugeridos
+
+- Ajustar espaciado de flechas si en pantallas muy grandes (xl, 2xl) necesitan más separación.
+- Considerar agregar controles de navegación táctil para móvil (swipe ya funciona con Splide).
+- Optimizar animaciones del carousel para mejor performance.
+- Agregar meta tags Open Graph con el logo desde `public/logo.svg`.
+
