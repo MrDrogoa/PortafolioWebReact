@@ -1,9 +1,12 @@
 import React from "react";
+import "../css/ButtonComponents.css";
 
 function ButtonComponents({ children, className = "", onClick = () => {} }) {
-  // Base styles for the button
+  // Base styles for the button with floating layered effect
+
   const base =
-    "font-secondary py-2 px-5 bg-[#FFEA00] hover:bg-[#FFEE39] text-[#202023] font-bold rounded-lg lg:hover:-translate-y-2 hover:-translate-y-0 hover:shadow-lg will-change-transform transition-transform duration-300 ease-in-out cursor-pointer text-sm lg:text-base";
+    "floating-button font-secondary py-2 px-5 bg-[#FFEA00] hover:bg-[#FFEE39] text-[#202023] font-bold rounded-lg will-change-transform cursor-pointer text-sm lg:text-base";
+
   return (
     // Button element i can use anywhere
     <button className={`${base} ${className}`} onClick={onClick}>

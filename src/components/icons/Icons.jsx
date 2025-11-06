@@ -16,6 +16,8 @@ import {
   FaFire,
   FaArrowRight,
   FaArrowLeft,
+  FaCopyright,
+  FaCircle,
 } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { BiLogoTailwindCss, BiLogoFigma } from "react-icons/bi";
@@ -49,6 +51,8 @@ export const GitIcon = (props) => <FaGitAlt {...props} />;
 export const FireIcon = (props) => <FaFire {...props} />;
 export const ArrowRightIcon = (props) => <FaArrowRight {...props} />;
 export const ArrowLeftIcon = (props) => <FaArrowLeft {...props} />;
+export const CopyrightIcon = (props) => <FaCopyright {...props} />;
+export const CircleIcon = (props) => <FaCircle {...props} />;
 
 export default {
   GithubIcon,
@@ -73,4 +77,6 @@ export default {
   FireIcon,
   ArrowRightIcon,
   ArrowLeftIcon,
+  CopyrightIcon,
+  CircleIcon,
 };

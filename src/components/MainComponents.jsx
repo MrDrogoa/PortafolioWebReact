@@ -2,6 +2,8 @@ import React from "react";
 import Signature from "./main/Signature";
 import Carousel from "./main/Carousel";
 import Experience from "./main/Experience";
+import About from "./main/About";
+import Cards from "./main/Cards";
 
 function MainComponents() {
   return (
@@ -9,6 +11,8 @@ function MainComponents() {
       <Signature />
       <Carousel />
       <Experience />
+      <About />
+      <Cards />
     </section>
   );
 }

@@ -422,3 +422,53 @@ Próximos pasos sugeridos
 - Optimizar animaciones del carousel para mejor performance.
 - Agregar meta tags Open Graph con el logo desde `public/logo.svg`.
 
+# Cambios realizados el 6 de noviembre de 2025
+
+Resumen de lo implementado y revisado hoy:
+
+- Botón con efecto "capas flotantes" (hover)
+  - Creé `src/css/ButtonComponents.css` con un efecto de capas (múltiples box-shadows) que simula la animación del ejemplo de Uiverse.
+  - Actualicé `src/components/ButtonComponents.jsx` para importar el CSS y añadir la clase `floating-button`.
+  - El efecto usa colores que combinan con el amarillo del proyecto (`#FFEA00`): capa coral `#FF6F61` y turquesa `#4ECDC4` para las sombras de acento.
+  - Comportamiento responsive: en dispositivos táctiles (ancho < 1024px) el efecto de elevación se reduce para mejor UX.
+
+- Corrección y renderizado de tarjetas (Cards)
+  - Arreglé `src/components/main/Cards.jsx` para que imprima correctamente los objetos definidos en `cardData`.
+  - Cambios principales: reemplazo de `class` por `className`, uso de `Link` de `react-router-dom` para navegación interna, normalización de la propiedad de iconos a `{ Icon, color }` y renderizado de los iconos como componentes React.
+  - Añadí tamaños de miniatura estables (`w-full h-48` / `md:h-56`) y estructura flex para que los iconos queden alineados abajo a la derecha de cada tarjeta.
+
+- Limpieza y experiencia de desarrollo
+  - Importé el CSS del botón en el componente para mantener estilos encapsulados.
+  - Añadí reglas responsive y transiciones suaves para que la interacción sea consistente.
+
+Archivos modificados/creados hoy
+
+- `src/css/ButtonComponents.css` — estilos del botón con box-shadow en capas (NUEVO)
+- `src/components/ButtonComponents.jsx` — import del CSS y clase `floating-button` (MODIFICADO)
+- `src/components/main/Cards.jsx` — renderizado correcto de `cardData` y icons (MODIFICADO)
+
+Cómo probar los cambios localmente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verifica:
+1. **Botones**: Pasa el cursor sobre los botones que usan `<ButtonComponents>` para ver el efecto de capas y elevación (en desktop). En móvil el efecto será más sutil.
+2. **Cards**: Comprueba que las tarjetas muestren título, descripción, miniatura y los iconos en la esquina inferior derecha.
+
+Notas sobre commits / push
+
+- Si aún no has commiteado estos cambios, puedes hacerlo con:
+
+```bash
+git add src/css/ButtonComponents.css src/components/ButtonComponents.jsx src/components/main/Cards.jsx README.md
+git commit -m "feat(ui): floating layered button and fix cards rendering"
+git push
+```
+
+Si quieres, puedo crear el commit y el push por ti (dímelo) o te dejo los comandos para que los ejecutes localmente.
+
+Si quieres que ajuste colores, distancia de elevación o comportamiento en móviles, dime exactamente qué prefieres y lo aplico ahora.
+
