@@ -1,9 +1,9 @@
 import React from "react";
-import Signature from "./main/Signature";
-import Carousel from "./main/Carousel";
-import Experience from "./main/Experience";
-import About from "./main/About";
-import Cards from "./main/Cards";
+import Signature from "@/components/main/Signature";
+import Carousel from "@/components/main/Carousel";
+import Experience from "@/components/main/Experience";
+import HomeAbout from "@/components/main/HomeAbout";
+import Cards from "@/components/main/Cards";
 
 function MainComponents() {
   return (
@@ -11,7 +11,7 @@ function MainComponents() {
       <Signature />
       <Carousel />
       <Experience />
-      <About />
+      <HomeAbout />
       <Cards />
     </section>
   );

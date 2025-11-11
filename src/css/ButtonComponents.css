@@ -8,8 +8,18 @@
   box-shadow: 0 7px 0 -2px #ff6f61, 0 15px 0 -4px #ffffff;
 }
 
+.floating-button-1 {
+  transition: all 0.4s ease;
+}
+
+.floating-button-1:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 7px 0 -2px #ffea00, 0 15px 0 -4px #ffffff;
+}
+
 /* Versión responsive: sin float en móviles */
 @media (max-width: 1023px) {
+  .floating-button-1:hover,
   .floating-button:hover {
     transform: translateY(0);
     box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);

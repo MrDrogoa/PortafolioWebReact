@@ -17,8 +17,17 @@ function NavList() {
       {/* Desktop / large */}
       <ul className="hidden lg:flex justify-center items-center gap-8 text-sm md:text-base font-primary font-medium text-white">
         {items.map((item) => (
-          <li key={item.to}>
-            <Link to={item.to}>{item.label}</Link>
+          <li
+            key={item.to}
+            className="relative group lg:hover:bg-transparent hover:bg-[#FF6F61] lg:p-0 p-2 rounded transition-colors"
+          >
+            <Link
+              to={item.to}
+              className="lg:hover:text-[#FF6F61] hover:text-white transition-colors inline-block w-full lg:w-auto"
+            >
+              {item.label}
+              <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-[#FF6F61] group-hover:w-full transition-all duration-300 hidden lg:block"></span>
+            </Link>
           </li>
         ))}
       </ul>

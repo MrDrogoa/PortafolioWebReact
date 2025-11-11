@@ -22,8 +22,6 @@ import {
   ArrowLeftIcon,
 } from "../icons/Icons";
 import { defaultSplideOptions } from "../../utils/splideConfig";
-// Estilos personalizados del carousel
-import "../../css/Carousel.css";
 
 function Carousel() {
   const splideRef = useRef(null);

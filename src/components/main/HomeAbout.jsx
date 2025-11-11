@@ -1,5 +1,5 @@
 import React from "react";
-import ButtonComponents from "../ButtonComponents";
+import ButtonComponents from "../buttons/ButtonComponents";
 import { Link } from "react-router-dom";
 import Titleh2 from "../Titleh2";
 

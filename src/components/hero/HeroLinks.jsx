@@ -4,7 +4,7 @@ import {
   InstagramIcon,
   LinkedinIcon,
   WhatsappIcon,
-} from "../icons/Icons";
+} from "@/components/icons/Icons";
 
 function HeroLinks() {
   const links = [

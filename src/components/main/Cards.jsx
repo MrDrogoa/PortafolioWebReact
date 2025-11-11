@@ -1,7 +1,7 @@
 import React from "react";
 import Titleh2 from "../Titleh2";
 import { Link } from "react-router-dom";
-import ButtonComponents from "../ButtonComponents";
+import ButtonComponents from "../buttons/ButtonComponents";
 import Diseno from "../../assets/img/diseno-usuario.jpg";
 import Frontend from "../../assets/img/desarrollo-frontend.jpg";
 import Frameworks from "../../assets/img/implementacion-frameworks.jpg";
@@ -60,10 +60,14 @@ function Cards() {
         {cardData.map((card) => (
           <div
             key={card.id}
-            className="card flex flex-col border-2 border-white rounded-md overflow-hidden max-w-xs lg:max-w-sm m-auto md:m-0"
+            className="card flex flex-col border-2 border-white rounded-md max-w-xs lg:max-w-sm m-auto md:m-0"
           >
-            <Link to={card.path}>
-              <img src={card.image} alt={card.title} className="object-cover" />
+            <Link to={card.path} className="group overflow-hidden">
+              <img
+                src={card.image}
+                alt={card.title}
+                className="object-cover transition-transform duration-500 lg:group-hover:scale-110 "
+              />
             </Link>
 
             <div className="px-6 pb-6 pt-5 flex flex-col">

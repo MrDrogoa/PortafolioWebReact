@@ -472,3 +472,116 @@ Si quieres, puedo crear el commit y el push por ti (dímelo) o te dejo los coman
 
 Si quieres que ajuste colores, distancia de elevación o comportamiento en móviles, dime exactamente qué prefieres y lo aplico ahora.
 
+# Cambios realizados el 11 de noviembre de 2025
+
+Resumen de lo implementado y revisado hoy:
+
+- Configuración de alias `@` en Vite
+  - **Problema**: Las rutas de importación con `../../../` eran largas y difíciles de mantener.
+  - **Solución**: Añadí configuración de alias `@` en `vite.config.js` que mapea `@` → `src/`.
+  - **Implementación**:
+    ```javascript
+    import path from "path";
+    import { fileURLToPath } from "url";
+    
+    const __dirname = path.dirname(fileURLToPath(import.meta.url));
+    
+    resolve: {
+      alias: {
+        "@": path.resolve(__dirname, "./src"),
+      },
+    }
+    ```
+  - **Ventajas**: Imports más limpios y legibles desde cualquier profundidad de carpeta.
+  - Ejemplo: `import "@/css/ButtonComponents.css"` en lugar de `import ".././css/ButtonComponents.css"`
+
+- Efecto de borde animado en tarjetas (Cards)
+  - **Objetivo**: Crear animación de borde que "corra" alrededor del contorno de las tarjetas solo en hover.
+  - **Solución**: CSS nativo mínimo (solo animación) + Tailwind para el resto de estilos.
+  - **Animación `borderRunning`**: Cambia los colores del gradiente (amarillo → coral → turquesa) en 3 segundos, haciendo que parezca que "corre" alrededor.
+  - **Colores usados**: 
+    - 🟡 Amarillo `#FFEA00` (color primario)
+    - 🔴 Coral `#FF6F61` (acento)
+    - 🔵 Turquesa `#4ECDC4` (complementario)
+  - **Características**:
+    - Solo se activa en hover (`.card-border-animation:hover`)
+    - Duración: 3 segundos
+    - Loop infinito
+    - Imagen se escala 8% en hover
+    - Iconos crecen 25% en hover
+    - Sombra coral en hover
+
+- Fixes en ButtonComponents
+  - Actualicé `src/components/buttons/ButtonComponents.jsx` con import de CSS usando alias `@`.
+  - Ruta mejorada: `import "@/css/ButtonComponents.css"` (más limpio que `import ".././css/ButtonComponents.css"`).
+
+- Estructura y organización
+  - Todos los componentes ahora usan alias `@` para imports de CSS y utilidades.
+  - Estructura clara: `src/css/` para estilos globales, `src/components/*/` para componentes.
+
+Archivos modificados/creados hoy
+
+- `vite.config.js` — configuración de alias `@` (MODIFICADO)
+- `src/css/Cards.css` — animación `borderRunning` para borde corriendo (ACTUALIZADO)
+- `src/components/main/Cards.jsx` — uso de clase `card-border-animation` con Tailwind (ACTUALIZADO)
+- `src/components/buttons/ButtonComponents.jsx` — import con alias `@` (ACTUALIZADO)
+- `README.md` — documentación de cambios (ACTUALIZADO)
+
+Código clave implementado
+
+```css
+/* src/css/Cards.css */
+@keyframes borderRunning {
+  0%, 100% {
+    border-image-source: linear-gradient(90deg, #FFEA00, #FF6F61, #4ECDC4);
+  }
+  25% {
+    border-image-source: linear-gradient(90deg, #FF6F61, #4ECDC4, #FFEA00);
+  }
+  50% {
+    border-image-source: linear-gradient(90deg, #4ECDC4, #FFEA00, #FF6F61);
+  }
+  75% {
+    border-image-source: linear-gradient(90deg, #FFEA00, #FF6F61, #4ECDC4);
+  }
+}
+
+.card-border-animation:hover {
+  animation: borderRunning 3s infinite linear;
+  border: 2px solid;
+  border-image: linear-gradient(90deg, #FFEA00, #FF6F61, #4ECDC4) 1;
+}
+```
+
+```jsx
+// src/components/main/Cards.jsx
+<div className="card-border-animation flex flex-col rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 bg-[#202023] border-2 border-white transition-all duration-300">
+  {/* Contenido */}
+</div>
+```
+
+Cómo probar los cambios de hoy
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verifica:
+1. **Cards**: Pasa el cursor sobre las tarjetas y verás el borde animado corriendo alrededor en 3 segundos.
+2. **Imports**: Verifica que los imports con `@` funcionen (sin errores en consola).
+3. **Efectos**: Imagen se escala, iconos crecen, sombra coral aparece en hover.
+
+Próximos pasos sugeridos
+
+- Ajustar velocidad de animación del borde (cambiar `3s` a `2s` o `4s` según prefieras).
+- Modificar colores del gradiente animado según feedback.
+- Aplicar efecto similar a otros componentes si lo deseas.
+- Hacer push a GitHub con estos cambios.
+
+Patrones aprendidos
+
+- **Alias en Vite**: `@` mapea a `src/` facilitando imports desde cualquier profundidad.
+- **Animación de borde**: CSS `border-image` + `@keyframes` para efecto de "correr" alrededor del contorno.
+- **Combinación Tailwind + CSS**: Usar CSS solo para animaciones complejas, Tailwind para lo demás (separación clara de responsabilidades).
+

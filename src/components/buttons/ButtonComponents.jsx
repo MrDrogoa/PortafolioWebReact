@@ -1,5 +1,5 @@
 import React from "react";
-import "../css/ButtonComponents.css";
+import "@/css/ButtonComponents.css";
 
 function ButtonComponents({ children, className = "", onClick = () => {} }) {
   // Base styles for the button with floating layered effect

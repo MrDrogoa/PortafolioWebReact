@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ButtonComponents from "../ButtonComponents";
+import ButtonComponents from "../buttons/ButtonComponents";
 
 function HeroContent() {
   return (
