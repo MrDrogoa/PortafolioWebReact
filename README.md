@@ -585,3 +585,161 @@ Patrones aprendidos
 - **Animación de borde**: CSS `border-image` + `@keyframes` para efecto de "correr" alrededor del contorno.
 - **Combinación Tailwind + CSS**: Usar CSS solo para animaciones complejas, Tailwind para lo demás (separación clara de responsabilidades).
 
+# Cambios realizados el 12 de noviembre de 2025
+
+Resumen de lo implementado y revisado hoy:
+
+- Componente AnimatedTestimonials
+  - **Problema inicial**: Error de importación - el componente `@/components/ui/animated-testimonials` no existía.
+  - **Solución**: Creé el componente completo desde cero en `src/components/ui/animated-testimonials.jsx`.
+  - **Características implementadas**:
+    - Carousel de testimonios con autoplay cada 5 segundos
+    - Navegación manual con botones Anterior/Siguiente
+    - Indicadores de progreso (dots) clicables
+    - Pausado automático al interactuar manualmente
+    - Dark theme con colores coral (#FF6F61) para accents
+    - Completamente responsive (mobile-first)
+  - **Export fix**: Cambié `AnimatedTestimonialsDemo.jsx` de `export function` a `export default` para que funcione correctamente con la importación en `AboutComponents.jsx`.
+
+- Refactorización de componentes About
+  - **Arquitectura anterior**: Todo mezclado en un solo componente (AnimatedTestimonials).
+  - **Nueva arquitectura modular**:
+    - `AboutImg.jsx` - Componente de imagen reutilizable con props: `src`, `alt`, `isTransitioning`
+    - `AboutContent.jsx` - Componente de contenido con props: `title`, `name`, `designation`, `descripcion2`, `descripcion3`, `current`, `total`, callbacks
+    - `AnimatedTestimonialsDemo.jsx` - Contenedor principal con toda la lógica de estado
+  - **Ventajas de la refactorización**:
+    - Separación de responsabilidades (imagen / contenido / lógica)
+    - Componentes reutilizables
+    - Más fácil de mantener y testear
+    - Props bien definidas con callbacks
+
+- Layout y diseño del componente testimonials
+  - **Estructura final**: Flexbox con imagen a la izquierda (50%) y contenido a la derecha (50%)
+  - **Responsive**: En mobile imagen arriba, contenido abajo (flex-col), en desktop lado a lado (md:flex-row)
+  - **Animaciones implementadas**:
+    - Transición fade in/out en imágenes al cambiar (opacity 0 → 1 en 300ms)
+    - Hover effect: imagen escala 110% + overlay gradient
+    - Botones circulares personalizados con hover effects
+  - **Estilos aplicados**:
+    - Background oscuro #171717
+    - Bordes sutiles white/10 con hover coral
+    - Progress indicators como líneas horizontales (expandibles en current)
+    - Botones circulares blancos con hover coral
+
+- Gestión de imágenes y assets
+  - **Primera aproximación**: Intenté usar imports de módulos ES6 pero causaba errores.
+  - **Segunda aproximación**: Rutas públicas `/img/...` pero imágenes no cargaban.
+  - **Solución final**: 
+    - Imports directos con alias: `import aboutmeImg from "@/assets/img/aboutme.webp"`
+    - Vite procesa automáticamente las imágenes y genera URLs optimizadas
+    - Variables asignadas en el array de testimonials: `img: aboutmeImg`
+  - **Archivos de imagen usados**:
+    - `aboutme.webp`
+    - `aboutlandscape.webp`
+    - `about.jpg`
+    - `aboutsantiago.webp`
+
+- Botones de navegación personalizados
+  - Reemplacé texto "← Anterior" / "Siguiente →" por botones circulares con iconos
+  - Integré `ArrowLeftIcon` y `ArrowRightIcon` desde `@/components/icons/Icons.jsx`
+  - Estilo: fondo blanco, texto oscuro, hover coral (#FF6F61)
+  - Clases aplicadas: `rounded-full p-2 bg-white text-[#202023] lg:hover:bg-[#FF6F61]`
+
+- Corrección de renderizado con dangerouslySetInnerHTML
+  - **Problema**: En `ProjectsDeveloper.jsx` los `<span>` con clases no se renderizaban, mostraban texto plano.
+  - **Causa**: JSX escapa HTML por defecto para prevenir XSS.
+  - **Solución**: Usar `dangerouslySetInnerHTML={{ __html: item.description }}` para renderizar HTML seguro.
+  - **Cambios adicionales**:
+    - Corregí sintaxis rota en step "02" (comillas mal cerradas)
+    - Unifiqué todos los strings usando template literals con backticks
+    - Cambié `class` a `className` en JSX
+    - Agregué `key={index}` al map
+
+Archivos creados hoy
+
+- `src/components/ui/animated-testimonials.jsx` — Componente de carousel de testimonios (NUEVO)
+- `src/css/AnimatedTestimonials.css` — Estilos y animaciones para testimonials (NUEVO)
+
+Archivos modificados hoy
+
+- `src/components/main/AnimatedTestimonialsDemo.jsx` — Refactorizado con lógica centralizada y imports de imágenes
+- `src/components/main/AboutImg.jsx` — Creado como componente reutilizable de imagen
+- `src/components/main/AboutContent.jsx` — Creado como componente reutilizable de contenido
+- `src/components/main/projects/ProjectsDeveloper.jsx` — Fix de renderizado HTML con dangerouslySetInnerHTML
+- `README.md` — Documentación completa de cambios del día
+
+Código clave implementado
+
+```jsx
+// AnimatedTestimonialsDemo.jsx - Imports de imágenes
+import aboutmeImg from "@/assets/img/aboutme.webp";
+import aboutlandscapeImg from "@/assets/img/aboutlandscape.webp";
+import aboutImg from "@/assets/img/about.jpg";
+import aboutsantiagoImg from "@/assets/img/aboutsantiago.webp";
+
+// Lógica de transición
+const handleNext = () => {
+  setIsTransitioning(true);
+  setTimeout(() => {
+    setCurrent((prev) => (prev + 1) % testimonials.length);
+    setIsTransitioning(false);
+  }, 300);
+  setAutoplay(false);
+};
+
+// AboutImg.jsx - Componente de imagen con transición
+<img
+  src={src}
+  alt={alt}
+  className={`w-full h-full object-cover transition-all duration-500 
+    group-hover:scale-110 ${isTransitioning ? "opacity-0" : "opacity-100"}`}
+/>
+
+// ProjectsDeveloper.jsx - Renderizado de HTML
+<p
+  className="font-[DM Sans] font-normal md:text-lg pb-2"
+  dangerouslySetInnerHTML={{ __html: item.description }}
+/>
+```
+
+Patrón de componentes reutilizables aplicado
+
+```
+AnimatedTestimonialsDemo (Container)
+  ├── AboutImg (Presentational)
+  │   └── Props: src, alt, isTransitioning
+  └── AboutContent (Presentational)
+      └── Props: title, name, designation, descripcion2, descripcion3,
+                 current, total, onNext, onPrev, onDotClick
+```
+
+Cómo probar los cambios de hoy
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verifica:
+1. **About page**: Componente AnimatedTestimonials debe mostrar imagen y contenido lado a lado
+2. **Animaciones**: Al hacer clic en botones, imagen debe hacer fade out/in
+3. **Autoplay**: Cada 5 segundos debe cambiar automáticamente
+4. **Projects**: Las palabras en coral (Brief, HTML, CSS, etc.) deben verse destacadas
+5. **Responsive**: En móvil, imagen arriba y contenido abajo
+
+Errores solucionados
+
+- ✅ "Failed to resolve import @/components/ui/animated-testimonials"
+- ✅ "The requested module does not provide an export named 'default'"
+- ✅ Imágenes no se mostraban (rutas incorrectas)
+- ✅ HTML no se renderizaba en ProjectsDeveloper (span tags como texto)
+- ✅ Sintaxis rota en description del step "02"
+
+Próximos pasos sugeridos
+
+- Ajustar contenido de los testimonials con información real
+- Optimizar imágenes (comprimir webp para mejor performance)
+- Añadir loading skeleton mientras cargan las imágenes
+- Implementar lazy loading para las imágenes
+- Considerar agregar swipe gestures para móvil
+

@@ -1,10 +1,8 @@
 import React from "react";
-import Titleh2 from "../Titleh2";
 import { Link } from "react-router-dom";
-import ButtonComponents from "../buttons/ButtonComponents";
-import Diseno from "../../assets/img/diseno-usuario.jpg";
-import Frontend from "../../assets/img/desarrollo-frontend.jpg";
-import Frameworks from "../../assets/img/implementacion-frameworks.jpg";
+import Diseno from "@/assets/img/diseno-usuario.jpg";
+import Frontend from "@/assets/img/desarrollo-frontend.jpg";
+import Frameworks from "@/assets/img/implementacion-frameworks.jpg";
 import {
   FigmaIcon,
   HtmlIcon,
@@ -54,8 +52,7 @@ function Cards() {
     },
   ];
   return (
-    <section className="max-w-[1300px] m-auto pt-8 sm:pt-10 md:pt-30 px-4">
-      <Titleh2 className="mb-8 md:mb-16">Proyectos</Titleh2>
+    <section>
       <div className="flex flex-col md:flex-row flex-wrap justify-center px-5 w-full gap-5">
         {cardData.map((card) => (
           <div
@@ -98,11 +95,6 @@ function Cards() {
             </div>
           </div>
         ))}
-      </div>
-      <div className="flex items-center justify-center mt-3 md:mt-5">
-        <Link to="/projects">
-          <ButtonComponents>Ver más</ButtonComponents>
-        </Link>
       </div>
     </section>
   );

@@ -1,0 +1,56 @@
+/* Animación de fade in/out para los testimonials */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInImage {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Animación de border que corre alrededor */
+@keyframes borderRunning {
+  0% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ff6f61 0%,
+      #ff6f61 25%,
+      #4ecdc4 50%,
+      #4ecdc4 75%,
+      #ff6f61 100%
+    );
+  }
+  50% {
+    border-image-source: linear-gradient(
+      90deg,
+      #4ecdc4 0%,
+      #ff6f61 25%,
+      #ff6f61 50%,
+      #4ecdc4 75%,
+      #4ecdc4 100%
+    );
+  }
+  100% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ff6f61 0%,
+      #ff6f61 25%,
+      #4ecdc4 50%,
+      #4ecdc4 75%,
+      #ff6f61 100%
+    );
+  }
+}
