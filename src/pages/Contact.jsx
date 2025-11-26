@@ -1,7 +1,8 @@
 import React from "react";
+import ContactComponents from "@/components/ContactComponents.jsx";
 
 function Contact() {
-  return <div>Contact</div>;
+  return <ContactComponents />;
 }
 
 export default Contact;

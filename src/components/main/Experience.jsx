@@ -37,18 +37,18 @@ function Experience() {
             key={index}
             className="flex flex-col border-2 border-white  px-3 py-6 sm:px-4 md:py-8 md:px-6 lg:py-10 lg:px-8 gap-3 max-w-sm m-auto md:m-0"
           >
-            <h3 className="font-[Montserrat] text-white text-lg sm:text-xl md:text-2xl font-semibold">
+            <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold">
               {experience.title}
             </h3>
-            <div className="flex gap-2 font-[DM Sans] text-[#FF6F61] font-medium text-sm">
+            <div className="flex flex-wrap gap-2 font-secondary text-[#FF6F61] font-medium text-xs sm:text-sm">
               {experience.projects.map((project, index) => (
                 <React.Fragment key={index}>
-                  <p>{project}</p>
+                  <p className="font-secondary">{project}</p>
                   {index < experience.projects.length - 1 && <span>-</span>}
                 </React.Fragment>
               ))}
             </div>
-            <p className="font-[DM Sans] text-white font-normal text-sm md:text-lg">
+            <p className="font-secondary text-white font-normal text-sm md:text-lg">
               {experience.paragraph}
             </p>
             <div className="flex justify-end"></div>

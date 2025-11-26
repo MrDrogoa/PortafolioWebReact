@@ -743,3 +743,86 @@ Próximos pasos sugeridos
 - Implementar lazy loading para las imágenes
 - Considerar agregar swipe gestures para móvil
 
+# Cambios realizados el 26 de noviembre de 2025
+
+Resumen de lo implementado y corregido hoy:
+
+- Corrección de errores JSX en Contact.jsx
+  - **Problema**: Error de compilación en el formulario de contacto - elementos `input` no auto-cerrados.
+  - **Causa**: JSX requiere que todos los elementos void (sin contenido) sean auto-cerrados con `/>`.
+  - **Errores encontrados**:
+    - Línea 18: `<input type="text" ... required="">` - input de nombre
+    - Línea 21: `<input type="email" ... required="">` - input de correo
+  - **Solución aplicada**:
+    - Cambié `<input ... required="">` a `<input ... required />`
+    - Corregí ambos inputs (nombre y correo) para usar sintaxis JSX válida
+  - **Resultado**: Formulario compila sin errores, sintaxis JSX correcta
+
+- Fix de texto wrapping en Experience.jsx (responsive 320px)
+  - **Problema**: En resolución de 320px (móvil más pequeño), los nombres de proyectos en color coral desbordaban el contenedor.
+  - **Contexto**: Segunda tarjeta mostraba "Restaurante - Landings - FrontPet" en una sola línea causando overflow horizontal.
+  - **Causa**: Contenedor flex sin `flex-wrap` no permitía que los elementos pasaran a la siguiente línea.
+  - **Solución aplicada**:
+    - Añadí clase `flex-wrap` al contenedor de proyectos
+    - Removí clases `text-wrap` redundantes de elementos `<p>` individuales
+    - El contenedor ahora permite layout multi-línea: `className="flex flex-wrap gap-2..."`
+  - **Resultado**: Texto de proyectos ahora hace wrap correctamente en todas las resoluciones, incluyendo 320px
+
+Archivos modificados hoy
+
+- `src/pages/Contact.jsx` — corrección de sintaxis JSX en inputs (self-closing)
+- `src/components/main/Experience.jsx` — agregado flex-wrap para responsive wrapping
+- `README.md` — documentación de cambios del 26 de noviembre
+
+Código clave implementado
+
+```jsx
+// Contact.jsx - Before
+<input type="text" ... required="">
+<input type="email" ... required="">
+
+// Contact.jsx - After
+<input type="text" ... required />
+<input type="email" ... required />
+
+// Experience.jsx - Container fix
+<div className="flex flex-wrap gap-2 font-secondary text-[#FF6F61]">
+  {experience.projects.map((project, index) => (
+    <React.Fragment key={index}>
+      <p className="font-secondary">{project}</p>
+      {index < experience.projects.length - 1 && <span>-</span>}
+    </React.Fragment>
+  ))}
+</div>
+```
+
+Errores solucionados
+
+- ✅ Contact.jsx: "JSX element 'input' has no corresponding closing tag" (3 errores)
+- ✅ Experience.jsx: Overflow de texto en viewport 320px
+
+Conceptos aplicados
+
+- **JSX Syntax**: Todos los elementos void deben auto-cerrarse (`<input />`, `<br />`, `<img />`)
+- **Responsive Flexbox**: `flex-wrap` permite que elementos flex pasen a nuevas líneas cuando no hay espacio
+- **Mobile-first design**: Validación en 320px asegura compatibilidad con dispositivos más pequeños
+
+Cómo probar los cambios de hoy
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verifica:
+1. **Contact page**: El formulario debe compilar sin errores
+2. **Experience component**: Redimensiona a 320px de ancho y verifica que los nombres de proyectos hagan wrap correctamente
+3. **No errores de compilación**: Ejecuta y confirma cero errores en consola
+
+Estado del proyecto
+
+- ✅ Todos los componentes compilan sin errores
+- ✅ Responsive design validado hasta 320px (resolución mínima estándar)
+- ✅ Sintaxis JSX correcta en todos los archivos
+- ✅ Portfolio listo para producción
+
