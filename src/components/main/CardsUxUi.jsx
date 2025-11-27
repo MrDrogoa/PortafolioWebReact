@@ -1,54 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Diseno from "@/assets/img/diseno-usuario.jpg";
-import Frontend from "@/assets/img/desarrollo-frontend.jpg";
-import Frameworks from "@/assets/img/implementacion-frameworks.jpg";
-import {
-  FigmaIcon,
-  HtmlIcon,
-  JavascriptIcon,
-  PhpIcon,
-  WordpressIcon,
-  CssIcon,
-  DatabaseIcon,
-} from "../icons/Icons";
+import Libros from "@/assets/img/disenouxui/libros.webp";
+import Pet from "@/assets/img/disenouxui/pet-card.webp";
+import Womad from "@/assets/img/disenouxui/womad-card.webp";
+import { FigmaIcon } from "../icons/Icons";
 
 function Cards() {
   const cardData = [
     {
       id: 1,
-      title: "Diseño Centrado en el Usuario",
+      title: "Proyectos Libros",
       description:
-        "metodología que prioriza las necesidades y expectativas del usuario...",
-      image: Diseno,
-      path: "/diseno-centrado-en-el-usuario",
+        "En las primeras etapas de nuestro trabajo con el brief y el benchmark, llevamos...",
+      image: Libros,
+      //   path: "/diseno-centrado-en-el-usuario",
       icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
     {
       id: 2,
-      title: "Desarrollo Front-End",
+      title: "Petmatch - Diseño",
       description:
-        "Se enfoca en la creación y diseño de la interfaz visual de un sitio o aplicación...",
-      image: Frontend,
-      path: "/desarrollo-front-end",
-      icon: [
-        { Icon: HtmlIcon, color: "text-[#E44D26]" },
-        { Icon: CssIcon, color: "text-[#1E3FDA]" },
-      ],
+        "En el trabajo desarrollamos una solución para combatir el abandono de perros...",
+      image: Pet,
+      //   path: "/desarrollo-front-end",
+      icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
     {
       id: 3,
-      title: "Implementación de Frameworks",
+      title: "Womad - Rediseño",
       description:
-        "Consiste en integrar estructuras predefinidas de desarrollo...",
-      image: Frameworks,
-      path: "/implementacion-de-frameworks",
-      icon: [
-        { Icon: PhpIcon, color: "text-[#8800FF]" },
-        { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
-      ],
+        "En este proyecto pude conocer mas a fondo las metodologias que se usan...",
+      image: Womad,
+      //   path: "/implementacion-de-frameworks",
+      icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
   ];
   return (

@@ -1,7 +1,8 @@
 import React from "react";
+import ProjectUxUiComponents from "@/components/ProjectUxUiComponents.jsx";
 
-function ProjectUxui() {
-  return <div>ProjectUxui</div>;
+function ProjectUxUi() {
+  return <ProjectUxUiComponents />;
 }
 
-export default ProjectUxui;
+export default ProjectUxUi;

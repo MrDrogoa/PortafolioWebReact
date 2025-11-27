@@ -1,36 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Diseno from "@/assets/img/diseno-usuario.jpg";
-import Frontend from "@/assets/img/desarrollo-frontend.jpg";
-import Frameworks from "@/assets/img/implementacion-frameworks.jpg";
-import {
-  FigmaIcon,
-  HtmlIcon,
-  JavascriptIcon,
-  PhpIcon,
-  WordpressIcon,
-  CssIcon,
-  DatabaseIcon,
-} from "../icons/Icons";
+import Bootstrap from "@/assets/img/frontend/bootstrap.webp";
+import Landings from "@/assets/img/frontend/landings.webp";
+import PetFront from "@/assets/img/frontend/pet-front.webp";
+
+import { HtmlIcon, CssIcon } from "@/components/icons/Icons";
 
 function Cards() {
   const cardData = [
     {
       id: 1,
-      title: "Diseño Centrado en el Usuario",
+      title: "Proyectos Bootstrap",
       description:
-        "metodología que prioriza las necesidades y expectativas del usuario...",
-      image: Diseno,
-      path: "/diseno-centrado-en-el-usuario",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+        "Para este trabajo aprendimos los fundamentos de las librerías CSS...",
+      image: Bootstrap,
+      //   path: "/diseno-centrado-en-el-usuario",
+      icon: [
+        { Icon: HtmlIcon, color: "text-[#E44D26]" },
+        { Icon: CssIcon, color: "text-[#1E3FDA]" },
+      ],
     },
     {
       id: 2,
-      title: "Desarrollo Front-End",
+      title: "Landings",
       description:
-        "Se enfoca en la creación y diseño de la interfaz visual de un sitio o aplicación...",
-      image: Frontend,
-      path: "/desarrollo-front-end",
+        "En este proyecto, trabajamos directamente con código, aplicando conocimientos...",
+      image: Landings,
+      //   path: "/desarrollo-front-end",
       icon: [
         { Icon: HtmlIcon, color: "text-[#E44D26]" },
         { Icon: CssIcon, color: "text-[#1E3FDA]" },
@@ -38,16 +34,14 @@ function Cards() {
     },
     {
       id: 3,
-      title: "Implementación de Frameworks",
+      title: "Petmatch - Front-End",
       description:
-        "Consiste en integrar estructuras predefinidas de desarrollo...",
-      image: Frameworks,
-      path: "/implementacion-de-frameworks",
+        "El proyecto consistió en replicar el trabajo del primer semestre, esta vez enfocándose...",
+      image: PetFront,
+      //   path: "/implementacion-de-frameworks",
       icon: [
-        { Icon: PhpIcon, color: "text-[#8800FF]" },
-        { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+        { Icon: HtmlIcon, color: "text-[#E44D26]" },
+        { Icon: CssIcon, color: "text-[#1E3FDA]" },
       ],
     },
   ];

@@ -826,3 +826,346 @@ Estado del proyecto
 - ✅ Sintaxis JSX correcta en todos los archivos
 - ✅ Portfolio listo para producción
 
+---
+
+# Cambios realizados el 27 de noviembre de 2025
+
+Resumen de lo implementado hoy:
+
+- Creación de API REST con MySQL para gestión de proyectos
+  - **Objetivo**: Crear backend completo para subir y gestionar proyectos del portafolio (título, imágenes, descripción).
+  - **Arquitectura elegida**: API REST + MySQL (gratuito con Railway/Render)
+  - **Razones**:
+    - ✅ Proyectos con múltiples imágenes → MySQL maneja mejor relaciones
+    - ✅ Escalable para agregar más proyectos a futuro
+    - ✅ Actualizaciones mensuales sin necesidad de editar código
+    - ✅ Separación frontend (Netlify) + backend (Railway/Render)
+
+- Estructura de base de datos MySQL
+  - **3 tablas relacionales**:
+    1. `projects` - Datos principales (id, titulo, descripcion, categoria, tecnologias, github_url, demo_url, orden, activo)
+    2. `project_images` - Múltiples imágenes por proyecto (relación 1:N con project_id)
+    3. `project_steps` - Pasos de desarrollo para componente ProjectsDeveloper (relación 1:N)
+  - **Categorías**: ENUM('frontend', 'uxui', 'framework')
+  - **Tecnologías**: Almacenadas como JSON array
+  - **Soft delete**: Campo `activo` BOOLEAN para no eliminar permanentemente
+
+- Implementación del backend (Express.js + MySQL)
+  - **Dependencias instaladas**:
+    - `express` - Framework web
+    - `mysql2` - Driver MySQL con Promises
+    - `cors` - Middleware CORS
+    - `dotenv` - Variables de entorno
+    - `multer` - Manejo de uploads de archivos
+    - `nodemon` - Auto-reload en desarrollo
+  
+  - **Estructura de archivos**:
+    ```
+    Portafolio-API/
+    ├── config/
+    │   └── database.js          # Conexión MySQL con pool
+    ├── controllers/
+    │   └── ProjectController.js # Lógica de negocio (CRUD)
+    ├── models/
+    │   └── Project.js           # Modelo con queries SQL
+    ├── routes/
+    │   └── projects.js          # Definición de rutas
+    ├── database/
+    │   ├── schema.sql           # Estructura de tablas
+    │   └── seed.sql             # Datos de ejemplo
+    ├── .env                     # Variables de entorno
+    ├── .env.example             # Plantilla
+    ├── .gitignore
+    ├── index.js                 # Servidor Express
+    ├── package.json
+    ├── README.md                # Documentación técnica
+    └── GUIA-USO.md             # Guía paso a paso (NUEVO)
+    ```
+
+- API REST - Endpoints implementados
+  - `GET /api/projects` - Obtener todos los proyectos
+  - `GET /api/projects?categoria=frontend` - Filtrar por categoría
+  - `GET /api/projects/:id` - Obtener proyecto específico
+  - `POST /api/projects` - Crear nuevo proyecto
+  - `PUT /api/projects/:id` - Actualizar proyecto
+  - `DELETE /api/projects/:id` - Soft delete (marcar como inactivo)
+  - `DELETE /api/projects/:id/hard` - Eliminar permanentemente
+  - `GET /health` - Estado del servidor y DB
+  - `GET /` - Documentación de endpoints
+
+- Configuración de conexión a base de datos
+  - **Pool de conexiones** con `mysql2/promise`
+  - **Variables de entorno** (.env):
+    - DB_HOST, DB_PORT, DB_USER, DB_PASSWORD, DB_NAME
+    - PORT, NODE_ENV, FRONTEND_URL (CORS)
+  - **Función de health check**: `testConnection()` valida conexión al iniciar
+
+- Scripts de base de datos
+  - `database/schema.sql`:
+    - Creación de tablas con índices optimizados
+    - Relaciones con CASCADE DELETE
+    - CHARSET utf8mb4 para emojis y caracteres especiales
+  - `database/seed.sql`:
+    - 3 proyectos de ejemplo (e-commerce, app fitness, blog Next.js)
+    - Múltiples imágenes por proyecto
+    - Pasos de desarrollo con HTML destacado en coral
+
+- Modelo de datos (Project.js)
+  - **Métodos implementados**:
+    - `getAll(categoria)` - Obtiene proyectos con images y steps JOIN
+    - `getById(id)` - Obtiene proyecto individual completo
+    - `create(projectData)` - Crea proyecto con transacción (inserta en 3 tablas)
+    - `update(id, projectData)` - Actualiza proyecto (elimina/reinserta images/steps)
+    - `delete(id)` - Soft delete (marca activo=FALSE)
+    - `hardDelete(id)` - Eliminación permanente
+  - **Uso de transacciones** para garantizar integridad de datos
+  - **Parseo automático** de JSON (tecnologias)
+
+- Controlador (ProjectController.js)
+  - **Validaciones**:
+    - Campos requeridos: titulo, descripcion, categoria
+    - Categoría válida: frontend | uxui | framework
+    - Verificación de existencia antes de actualizar/eliminar
+  - **Respuestas estandarizadas**:
+    - `{ success: true, data: ... }` para éxito
+    - `{ success: false, message: ... }` para errores
+    - HTTP status codes apropiados (200, 201, 400, 404, 500)
+  - **Manejo de errores** centralizado con try/catch
+
+- Servidor Express configurado
+  - **Middleware**:
+    - CORS configurado para `FRONTEND_URL` con credentials
+    - `express.json()` y `express.urlencoded()`
+    - Logger de requests (método + path)
+  - **Rutas montadas**: `/api/projects` → projectRoutes
+  - **Error handlers**:
+    - 404 para rutas no encontradas
+    - 500 con stack trace en desarrollo
+  - **Inicialización**: Test de conexión DB al arrancar
+
+- Scripts npm configurados
+  - `pnpm start` - Producción con node
+  - `pnpm run dev` - Desarrollo con nodemon
+  - Variables de entorno cargadas con dotenv
+
+- Documentación completa
+  - **README.md del API**:
+    - Instalación y configuración
+    - Tabla de endpoints
+    - Ejemplos de uso con fetch
+    - Estructura de base de datos
+    - Guía de deployment (Railway/Render)
+    - Variables de entorno de producción
+  
+  - **GUIA-USO.md** (archivo nuevo):
+    - **Sección 1**: Preparar base de datos (instalación MySQL, crear tablas, configurar .env)
+    - **Sección 2**: Subir proyectos (3 opciones):
+      1. Thunder Client (extensión VS Code) - RECOMENDADO
+      2. Archivo SQL personalizado
+      3. MySQL Workbench directo
+    - **Sección 3**: Conectar React con API:
+      - Servicio `projectsService.js` con métodos GET
+      - Variables de entorno `.env.local` en React
+      - Código completo para páginas:
+        - `ProjectFrontend.jsx` - Proyectos por categoría
+        - `Projects.jsx` - Todos los proyectos con filtros
+        - `ProjectsDeveloper.jsx` - Actualización para recibir steps
+    - **Sección 4**: Ejemplos prácticos con código completo
+    - **Checklist de implementación**
+    - **FAQ**: Preguntas frecuentes y soluciones
+
+- Integración con React (arquitectura propuesta)
+  - **Servicio centralizado**: `src/services/projectsService.js`
+    - Clase con métodos: `getAllProjects()`, `getProjectsByCategory()`, `getProjectById()`
+    - Configuración de API_URL desde variables de entorno
+    - Manejo de errores con try/catch
+  
+  - **Variables de entorno React**: `.env.local`
+    - `VITE_API_URL=http://localhost:4000/api` (desarrollo)
+    - `VITE_API_URL=https://api.railway.app/api` (producción)
+  
+  - **Patrón de consumo en componentes**:
+    ```jsx
+    const [projects, setProjects] = useState([]);
+    const [loading, setLoading] = useState(true);
+    
+    useEffect(() => {
+      const fetchProjects = async () => {
+        const data = await projectsService.getProjectsByCategory('frontend');
+        setProjects(data);
+        setLoading(false);
+      };
+      fetchProjects();
+    }, []);
+    ```
+
+- Preparación para deployment
+  - **Backend (Railway/Render)**:
+    - `.gitignore` configurado (node_modules, .env, logs)
+    - Scripts de producción listos
+    - Variables de entorno documentadas
+  - **Frontend (Netlify)**:
+    - Variable VITE_API_URL configurable por entorno
+    - CORS configurado para dominio de producción
+
+Archivos creados hoy (Portafolio-API)
+
+- `config/database.js` - Pool de conexiones MySQL
+- `controllers/ProjectController.js` - Controlador CRUD
+- `models/Project.js` - Modelo de datos con queries
+- `routes/projects.js` - Rutas de la API
+- `database/schema.sql` - Estructura de BD
+- `database/seed.sql` - Datos de ejemplo
+- `.env` - Variables de entorno (desarrollo)
+- `.env.example` - Plantilla de variables
+- `.gitignore` - Archivos ignorados por git
+- `README.md` - Documentación técnica completa
+- `GUIA-USO.md` - Tutorial paso a paso para uso
+
+Archivos modificados hoy (Portafolio-API)
+
+- `index.js` - Servidor Express completo
+- `package.json` - Scripts y dependencias actualizadas
+
+Código clave implementado
+
+```javascript
+// database.js - Pool de conexiones
+const pool = mysql.createPool({
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
+  waitForConnections: true,
+  connectionLimit: 10,
+});
+
+// Project.js - Query con JOIN
+static async getAll(categoria = null) {
+  let query = `
+    SELECT p.*, 
+      JSON_ARRAYAGG(
+        JSON_OBJECT(
+          'id', pi.id,
+          'image_url', pi.image_url,
+          'image_alt', pi.image_alt,
+          'is_main', pi.is_main,
+          'orden', pi.orden
+        )
+      ) as images
+    FROM projects p
+    LEFT JOIN project_images pi ON p.id = pi.project_id
+    WHERE p.activo = TRUE
+    GROUP BY p.id ORDER BY p.orden ASC
+  `;
+}
+
+// ProjectController.js - Validación
+if (!titulo || !descripcion || !categoria) {
+  return res.status(400).json({
+    success: false,
+    message: 'Faltan campos requeridos: titulo, descripcion, categoria'
+  });
+}
+```
+
+Estructura de respuesta de la API
+
+```json
+{
+  "success": true,
+  "count": 9,
+  "data": [
+    {
+      "id": 1,
+      "titulo": "E-commerce Dashboard",
+      "descripcion": "Panel de administración...",
+      "categoria": "frontend",
+      "tecnologias": ["React", "TypeScript", "Tailwind CSS"],
+      "github_url": "https://github.com/...",
+      "demo_url": "https://demo.com",
+      "orden": 1,
+      "activo": true,
+      "created_at": "2025-11-27T...",
+      "images": [
+        {
+          "id": 1,
+          "image_url": "/images/projects/main.webp",
+          "image_alt": "Pantalla principal",
+          "is_main": true,
+          "orden": 1
+        }
+      ],
+      "steps": [
+        {
+          "id": 1,
+          "titulo": "Investigación",
+          "descripcion": "Análisis de <span class='text-[#FF6F61]'>requisitos</span>",
+          "orden": 1
+        }
+      ]
+    }
+  ]
+}
+```
+
+Cómo probar la API localmente
+
+```bash
+# 1. Crear base de datos MySQL
+mysql -u root -p < Portafolio-API/database/schema.sql
+
+# 2. Configurar .env con tu password de MySQL
+cd Portafolio-API
+# Editar .env y poner tu DB_PASSWORD
+
+# 3. Instalar dependencias (ya instaladas)
+pnpm install
+
+# 4. Iniciar servidor
+pnpm run dev
+
+# 5. Probar endpoints
+# http://localhost:4000/
+# http://localhost:4000/health
+# http://localhost:4000/api/projects
+```
+
+Próximos pasos sugeridos
+
+1. **Crear base de datos MySQL local** y ejecutar schema.sql
+2. **Configurar password** en `.env`
+3. **Probar endpoints** con Thunder Client
+4. **Insertar tus 9 proyectos reales** usando uno de los 3 métodos de la guía
+5. **Crear servicio en React** (`projectsService.js`)
+6. **Actualizar componentes** para consumir API en lugar de datos estáticos
+7. **Subir backend a Railway/Render** (gratis)
+8. **Configurar variable de entorno** en Netlify con URL de producción
+
+Tecnologías y conceptos aplicados
+
+- **REST API design**: Endpoints semánticos, HTTP verbs correctos, status codes
+- **SQL relacional**: JOINs, foreign keys, CASCADE DELETE, índices
+- **Transacciones**: ACID compliance para operaciones multi-tabla
+- **Pool de conexiones**: Reutilización eficiente de conexiones DB
+- **MVC pattern**: Separación Model-Controller-Routes
+- **Environment variables**: Configuración segura con dotenv
+- **Error handling**: Try/catch, validaciones, mensajes descriptivos
+- **CORS**: Configuración segura para cross-origin requests
+- **Soft delete**: Preservar datos históricos con flag booleano
+
+Estado del proyecto backend
+
+- ✅ API REST completamente funcional
+- ✅ Base de datos con 3 tablas relacionales
+- ✅ CRUD completo para proyectos
+- ✅ Validaciones de datos
+- ✅ Manejo de errores robusto
+- ✅ Documentación completa (README + GUIA-USO)
+- ✅ Preparado para deployment gratuito
+- ✅ Scripts SQL para setup rápido
+- ⏳ Pendiente: Conectar con frontend React
+- ⏳ Pendiente: Insertar proyectos reales
+- ⏳ Pendiente: Deploy a Railway/Render
+

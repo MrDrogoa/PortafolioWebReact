@@ -1,48 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Diseno from "@/assets/img/diseno-usuario.jpg";
-import Frontend from "@/assets/img/desarrollo-frontend.jpg";
-import Frameworks from "@/assets/img/implementacion-frameworks.jpg";
+import Firma from "@/assets/img/frameworks/firma-card.webp";
+import Habitissimo from "@/assets/img/frameworks/habitissimo-card.webp";
+import Spotify from "@/assets/img/frameworks/spotify-card.webp";
 import {
-  FigmaIcon,
-  HtmlIcon,
   JavascriptIcon,
   PhpIcon,
   WordpressIcon,
-  CssIcon,
   DatabaseIcon,
-} from "../icons/Icons";
+} from "@/components/icons/Icons";
 
 function Cards() {
   const cardData = [
     {
       id: 1,
-      title: "Diseño Centrado en el Usuario",
+      title: "Firma del Restaurador",
       description:
-        "metodología que prioriza las necesidades y expectativas del usuario...",
-      image: Diseno,
-      path: "/diseno-centrado-en-el-usuario",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+        "Este desafío fue especialmente complejo porque implicó trabajar...",
+      image: Firma,
+      //   path: "/diseno-centrado-en-el-usuario"
+      icon: [
+        { Icon: PhpIcon, color: "text-[#8800FF]" },
+        { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
+        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
+        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+      ],
     },
     {
       id: 2,
-      title: "Desarrollo Front-End",
+      title: "Habitissimo",
       description:
-        "Se enfoca en la creación y diseño de la interfaz visual de un sitio o aplicación...",
-      image: Frontend,
-      path: "/desarrollo-front-end",
+        "Tuvimos que rediseñar y mejorar un sitio web existente para este semestre...",
+      image: Habitissimo,
+      //   path: "/desarrollo-front-end",
       icon: [
-        { Icon: HtmlIcon, color: "text-[#E44D26]" },
-        { Icon: CssIcon, color: "text-[#1E3FDA]" },
+        { Icon: PhpIcon, color: "text-[#8800FF]" },
+        { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
+        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
+        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
       ],
     },
     {
       id: 3,
-      title: "Implementación de Frameworks",
+      title: "Spotify Clone",
       description:
-        "Consiste en integrar estructuras predefinidas de desarrollo...",
-      image: Frameworks,
-      path: "/implementacion-de-frameworks",
+        "En este desafío, trabajé con la API de WordPress para desarrollar un proyecto...",
+      image: Spotify,
+      //   path: "/implementacion-de-frameworks",
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
