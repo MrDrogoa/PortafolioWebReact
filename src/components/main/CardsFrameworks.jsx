@@ -87,9 +87,8 @@ function Cards() {
                 {card.icon.map((ic, index) => {
                   const IconComp = ic.Icon;
                   return (
-                    <Link to={card.path}>
+                    <Link to={card.path} key={index}>
                       <IconComp
-                        key={index}
                         className={`${ic.color} text-2xl lg:text-3xl ml-2`}
                       />
                     </Link>

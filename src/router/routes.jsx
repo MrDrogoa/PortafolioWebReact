@@ -5,6 +5,7 @@ import Contact from "@/pages/Contact";
 import ProjectUxUi from "@/pages/ProjectUxUi.jsx";
 import ProjectFrontend from "@/pages/ProjectFrontend.jsx";
 import ProjectFrameworks from "@/pages/ProjectFrameworks.jsx";
+import Plantilla from "@/pages/Plantilla";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -19,6 +20,18 @@ const routes = [
   {
     path: "/implementacion-de-frameworks",
     element: <ProjectFrameworks />,
+  },
+  {
+    path: "/plantilla",
+    element: <Plantilla />,
+  },
+  {
+    path: "/:categoria/:slug",
+    element: <Plantilla />,
+  },
+  {
+    path: "/project/:id",
+    element: <Plantilla />,
   },
 ];
 

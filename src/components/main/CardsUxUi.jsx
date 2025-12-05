@@ -13,7 +13,7 @@ function Cards() {
       description:
         "En las primeras etapas de nuestro trabajo con el brief y el benchmark, llevamos...",
       image: Libros,
-      //   path: "/diseno-centrado-en-el-usuario",
+      path: "/diseno-centrado-en-el-usuario/proyecto-libros",
       icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
     {
@@ -22,7 +22,7 @@ function Cards() {
       description:
         "En el trabajo desarrollamos una solución para combatir el abandono de perros...",
       image: Pet,
-      //   path: "/desarrollo-front-end",
+      path: "/diseno-centrado-en-el-usuario/petmatch-diseno",
       icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
     {
@@ -31,7 +31,7 @@ function Cards() {
       description:
         "En este proyecto pude conocer mas a fondo las metodologias que se usan...",
       image: Womad,
-      //   path: "/implementacion-de-frameworks",
+      path: "/diseno-centrado-en-el-usuario/womad-rediseno",
       icon: [{ Icon: FigmaIcon, color: "text-white" }],
     },
   ];
@@ -67,9 +67,8 @@ function Cards() {
                 {card.icon.map((ic, index) => {
                   const IconComp = ic.Icon;
                   return (
-                    <Link to={card.path}>
+                    <Link to={card.path} key={index}>
                       <IconComp
-                        key={index}
                         className={`${ic.color} text-2xl lg:text-3xl ml-2`}
                       />
                     </Link>

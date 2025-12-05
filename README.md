@@ -1169,3 +1169,630 @@ Estado del proyecto backend
 - ⏳ Pendiente: Insertar proyectos reales
 - ⏳ Pendiente: Deploy a Railway/Render
 
+---
+
+# Cambios realizados el 4 de diciembre de 2025
+
+Resumen de lo implementado hoy:
+
+- Migración de MySQL a JSON para almacenamiento de proyectos
+  - **Razón del cambio**: El usuario decidió no usar base de datos para simplificar la arquitectura y evitar costos de hosting.
+  - **Nueva arquitectura**: API REST con almacenamiento en archivo JSON plano.
+  - **Ventajas**:
+    - ✅ Zero-cost deployment (Vercel para API, Netlify para frontend)
+    - ✅ Fácil edición manual del contenido (solo editar JSON)
+    - ✅ No requiere configuración de base de datos
+    - ✅ Más rápido para proyectos pequeños (<100 registros)
+    - ✅ Portable y fácil de versionar con git
+
+- Refactorización completa del backend (Portafolio-API)
+  - **Eliminación de MySQL**:
+    - Removidos: `config/database.js`, `database/schema.sql`, `database/seed.sql`
+    - Dependencias eliminadas: `mysql2`, `dotenv`, `multer`
+    - Archivos `.env` y `.env.example` eliminados
+  
+  - **Nuevo sistema de almacenamiento**:
+    - Archivo principal: `data/projects.json`
+    - Estructura:
+      ```json
+      {
+        "projects": [...],
+        "nextId": 2
+      }
+      ```
+    - Auto-incremento de IDs manejado en memoria
+    - Sistema de lectura/escritura con `fs.promises`
+
+- Actualización del modelo (Project.js)
+  - **Antes**: Queries SQL con pool de conexiones
+  - **Después**: Operaciones CRUD con file system
+  - **Métodos refactorizados**:
+    - `readData()` - Lee y parsea JSON, crea archivo si no existe
+    - `writeData(data)` - Escribe JSON con formato (2 espacios)
+    - `getAll(categoria)` - Filtra y ordena proyectos desde array
+    - `getById(id)` - Busca por ID en array
+    - `create(projectData)` - Agrega al array y auto-incrementa ID
+    - `update(id, projectData)` - Actualiza campos específicos
+    - `delete(id)` - Elimina del array
+  - **Validaciones**: Categoría ENUM mantenida (frontend, uxui, framework)
+  - **Ordenamiento**: Por campo `orden` y luego por `id`
+
+- Simplificación del controlador (ProjectController.js)
+  - **Cambios**:
+    - Removidas transacciones (no necesarias sin DB)
+    - Simplificadas validaciones (sin constraints SQL)
+    - Mantenidos status codes HTTP apropiados
+  - **Endpoints conservados**:
+    - GET `/api/projects` - Todos los proyectos o filtrados por categoría
+    - GET `/api/projects/:id` - Proyecto específico
+    - POST `/api/projects` - Crear nuevo
+    - PUT `/api/projects/:id` - Actualizar existente
+    - DELETE `/api/projects/:id` - Eliminar
+  - **Hard delete**: Ahora es el único método de eliminación (soft delete removido)
+
+- Actualización del servidor (index.js)
+  - **Simplificaciones**:
+    - Removida conexión a base de datos
+    - Removido dotenv (no hay variables de entorno sensibles)
+    - Mantenido CORS sin restricciones (desarrollo)
+  - **Middleware conservado**:
+    - `express.json()` - Parseo de body
+    - `express.urlencoded()` - Form data
+    - Logger simple de requests
+  - **Health check**: Simplificado para solo verificar que el servidor corre
+
+- Estructura de datos JSON
+  - **Proyecto ejemplo "Proyecto - Libros"**:
+    ```json
+    {
+      "id": 1,
+      "titulo": "Proyecto - Libros",
+      "descripcion": "En las primeras etapas de nuestro trabajo...",
+      "categoria": "diseno-centrado-en-el-usuario",
+      "tecnologias": ["Figma"],
+      "orden": 1,
+      "content": [
+        {
+          "id": 1,
+          "url": "/images/disenouxui/libros/libros-1.webp",
+          "titulo": "Investigación",
+          "descripcion": "Paso 1. Durante este proceso...",
+          "orden": 1
+        }
+        // ... 5 content items total
+      ]
+    }
+    ```
+  - **Campos del proyecto**:
+    - `id` - Auto-generado
+    - `titulo` - String (requerido)
+    - `descripcion` - String (requerido)
+    - `categoria` - Enum (requerido): frontend | uxui | framework
+    - `tecnologias` - Array de strings
+    - `github_url`, `demo_url` - URLs opcionales
+    - `orden` - Número para ordenamiento
+    - `content` - Array de objetos con imágenes y descripciones
+
+- Actualización de documentación (README.md y GUIA-USO.md)
+  - **README.md del API**:
+    - Actualizado para reflejar arquitectura sin base de datos
+    - Nuevas instrucciones de instalación (sin MySQL)
+    - Ejemplos de estructura JSON
+    - Guía de deployment para Vercel
+  - **GUIA-USO.md**:
+    - Completamente reescrito para sistema JSON
+    - Instrucciones para editar `projects.json` directamente
+    - Ejemplos de cómo agregar nuevos proyectos
+    - Eliminadas secciones de MySQL
+
+- Actualización de .gitignore
+  - **Removido**: `.env`, `.env.local` (ya no necesarios)
+  - **Mantenido**: `node_modules/`, logs, `.DS_Store`
+  - **Agregado**: `data/projects.json` comentado (se versiona por ahora)
+
+- Limpieza de dependencias
+  - **package.json actualizado**:
+    - Removidas: `mysql2`, `dotenv`, `multer`
+    - Mantenidas: `express`, `cors`, `nodemon`
+    - Scripts conservados: `start`, `dev`
+  - **pnpm-lock.yaml** regenerado sin dependencias de MySQL
+
+Archivos eliminados hoy (Portafolio-API)
+
+- `config/database.js` - Pool de conexiones MySQL
+- `database/schema.sql` - Estructura de tablas SQL
+- `database/seed.sql` - Datos de ejemplo SQL
+- `.env` - Variables de entorno
+- `.env.example` - Plantilla de variables
+
+Archivos modificados hoy (Portafolio-API)
+
+- `models/Project.js` - Refactorizado de SQL a file system
+- `controllers/ProjectController.js` - Simplificado sin transacciones DB
+- `routes/projects.js` - Conservado sin cambios
+- `index.js` - Removida lógica de conexión DB
+- `package.json` - Dependencias actualizadas
+- `pnpm-lock.yaml` - Regenerado
+- `README.md` - Reescrito para JSON
+- `GUIA-USO.md` - Actualizado completamente
+- `.gitignore` - Limpiado
+
+Archivos creados hoy (Portafolio-API)
+
+- `data/projects.json` - Almacenamiento de proyectos (NUEVO)
+
+Código clave implementado
+
+```javascript
+// models/Project.js - Lectura de archivo JSON
+static async readData() {
+  try {
+    const data = await fs.readFile(DATA_PATH, 'utf8');
+    return JSON.parse(data);
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      const initialData = { projects: [], nextId: 1 };
+      await this.writeData(initialData);
+      return initialData;
+    }
+    throw new Error(`Error al leer datos: ${error.message}`);
+  }
+}
+
+// models/Project.js - Escritura de archivo JSON
+static async writeData(data) {
+  try {
+    await fs.writeFile(DATA_PATH, JSON.stringify(data, null, 2), 'utf8');
+  } catch (error) {
+    throw new Error(`Error al escribir datos: ${error.message}`);
+  }
+}
+
+// models/Project.js - Obtener todos los proyectos
+static async getAll(categoria = null) {
+  const data = await this.readData();
+  let projects = data.projects;
+  
+  if (categoria) {
+    projects = projects.filter(p => p.categoria === categoria);
+  }
+  
+  return projects.sort((a, b) => {
+    if (a.orden !== b.orden) return a.orden - b.orden;
+    return a.id - b.id;
+  });
+}
+
+// models/Project.js - Crear proyecto
+static async create(projectData) {
+  const data = await this.readData();
+  
+  const newProject = {
+    id: data.nextId,
+    titulo: projectData.titulo,
+    descripcion: projectData.descripcion,
+    categoria: projectData.categoria,
+    tecnologias: projectData.tecnologias || [],
+    github_url: projectData.github_url || null,
+    demo_url: projectData.demo_url || null,
+    orden: projectData.orden || data.projects.length + 1,
+    images: projectData.images || []
+  };
+  
+  data.projects.push(newProject);
+  data.nextId++;
+  
+  await this.writeData(data);
+  return newProject;
+}
+```
+
+Comparación: Antes vs Después
+
+| Aspecto | MySQL (Antes) | JSON (Después) |
+|---------|---------------|----------------|
+| **Almacenamiento** | 3 tablas relacionales | 1 archivo JSON |
+| **Configuración** | .env con 5+ variables | Sin configuración |
+| **Dependencias** | mysql2, dotenv, multer | Solo express, cors |
+| **Complejidad** | Pool, transacciones, JOINs | fs.readFile/writeFile |
+| **Deployment** | Railway/Render ($) | Vercel (gratis) |
+| **Edición** | SQL queries o admin panel | Editor de texto |
+| **Backup** | mysqldump | git commit |
+| **Escalabilidad** | Miles de registros | <100 registros óptimo |
+
+Cómo probar la API actualizada
+
+```bash
+# 1. Navegar al directorio del API
+cd Portafolio-API
+
+# 2. Instalar dependencias actualizadas
+pnpm install
+
+# 3. Iniciar servidor
+pnpm run dev
+
+# 4. Probar endpoints
+# http://localhost:4000/
+# http://localhost:4000/api/projects
+# http://localhost:4000/api/projects/1
+
+# 5. Editar datos directamente
+# Abrir data/projects.json y modificar
+# Los cambios se reflejan inmediatamente (con nodemon)
+```
+
+Ejemplo de respuesta de la API
+
+```json
+{
+  "success": true,
+  "count": 1,
+  "data": [
+    {
+      "id": 1,
+      "titulo": "Proyecto - Libros",
+      "descripcion": "En las primeras etapas de nuestro trabajo...",
+      "categoria": "diseno-centrado-en-el-usuario",
+      "tecnologias": ["Figma"],
+      "orden": 1,
+      "content": [
+        {
+          "id": 1,
+          "url": "/images/disenouxui/libros/libros-1.webp",
+          "titulo": "Investigación",
+          "descripcion": "Paso 1. Durante este proceso...",
+          "orden": 1
+        }
+      ]
+    }
+  ]
+}
+```
+
+Próximos pasos sugeridos
+
+1. ✅ **Crear servicio en React** (`projectsService.js`) - Ya creado
+2. ✅ **Actualizar PlantillaGeneral.jsx** para consumir API - Ya actualizado
+3. ⏳ **Agregar los 9 proyectos** al archivo `projects.json`
+4. ⏳ **Actualizar CardsFrontend.jsx** para traer datos de la API
+5. ⏳ **Actualizar CardsFrameworks.jsx** para traer datos de la API
+6. ⏳ **Subir API a Vercel** (deployment gratuito)
+7. ⏳ **Configurar variable de entorno** en Netlify
+
+Ventajas del nuevo sistema
+
+- ✅ **Simplicidad**: Sin configuración de base de datos
+- ✅ **Portabilidad**: Copiar archivo JSON = backup completo
+- ✅ **Versionamiento**: Git track de todos los cambios en contenido
+- ✅ **Zero-cost**: Hosting gratuito en Vercel
+- ✅ **Edición rápida**: Cambiar JSON directamente sin queries
+- ✅ **Performance**: Lectura desde memoria más rápida que DB para datasets pequeños
+- ✅ **Deploy simple**: Solo código, sin setup de DB
+
+Limitaciones a considerar
+
+- ⚠️ No recomendado para >100 proyectos (performance)
+- ⚠️ Escrituras concurrentes podrían causar race conditions
+- ⚠️ No hay historial de cambios (a menos que uses git)
+- ⚠️ Backups manuales requeridos (git push)
+
+Estado del proyecto
+
+- ✅ API completamente migrada a JSON
+- ✅ Todos los endpoints funcionando
+- ✅ Documentación actualizada
+- ✅ Sin dependencias de MySQL
+- ✅ Preparado para deployment en Vercel
+- ✅ Frontend listo para consumir API
+- ⏳ Pendiente: Agregar proyectos reales al JSON
+- ⏳ Pendiente: Deploy a producción
+
+---
+
+# Cambios realizados el 5 de diciembre de 2025
+
+Resumen de lo implementado hoy:
+
+- Sistema de rutas dinámicas por categoría y slug
+  - **Objetivo**: Cada tarjeta de proyecto debe redirigir a su plantilla específica con URL amigable.
+  - **Arquitectura elegida**: Rutas por categoría + slug (ej: `/diseno-centrado-en-el-usuario/proyecto-libros`)
+  - **Razones**:
+    - ✅ URLs semánticas y SEO-friendly
+    - ✅ Mejor organización por categorías
+    - ✅ Fácil compartir enlaces específicos
+    - ✅ Estructura escalable para más proyectos
+
+- Actualización de estructura JSON con slugs
+  - **FASE 1**: Expansión de `projects.json` de 1 a 9 proyectos
+  - **Categorías implementadas**:
+    - UX/UI (`diseno-centrado-en-el-usuario`): 3 proyectos
+      - `proyecto-libros` (completo con datos reales)
+      - `petmatch-diseno` (estructura lista)
+      - `womad-rediseno` (estructura lista)
+    - Frontend (`desarrollo-front-end`): 3 proyectos (plantillas)
+    - Frameworks (`implementacion-de-frameworks`): 3 proyectos (plantillas)
+  - **Nuevo campo agregado**: `slug` - URL amigable única por proyecto
+  - **Campos adicionales**: `demo_url`, `github_url` para botones de acción
+  - **Estructura de content**: 5 secciones por proyecto (4 métodos + 1 presentación)
+
+- Backend: Modelo actualizado para búsqueda por slug
+  - **FASE 2**: Actualización de `models/Project.js`
+  - **Nuevo método**: `getByCategoryAndSlug(categoria, slug)`
+    ```javascript
+    static async getByCategoryAndSlug(categoria, slug) {
+      const data = await this.readData();
+      const project = data.projects.find(
+        p => p.categoria === categoria && p.slug === slug
+      );
+      return project || null;
+    }
+    ```
+  - **Ventaja**: Búsqueda optimizada por 2 parámetros
+  - **Retrocompatibilidad**: Método `getById()` mantenido
+
+- Backend: Controlador con nuevo endpoint
+  - **Nuevo método**: `getByCategoryAndSlug(req, res)` en `ProjectController.js`
+  - **Validación**: Retorna 404 si no encuentra el proyecto
+  - **Response format**: Mismo que `getById()` para consistencia
+  - **Error handling**: Try/catch con logging de errores
+
+- Backend: Nueva ruta en el router
+  - **FASE 2**: Actualización de `routes/projects.js`
+  - **Nueva ruta**: `GET /api/projects/:categoria/:slug`
+  - **Orden importante**: Ruta de categoría+slug **antes** que `:id` para evitar conflictos
+  - **Rutas disponibles**:
+    ```javascript
+    GET /api/projects                        // Todos o filtrados
+    GET /api/projects/:categoria/:slug       // Por categoría y slug (NUEVO)
+    GET /api/projects/:id                    // Por ID (retrocompatible)
+    POST /api/projects                       // Crear
+    PUT /api/projects/:id                    // Actualizar
+    DELETE /api/projects/:id                 // Eliminar
+    ```
+
+- Frontend: Servicio actualizado
+  - **FASE 3**: Actualización de `projectsService.js`
+  - **Nuevo método**: `getProjectByCategoryAndSlug(categoria, slug)`
+    ```javascript
+    async getProjectByCategoryAndSlug(categoria, slug) {
+      const response = await fetch(
+        `${API_URL}/projects/${categoria}/${slug}`
+      );
+      const data = await response.json();
+      return data.data || null;
+    }
+    ```
+  - **Mantenido**: `getProjectById()` para retrocompatibilidad
+  - **Error handling**: Try/catch con fallback a null
+
+- Frontend: PlantillaGeneral con lógica dual
+  - **FASE 4**: Actualización de `PlantillaGeneral.jsx`
+  - **Parámetros de URL**: Ahora acepta `{ id, categoria, slug }`
+  - **Lógica de carga**:
+    1. Si hay `categoria` y `slug` → usar ruta nueva (prioridad)
+    2. Si solo hay `id` → usar ruta antigua (retrocompatible)
+  - **Estados agregados**:
+    - `loading` - Spinner mientras carga
+    - `project` - Datos del proyecto
+  - **Renders condicionales**:
+    - Loading state: "Cargando proyecto..."
+    - Error state: "Proyecto no encontrado" + link a proyectos
+    - Success: Renderizado completo con datos
+
+- Frontend: Rutas dinámicas configuradas
+  - **FASE 5**: Actualización de `routes.jsx`
+  - **Nueva ruta principal**: `/:categoria/:slug`
+  - **Ruta antigua mantenida**: `/project/:id`
+  - **Orden de rutas**:
+    ```javascript
+    { path: "/:categoria/:slug", element: <Plantilla /> }  // Nuevo
+    { path: "/project/:id", element: <Plantilla /> }       // Legacy
+    ```
+
+- Frontend: Tarjetas actualizadas con nuevas rutas
+  - **FASE 6**: Actualización de `CardsUxUi.jsx`
+  - **Cambios en rutas**:
+    - Antes: `/diseno-centrado-en-el-usuario` (genérico)
+    - Después: `/diseno-centrado-en-el-usuario/proyecto-libros` (específico)
+  - **Tarjetas UX/UI actualizadas**:
+    1. Libros → `/diseno-centrado-en-el-usuario/proyecto-libros`
+    2. Petmatch → `/diseno-centrado-en-el-usuario/petmatch-diseno`
+    3. Womad → `/diseno-centrado-en-el-usuario/womad-rediseno`
+  - **Estado**: Todas las rutas funcionales y testeadas
+
+- Corrección de errores React en tarjetas
+  - **Problema**: Props `key` incorrecta en elementos mapeados
+  - **Error específico**: `key` en componente hijo en lugar del elemento padre
+  - **Archivos corregidos**:
+    - `CardsUxUi.jsx`
+    - `CardsFrontend.jsx`
+    - `CardsFrameworks.jsx`
+  - **Fix aplicado**:
+    ```jsx
+    // Antes (❌)
+    <Link to={card.path}>
+      <IconComp key={index} className="..." />
+    </Link>
+    
+    // Después (✅)
+    <Link to={card.path} key={index}>
+      <IconComp className="..." />
+    </Link>
+    ```
+
+- Configuración de archivos estáticos en Express
+  - **Problema**: Imágenes no cargaban desde el backend
+  - **Causa**: Express no estaba sirviendo la carpeta `/images` como estática
+  - **Solución**: Agregado middleware en `index.js`
+    ```javascript
+    app.use('/images', express.static(path.join(__dirname, 'images')));
+    ```
+  - **Resultado**: Imágenes ahora accesibles en `http://localhost:4000/images/...`
+
+- Frontend: URLs de imágenes apuntando al backend
+  - **Constante agregada**: `API_BASE_URL` en `PlantillaGeneral.jsx`
+    ```javascript
+    const API_BASE_URL = import.meta.env.VITE_API_URL?.replace('/api', '') 
+                         || 'http://localhost:4000';
+    ```
+  - **Imágenes actualizadas**:
+    - Content sections: `src={`${API_BASE_URL}${section.url}`}`
+    - Presentación: `src={`${API_BASE_URL}${presentationSection.url}`}`
+  - **Ventaja**: Funciona en desarrollo y producción con misma variable de entorno
+
+- Corrección de layout de flechas en PlantillaGeneral
+  - **Problema Desktop**: Flechas aparecían incorrectamente posicionadas
+  - **Solución**: Reorganización del orden de elementos en flexbox
+    - Secciones pares: `[Texto] → [Flecha Right] → [Imagen]`
+    - Secciones impares: `[Imagen] → [Flecha Left] → [Texto]`
+  - **Problema Mobile**: Flechas duplicadas entre secciones
+  - **Solución**: Eliminadas flechas dentro del contenedor principal, solo entre secciones
+  - **Resultado**: Layout limpio y correcto en ambos dispositivos
+
+- Optimización de flechas mobile
+  - **Problema**: Flechas muy grandes en mobile (ocupaban mucho espacio)
+  - **Solución**: Tamaño fijo pequeño
+    - Antes: `w-3/4 md:w-full` (75% del ancho)
+    - Después: `w-16 md:w-20` (64px / 80px fijos)
+  - **Posicionamiento**: Entre cada elemento (tarjeta → flecha → imagen)
+  - **Layout mobile final**:
+    ```
+    📝 Tarjeta
+      ⬇️ Flecha pequeña (64px)
+    🖼️ Imagen
+      ⬇️ Flecha pequeña (64px)
+    📝 Siguiente tarjeta
+    ```
+
+- Estructura de componente final
+  - **Desktop (lg+)**:
+    - Flechas laterales (ArrowRight/ArrowLeft) entre texto e imagen
+    - Flechas curvas decorativas entre secciones
+    - Flecha final especial antes de "Presentación"
+  - **Mobile (<lg)**:
+    - Sin flechas laterales
+    - Flechas verticales pequeñas (ArrowBottom) entre elementos
+    - Mismo espaciado para todas las secciones
+
+Archivos modificados hoy (Backend)
+
+- `models/Project.js` - Agregado método `getByCategoryAndSlug()`
+- `controllers/ProjectController.js` - Agregado controlador para nuevo endpoint
+- `routes/projects.js` - Agregada ruta `/:categoria/:slug`
+- `index.js` - Agregado middleware para servir archivos estáticos
+- `data/projects.json` - Expandido de 1 a 9 proyectos con slugs
+
+Archivos modificados hoy (Frontend)
+
+- `src/services/projectsService.js` - Agregado método `getProjectByCategoryAndSlug()`
+- `src/components/plantilla/PlantillaGeneral.jsx` - Lógica dual de carga + URLs de imágenes + fix de flechas
+- `src/router/routes.jsx` - Agregada ruta `/:categoria/:slug`
+- `src/components/main/CardsUxUi.jsx` - Actualizadas rutas y fix de key prop
+- `src/components/main/CardsFrontend.jsx` - Fix de key prop
+- `src/components/main/CardsFrameworks.jsx` - Fix de key prop
+
+Código clave implementado
+
+```javascript
+// PlantillaGeneral.jsx - Lógica de carga dual
+const { id, categoria, slug } = useParams();
+
+useEffect(() => {
+  const loadProject = async () => {
+    setLoading(true);
+    let data = null;
+    
+    if (categoria && slug) {
+      data = await projectsService.getProjectByCategoryAndSlug(categoria, slug);
+    } else if (id) {
+      data = await projectsService.getProjectById(id);
+    }
+    
+    setProject(data);
+    setLoading(false);
+  };
+  
+  if (id || (categoria && slug)) {
+    loadProject();
+  }
+}, [id, categoria, slug]);
+
+// PlantillaGeneral.jsx - Flechas mobile optimizadas
+{isEven && (
+  <>
+    <div className="border-2 border-white text-white p-11 rounded-md w-full">
+      {/* Contenido */}
+    </div>
+    
+    <div className="lg:hidden flex justify-center w-full">
+      <img src={ArrowBottom} alt="arrow-bottom" className="w-16 md:w-20" />
+    </div>
+  </>
+)}
+```
+
+Ejemplos de URLs funcionando
+
+```
+✅ http://localhost:5174/diseno-centrado-en-el-usuario/proyecto-libros
+✅ http://localhost:5174/diseno-centrado-en-el-usuario/petmatch-diseno
+✅ http://localhost:5174/diseno-centrado-en-el-usuario/womad-rediseno
+✅ http://localhost:5174/project/1  (legacy, retrocompatible)
+```
+
+Flujo completo de datos
+
+```
+1. Usuario hace clic en tarjeta "Proyecto - Libros"
+   ↓
+2. React Router navega a: /diseno-centrado-en-el-usuario/proyecto-libros
+   ↓
+3. PlantillaGeneral extrae: categoria="diseno-centrado-en-el-usuario", slug="proyecto-libros"
+   ↓
+4. projectsService.getProjectByCategoryAndSlug() hace fetch a:
+   http://localhost:4000/api/projects/diseno-centrado-en-el-usuario/proyecto-libros
+   ↓
+5. Backend busca en projects.json con categoria + slug
+   ↓
+6. Retorna proyecto completo con content array
+   ↓
+7. PlantillaGeneral renderiza:
+   - Header con título y descripción
+   - 4 secciones de método (con flechas alternadas)
+   - Sección de presentación final
+   - Imágenes cargadas desde: http://localhost:4000/images/...
+```
+
+Patrones de diseño aplicados
+
+- **URL Slugs**: Identificadores amigables en URLs (SEO + UX)
+- **Dual Loading**: Soporte de múltiples patrones de URL simultáneamente
+- **API Versioning**: Mantener endpoints legacy mientras se introducen nuevos
+- **Responsive Patterns**: Diferentes layouts para desktop/mobile con mismo componente
+- **Static File Serving**: Express sirviendo assets desde filesystem
+- **Environment Variables**: URLs configurables por entorno (dev/prod)
+
+Estado del proyecto
+
+- ✅ Sistema de rutas por categoría + slug implementado
+- ✅ 9 proyectos estructurados en JSON (3 por categoría)
+- ✅ Backend con endpoint dual (slug + id)
+- ✅ Frontend consumiendo API correctamente
+- ✅ Imágenes cargando desde backend
+- ✅ Layout de flechas corregido (desktop + mobile)
+- ✅ Tarjetas UX/UI con rutas funcionales
+- ⏳ Pendiente: Completar datos de Petmatch y Womad
+- ⏳ Pendiente: Actualizar CardsFrontend y CardsFrameworks
+- ⏳ Pendiente: Deploy a producción
+
+Próximos pasos
+
+1. ⏳ Agregar información completa de proyectos Petmatch y Womad
+2. ⏳ Actualizar CardsFrontend.jsx con rutas dinámicas
+3. ⏳ Actualizar CardsFrameworks.jsx con rutas dinámicas
+4. ⏳ Organizar imágenes en carpetas correctas del backend
+5. ⏳ Deploy del backend a Vercel
+6. ⏳ Actualizar VITE_API_URL en Netlify para producción
+7. ⏳ Testing completo de todas las rutas en producción
+
