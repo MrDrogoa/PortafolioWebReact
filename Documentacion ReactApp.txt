@@ -1,0 +1,24 @@
+Como primera instancia para mi portafolio vamos a instalar vite con react "npm create vite@latest" de ahi ejecutamos un "pnpm install" que lo que hace es que crea la estructura de nuestro proyecto, luego vamos a instalar tailwind "npm install tailwindcss @tailwindcss/vite" y después en el archivo de vite.config.js importamos y agregamos el tailwind, después en nuestro archivo de index.css pegamos "@import "tailwindcss";" para importar el tailwind.
+
+Para crear mi aplicacion react correctamente es necesario primero crear la carpeta del layout->Layout.jsx y dentro poner los componentes de footer y header e importarlos y luego ir al app.jsx y exportar layout.jsx y también instalar la dependencia de las rutas de react "pnpm install react-router-dom" para que funcione correctamente "import { BrowserRouter, Routes, Route } from "react-router-dom";" y en la función "        <BrowserRouter>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<h1>Inicio</h1>} />
+          <Route path="/about" element={<About />} /> {/* Usa el componente */}
+          <Route path="/projects" element={<h1>Proyectos</h1>} />
+        </Routes>
+      </Layout>
+    </BrowserRouter>" retornamos esto que obviamente es modificable para poner cada pages que va a ir en este caso la ia me recomendó trabajar con pages y no con view cree todas mis paginas y habia un error ya que como cree todas pestañas y componentes que iba a usar no le cree su respectivo archivo a todos "import React from "react";
+
+function Home() {
+  // poner contenido de la pagina de inicio que no sea el header ni el footer
+  return (
+    <div>
+      <h1>Bienvenido a mi portafolio</h1>
+      <p>Este es el contenido de la página de inicio.</p>
+    </div>
+  );
+}
+
+export default Home;
+" algo asi para que funcione correctamente 
