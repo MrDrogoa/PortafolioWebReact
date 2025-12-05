@@ -1,0 +1,61 @@
+/* Animación de borde corriendo en el contorno de la tarjeta */
+@keyframes borderRunning {
+  0% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ffea00 0%,
+      #ff6f61 25%,
+      #4ecdc4 50%,
+      #ffea00 75%,
+      #ffea00 100%
+    );
+  }
+  25% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ff6f61 0%,
+      #4ecdc4 25%,
+      #ffea00 50%,
+      #ff6f61 75%,
+      #ff6f61 100%
+    );
+  }
+  50% {
+    border-image-source: linear-gradient(
+      90deg,
+      #4ecdc4 0%,
+      #ffea00 25%,
+      #ff6f61 50%,
+      #4ecdc4 75%,
+      #4ecdc4 100%
+    );
+  }
+  75% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ffea00 0%,
+      #ff6f61 25%,
+      #4ecdc4 50%,
+      #ffea00 75%,
+      #ffea00 100%
+    );
+  }
+  100% {
+    border-image-source: linear-gradient(
+      90deg,
+      #ffea00 0%,
+      #ff6f61 25%,
+      #4ecdc4 50%,
+      #ffea00 75%,
+      #ffea00 100%
+    );
+  }
+}
+
+/* Aplicar la animación a las tarjetas en hover */
+.card-border-animation:hover {
+  animation: borderRunning 3s infinite linear;
+  border: 2px solid;
+  border-radius: 6px;
+  border-image: linear-gradient(90deg, #ffea00, #ff6f61, #4ecdc4) 1;
+}
