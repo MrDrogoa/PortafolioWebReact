@@ -1,27 +1,67 @@
 import React from "react";
-import Titleh2 from "../Titleh2";
-import { ArrowRightIcon } from "../icons/Icons";
+import Titleh2 from "@/components/Titleh2";
+import { ArrowRightIcon } from "@/components/icons/Icons";
 import { Link } from "react-router-dom";
 
 function Experience() {
   const experienceData = [
     {
       title: "Diseño Centrado en el Usuario",
-      projects: ["Womad", "Libros", "Petmatch"],
+      projects: [
+        {
+          path: "/diseno-centrado-en-el-usuario/proyecto-libros",
+          name: "Libros",
+        },
+        {
+          path: "/diseno-centrado-en-el-usuario/womad-rediseno",
+          name: "Womad",
+        },
+        {
+          path: "/diseno-centrado-en-el-usuario/petmatch-diseno",
+          name: "Petmatch",
+        },
+      ],
       paragraph:
         "Use metodologias de brief, benchmark, mapa de contenidos y otros para definir ideas sobre los requerimientos del usuario.",
       path: "/diseno-centrado-en-el-usuario",
     },
     {
       title: "Desarrollo Front-End",
-      projects: ["Restaurante", "Landings", "FrontPet"],
+      projects: [
+        {
+          path: "/desarrollo-front-end/proyecto-bootstrap",
+          name: "Bootstrap",
+        },
+        {
+          path: "/desarrollo-front-end/proyecto-landings",
+          name: "Landings",
+        },
+        {
+          path: "/desarrollo-front-end/petmatch-frontend",
+          name: "FrontPet",
+        },
+      ],
       paragraph:
         "Desarrollo de interfaces web utilizando HTML, CSS y JavaScript, asegurando una experiencia de usuario fluida y atractiva.",
       path: "/desarrollo-front-end",
     },
     {
       title: "Implementación de Frameworks",
-      projects: ["Habitissimo", "Spotify", "Firma"],
+      projects: [
+        {
+          path: "/implementacion-de-frameworks/proyecto-habitissimo",
+          name: "Habitissimo",
+        },
+
+        {
+          path: "/implementacion-de-frameworks/proyecto-spotify",
+          name: "Spotify",
+        },
+        {
+          path: "/implementacion-de-frameworks/proyecto-firma",
+          name: "Firma",
+        },
+      ],
       paragraph:
         "Proyectos programados con js, php, mysql y el cms de wordpress. Iniciando asi con el manejo de Api y BD.",
       path: "/implementacion-de-frameworks",
@@ -43,7 +83,10 @@ function Experience() {
             <div className="flex flex-wrap gap-2 font-secondary text-[#FF6F61] font-medium text-xs sm:text-sm">
               {experience.projects.map((project, index) => (
                 <React.Fragment key={index}>
-                  <p className="font-secondary">{project}</p>
+                  <Link to={project.path}>
+                    <p className="font-secondary">{project.name}</p>
+                  </Link>
+
                   {index < experience.projects.length - 1 && <span>-</span>}
                 </React.Fragment>
               ))}

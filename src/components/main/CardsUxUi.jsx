@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Libros from "@/assets/img/disenouxui/libros.webp";
 import Pet from "@/assets/img/disenouxui/pet-card.webp";
 import Womad from "@/assets/img/disenouxui/womad-card.webp";
-import { FigmaIcon } from "../icons/Icons";
+import { FigmaIcon } from "@/components/icons/Icons";
 
 function Cards() {
   const cardData = [

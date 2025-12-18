@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import ButtonComponents from "../buttons/ButtonComponents";
+import ButtonComponents from "@/components/buttons/ButtonComponents";
 
 function HeroContent() {
   return (
@@ -12,7 +12,7 @@ function HeroContent() {
         <p className="font-secondary text-white font-semibold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4 text-center z-10">
           Diseñador UX UI & desarrollador Front-End
         </p>
-        <Link to="/about" className="flex justify-center">
+        <Link to="/projects" className="flex justify-center">
           <ButtonComponents>Ver más</ButtonComponents>
         </Link>
       </div>

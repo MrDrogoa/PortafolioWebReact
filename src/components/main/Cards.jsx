@@ -11,7 +11,7 @@ import {
   WordpressIcon,
   CssIcon,
   DatabaseIcon,
-} from "../icons/Icons";
+} from "@/components/icons/Icons";
 
 function Cards() {
   const cardData = [

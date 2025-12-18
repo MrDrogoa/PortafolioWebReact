@@ -7,9 +7,51 @@ import ArrowCurve from "@/assets/img/arrow/arrow-curve-1.svg";
 import ArrowLeft from "@/assets/img/arrow/arrow-left.svg";
 import ArrowCurve2 from "@/assets/img/arrow/arrow-curve-2.svg";
 import ArrowCurveFinal from "@/assets/img/arrow/arrow-curve-final.svg";
+import ButtonComponents from "@/components/buttons/ButtonComponents";
+import {
+  CodeIcon,
+  FigmaIcon,
+  HtmlIcon,
+  CssIcon,
+  JavascriptIcon,
+  ReactIcon,
+  VueIcon,
+  BootstrapIcon,
+  PhpIcon,
+  WordpressIcon,
+  DatabaseIcon,
+} from "@/components/icons/Icons";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:4000";
+
+// Función para obtener el icono según el nombre de la tecnología
+const getTechIcon = (techName) => {
+  const iconMap = {
+    Figma: { Icon: FigmaIcon, color: "text-white" },
+    HTML: { Icon: HtmlIcon, color: "text-[#E44D26]" },
+    CSS: { Icon: CssIcon, color: "text-[#1E3FDA]" },
+    JavaScript: { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
+    PHP: { Icon: PhpIcon, color: "text-[#8800FF]" },
+    Wordpress: { Icon: WordpressIcon, color: "text-white" },
+    MySQL: { Icon: DatabaseIcon, color: "text-white" },
+    Bootstrap: { Icon: BootstrapIcon, color: "text-[#7952B3]" },
+    React: { Icon: ReactIcon, color: "text-[#61DAFB]" },
+    Vue: { Icon: VueIcon, color: "text-[#42B883]" },
+    Angular: { Icon: ReactIcon, color: "text-[#DD0031]" },
+  };
+
+  const techData = iconMap[techName];
+  if (techData) {
+    const { Icon, color } = techData;
+    return (
+      <>
+        <Icon className={`${color} text-3xl md:text-4xl lg:text-5xl`} />
+      </>
+    );
+  }
+  return <span className="text-sm">{techName}</span>;
+};
 
 function PlantillaGeneral() {
   const { id, categoria, slug } = useParams(); // Obtener parámetros desde la URL
@@ -73,42 +115,35 @@ function PlantillaGeneral() {
   const presentationSection = project.content?.slice(-1)[0] || null;
 
   return (
-    <section className="max-w-[1300px] m-auto py-8 md:py-12 lg:py-14">
+    <section className="max-w-[1300px] m-auto pt-8 md:pt-12 lg:pt-14">
       {/* Header del proyecto */}
-      <div className="px-5 flex flex-col md:flex-row items-center justify-between">
+      <div className="px-5 flex flex-col lg:flex-row items-center justify-between ">
         <div className="w-full md:w-3/5">
-          <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center md:text-left">
+          <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left">
             {project.titulo}
           </h2>
-          <div className="font-secondary font-normal md:text-lg text-center md:text-start text-white py-3 pb-6 lg:pb-0">
+          <div className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0">
             <p>{project.descripcion}</p>
           </div>
         </div>
 
-        {/* Botón de Behance o Demo */}
-        {(project.demo_url || project.github_url) && (
-          <div>
-            <button className="font-secondary py-2 px-5 bg-[#FFEA00] hover:bg-[#FFEE39] text-[#202023] font-semibold rounded-lg hover:-translate-y-2 hover:shadow-lg will-change-transform transition-transform duration-300 ease-in-out">
-              <a
-                href={project.demo_url || project.github_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-2"
-              >
-                {project.demo_url ? (
-                  <>
-                    Behance{" "}
-                    <i className="fa-brands fa-square-behance text-3xl"></i>
-                  </>
-                ) : (
-                  <>
-                    GitHub <i className="fa-brands fa-github text-3xl"></i>
-                  </>
-                )}
-              </a>
-            </button>
-          </div>
-        )}
+        <div>
+          {project.tecnologias && project.tecnologias.length > 0 && (
+            <div className="flex flex-col  justify-center items-center gap-3">
+              <div className="flex items-center gap-2 text-[#FF6F61]">
+                <CodeIcon className="text-2xl" />
+                <span className="font-secondary font-semibold text-lg">
+                  Tecnologías
+                </span>
+              </div>
+              <div className="flex flex-wrap gap-3 justify-center md:justify-end">
+                {project.tecnologias.map((tech, index) => (
+                  <div key={index}>{getTechIcon(tech)}</div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
 
       {/* Secciones de contenido dinámicas */}
@@ -120,7 +155,7 @@ function PlantillaGeneral() {
             <div
               className={`mx-5 flex flex-col lg:flex-row justify-center items-center gap-7 md:gap-12 ${
                 isEven ? "lg:gap-14" : ""
-              } pt-11`}
+              } pt-8 sm:pt-10 md:pt-20 lg:pt-25`}
             >
               {/* Contenido de texto (para secciones pares) */}
               {isEven && (
@@ -250,16 +285,16 @@ function PlantillaGeneral() {
 
       {/* Sección de presentación final */}
       {presentationSection && (
-        <section className="max-w-[1300px] m-auto pt-14 md:pt-16">
-          <div className="flex justify-center items-center flex-col w-72 md:w-1/2 lg:w-3/4 text-white m-auto text-center gap-3">
+        <section className="max-w-[1300px] m-auto ">
+          <div className="flex justify-center items-center flex-col w-72 md:w-1/2 lg:w-3/4 text-white m-auto text-center gap-3 pt-8 sm:pt-10 md:pt-20 lg:pt-30">
             <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold">
               {presentationSection.titulo}
             </h2>
-            <div className="font-secondary font-normal md:text-lg pb-2">
+            <div className="font-secondary font-normal md:text-lg">
               <p>{presentationSection.descripcion}</p>
             </div>
           </div>
-          <div className="flex justify-center px-4 pt-8 md:pt-14">
+          <div className="flex justify-center px-4 mt-8 md:mt-16">
             <img
               src={`${API_BASE_URL}${presentationSection.url}`}
               alt={presentationSection.titulo}
@@ -271,9 +306,11 @@ function PlantillaGeneral() {
 
       {/* Botón de contacto */}
       <section className="flex justify-center py-8">
-        <button className="flex items-center gap-2 font-secondary py-2 px-5 bg-[#FFEA00] hover:bg-[#FFEE39] text-[#202023] font-semibold rounded-lg hover:-translate-y-2 hover:shadow-lg will-change-transform transition-transform duration-300 ease-in-out">
-          <Link to="/contact">Contacto</Link>
-        </button>
+        <Link to="/contact">
+          <ButtonComponents className="flex items-center gap-2 font-secondary py-2 px-5 bg-[#FFEA00] hover:bg-[#FFEE39] text-[#202023] font-semibold rounded-lg hover:-translate-y-2 hover:shadow-lg will-change-transform transition-transform duration-300 ease-in-out">
+            Contacto
+          </ButtonComponents>
+        </Link>
       </section>
     </section>
   );

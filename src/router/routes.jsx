@@ -6,10 +6,12 @@ import ProjectUxUi from "@/pages/ProjectUxUi.jsx";
 import ProjectFrontend from "@/pages/ProjectFrontend.jsx";
 import ProjectFrameworks from "@/pages/ProjectFrameworks.jsx";
 import Plantilla from "@/pages/Plantilla";
+import Experience from "@/pages/Experience";
 
 const routes = [
   { path: "/", element: <Home /> },
   { path: "/about", element: <About /> },
+  { path: "/experience", element: <Experience /> },
   { path: "/projects", element: <Projects /> },
   { path: "/contact", element: <Contact /> },
   { path: "/diseno-centrado-en-el-usuario", element: <ProjectUxUi /> },

@@ -18,7 +18,7 @@ function Cards() {
       description:
         "Este desafío fue especialmente complejo porque implicó trabajar...",
       image: Firma,
-      //   path: "/diseno-centrado-en-el-usuario"
+      path: "/implementacion-de-frameworks/proyecto-firma",
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
@@ -32,7 +32,7 @@ function Cards() {
       description:
         "Tuvimos que rediseñar y mejorar un sitio web existente para este semestre...",
       image: Habitissimo,
-      //   path: "/desarrollo-front-end",
+      path: "/implementacion-de-frameworks/proyecto-habitissimo",
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
@@ -46,7 +46,7 @@ function Cards() {
       description:
         "En este desafío, trabajé con la API de WordPress para desarrollar un proyecto...",
       image: Spotify,
-      //   path: "/implementacion-de-frameworks",
+      path: "/implementacion-de-frameworks/proyecto-spotify",
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },

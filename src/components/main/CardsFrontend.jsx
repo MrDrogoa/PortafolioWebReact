@@ -14,7 +14,7 @@ function Cards() {
       description:
         "Para este trabajo aprendimos los fundamentos de las librerías CSS...",
       image: Bootstrap,
-      //   path: "/diseno-centrado-en-el-usuario",
+      path: "/desarrollo-front-end/proyecto-bootstrap",
       icon: [
         { Icon: HtmlIcon, color: "text-[#E44D26]" },
         { Icon: CssIcon, color: "text-[#1E3FDA]" },
@@ -26,7 +26,7 @@ function Cards() {
       description:
         "En este proyecto, trabajamos directamente con código, aplicando conocimientos...",
       image: Landings,
-      //   path: "/desarrollo-front-end",
+      path: "/desarrollo-front-end/proyecto-landings",
       icon: [
         { Icon: HtmlIcon, color: "text-[#E44D26]" },
         { Icon: CssIcon, color: "text-[#1E3FDA]" },
@@ -38,7 +38,7 @@ function Cards() {
       description:
         "El proyecto consistió en replicar el trabajo del primer semestre, esta vez enfocándose...",
       image: PetFront,
-      //   path: "/implementacion-de-frameworks",
+      path: "/desarrollo-front-end/petmatch-frontend",
       icon: [
         { Icon: HtmlIcon, color: "text-[#E44D26]" },
         { Icon: CssIcon, color: "text-[#1E3FDA]" },

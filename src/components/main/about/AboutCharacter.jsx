@@ -18,7 +18,7 @@ function AboutCharacter() {
             key={certificate.id}
             class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-medium md:text-lg text-center">
+            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>
@@ -31,7 +31,7 @@ function AboutCharacter() {
             key={certificate.id}
             class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-medium md:text-lg text-center">
+            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>
@@ -44,7 +44,7 @@ function AboutCharacter() {
             key={certificate.id}
             class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-medium md:text-lg text-center">
+            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>
