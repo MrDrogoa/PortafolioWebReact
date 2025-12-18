@@ -196,7 +196,7 @@
       "id": 5,
       "slug": "proyecto-landings",
       "titulo": "Proyecto - Landings",
-      "descripcion": "[AGREGA TU DESCRIPCIÓN AQUÍ]",
+      "descripcion": "En este proyecto, trabajamos directamente con código, aplicando conocimientos básicos sobre la estructura de HTML y el manejo de diseño con CSS. A lo largo del proceso, desarrollamos wireframes y mockups proporcionados por los profesores, permitiéndonos trabajar tanto de manera individual como en equipo para dar forma a nuestra propuesta. Este enfoque nos ayudó a fortalecer nuestras habilidades en diseño web y colaboración, asegurando que cada elemento reflejara una estructura clara y una estética bien definida.",
       "categoria": "desarrollo-front-end",
       "tecnologias": ["HTML", "CSS", "JavaScript"],
       "demo_url": "",
@@ -205,35 +205,35 @@
       "content": [
         {
           "id": 1,
-          "url": "/images/frontend/landings/landings-1.webp",
+          "url": "/images/frontend/landings/landing-1.webp",
           "titulo": "Proceso - 1",
           "descripcion": "Paso 1. El primer paso del proyecto consistió en un trabajo individual, donde tuve que replicar el diseño de una plantilla creada en Adobe XD. Este ejercicio me permitió desarrollar nuestra precisión en la maquetación, reforzar el uso de HTML y CSS.",
           "orden": 1
         },
         {
           "id": 2,
-          "url": "/images/frontend/landings/landings-2.webp",
+          "url": "/images/frontend/landings/landing-2.webp",
           "titulo": "Proceso - 2",
           "descripcion": "Paso 2. Desarrolle la carpeta en VSC llamada “wiframe-prueba” y cree los archivos de index.html y styles.css, en HTML cree lo primero que se hace para crear una estructura de una pagina que es “!”. Y procedi en hacer la estructura segun lo enviado por el profe. Paso 3. En la segunda landing page, diseñé un restaurante con estilos más avanzados. Aunque enfrenté algunas dificultades para ubicar ciertos elementos, logré completar el proyecto según los requerimientos de los profesores, asegurando un diseño funcional y bien estructurado.",
           "orden": 2
         },
         {
           "id": 3,
-          "url": "/images/frontend/landings/landings-3.webp",
+          "url": "/images/frontend/landings/landing-3.webp",
           "titulo": "Proceso - 3",
           "descripcion": "Paso 4. Para este proyecto que fue un sitio de viajes la cual nos toco en el sorteo impuesto por los profes, lo trabajamos en grupo. Paso 5. Al inicio, enfrentamos incertidumbre, ya que ninguno tenía un manejo sólido de HTML y CSS. Para hacer el trabajo más flexible, decidimos organizarnos en grupos de dos, lo que permitió distribuir mejor las tareas. Como el proyecto incluía dos páginas, esta estrategia resultó ideal para avanzar de manera eficiente y colaborativa.",
           "orden": 3
         },
         {
           "id": 4,
-          "url": "/images/frontend/landings/landings-4.webp",
+          "url": "/images/frontend/landings/landing-4.webp",
           "titulo": "Proceso - 4",
           "descripcion": "Paso 6. Organizamos el trabajo definiendo las secciones que cada integrante manejaría. En mi caso, me encargué del desarrollo y el estilo de la segunda página, mientras que mi compañera me proporcionaba las imágenes necesarias. Además, todo debía ser responsive para garantizar una buena experiencia en distintos dispositivos. Mis otros compañeros siguieron la misma dinámica, estableciendo estilos, carpetas e imágenes para lograr una entrega organizada y completa.",
           "orden": 4
         },
         {
           "id": 5,
-          "url": "/images/frontend/landings/landings-final.webp",
+          "url": "/images/frontend/landings/landing-final.webp",
           "titulo": "Presentación",
           "descripcion": "En la presentación final, enviamos nuestro trabajo a los profesores para su evaluación y recibir su feedback. Identificaron varios aspectos que podrían mejorarse en el futuro, tanto en la organización del equipo como en la presentación del proyecto. Estos comentarios nos brindaron una perspectiva valiosa para optimizar nuestros procesos y reforzar la calidad de nuestro trabajo en próximos proyectos.",
           "orden": 5
@@ -294,7 +294,7 @@
       "titulo": "Firma del restaurador",
       "descripcion": "Este desafío fue especialmente complejo porque implicó trabajar con un cliente real. Se buscó una institución y, en equipo, realizamos entrevistas para comprender sus necesidades. Nos informaron que ya contaban con un sitio web en WordPress, pero su diseño era anticuado, por lo que solicitaban una landing page que facilitara la comunicación con ellos. Fue una experiencia enriquecedora, ya que requirió análisis, planificación y colaboración directa con el cliente para garantizar que la solución cumpliera sus expectativas.",
       "categoria": "implementacion-de-frameworks",
-      "tecnologias": ["React", "Vue", "Angular"],
+      "tecnologias": ["JavaScript", "PHP", "Wordpress", "MySQL"],
       "demo_url": "",
       "github_url": "",
       "orden": 1,
@@ -342,7 +342,7 @@
       "titulo": "Habitissimo - Rediseño",
       "descripcion": "Tuvimos que rediseñar y mejorar un sitio web existente para este semestre, utilizando WordPress con PHP y una base de datos en phpMyAdmin. Al ser PHP un lenguaje backend, enfrenté varios desafíos, ya que incluso un pequeño error en la sintaxis podía hacer que el código no funcionara. Al principio fue frustrante, pero con la documentación y la orientación del profesor logré desarrollar el proyecto con éxito. Y presentar mi propuesta final del sitio.",
       "categoria": "implementacion-de-frameworks",
-      "tecnologias": ["React", "Vue", "Angular"],
+      "tecnologias": ["JavaScript", "PHP", "Wordpress", "MySQL"],
       "demo_url": "",
       "github_url": "",
       "orden": 2,
@@ -390,7 +390,7 @@
       "titulo": "Spotify - Clon",
       "descripcion": "En este desafío, trabajé con la API de WordPress para desarrollar un proyecto independiente, usando WordPress únicamente como base de datos, sin crear un nuevo tema. Implementé consultas y operaciones CRUD en PHP y JavaScript para gestionar la incorporación de artistas. Para verificar la correcta funcionalidad de la API, utilicé Postman, lo que me permitió probar las solicitudes y detectar posibles errores. Fue un reto significativo, ya que hasta el momento solo habíamos trabajado con plantillas de WordPress, pero aquí el enfoque fue distinto: WordPress servía únicamente para mostrar entradas, sin intervenir en el diseño ni la estructura del sitio. A pesar de la complejidad inicial, logré adaptarme y comprender mejor la interacción entre PHP, JavaScript y la API de WordPress.",
       "categoria": "implementacion-de-frameworks",
-      "tecnologias": ["React", "Vue", "Angular"],
+      "tecnologias": ["JavaScript", "PHP", "Wordpress", "MySQL"],
       "demo_url": "",
       "github_url": "",
       "orden": 3,

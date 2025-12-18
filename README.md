@@ -1,28 +1,221 @@
-# React + Vite
+# Portafolio Web - Full Stack Project 🚀
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Este repositorio contiene el proyecto completo de portafolio web con frontend y backend separados.
 
-Currently, two official plugins are available:
+## 📁 Estructura del Proyecto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+PortafolioWeb/
+├── joDani/          → Frontend (React + Vite + Tailwind CSS)
+└── Portafolio-API/  → Backend (Express.js + JSON Storage)
+```
 
-# React + Vite
+## 🚀 Frontend - joDani
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplicación React con sistema de rutas dinámicas, diseño responsive y consumo de API REST.
 
-Currently, two official plugins are available:
+**Tecnologías:**
+- ⚛️ React 19.1.1
+- ⚡ Vite 7.1.7
+- 🎨 Tailwind CSS 4.1.14
+- 🧭 React Router DOM 7.9.4
+- 🎠 Splide.js 4.1.4 (carousels)
+- 🎭 React Icons 5.5.0
+- 📦 styled-components para componentes personalizados
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+**Para ejecutar el frontend:**
+```bash
+cd joDani
+pnpm install
+pnpm run dev
+```
 
-## React Compiler
+**Scripts disponibles:**
+- `pnpm run dev` - Inicia el servidor de desarrollo (puerto 5174)
+- `pnpm run build` - Crea la build de producción
+- `pnpm run preview` - Vista previa de la build
+- `pnpm run lint` - Ejecuta ESLint para validar código
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+📄 [Ver documentación completa del frontend →](./joDani/README.md)
 
-## Expanding the ESLint configuration
+## 🔌 Backend - Portafolio-API
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+API REST con almacenamiento en JSON para gestión de proyectos del portafolio.
+
+**Tecnologías:**
+- 🟢 Node.js
+- 🚂 Express.js 5.1.0
+- 📁 File System (fs/promises) para persistencia
+- 🔗 CORS habilitado
+- 🖼️ Multer para manejo de imágenes
+
+**Para ejecutar el backend:**
+```bash
+cd Portafolio-API
+pnpm install
+pnpm run dev
+```
+
+**Scripts disponibles:**
+- `pnpm run dev` - Inicia el servidor con nodemon (puerto 4000)
+- `pnpm start` - Inicia el servidor en producción
+
+📄 [Ver documentación completa del backend →](./Portafolio-API/README.md)
+
+## 🔗 Configuración de desarrollo local
+
+1. **Iniciar el backend** (puerto 4000):
+   ```bash
+   cd Portafolio-API
+   pnpm install
+   pnpm run dev
+   ```
+
+2. **Iniciar el frontend** (puerto 5174):
+   ```bash
+   cd joDani
+   pnpm install
+   pnpm run dev
+   ```
+
+3. **Acceder a la aplicación:**
+   - Frontend: http://localhost:5174
+   - Backend API: http://localhost:4000/api
+
+## 📝 Variables de entorno
+
+**Frontend (.env.local en joDani/):**
+```env
+VITE_API_URL=http://localhost:4000/api
+```
+
+**Backend (sin .env necesario en desarrollo):**
+- Puerto por defecto: 4000
+- CORS habilitado para todos los orígenes en desarrollo
+
+## 🎨 Características principales
+
+### 🖥️ Frontend
+- ✅ Sistema de rutas dinámicas por categoría + slug
+- ✅ 9 proyectos organizados en 3 categorías (UX/UI, Frontend, Frameworks)
+- ✅ Componente PlantillaGeneral reutilizable
+- ✅ Layout responsive con flechas decorativas
+- ✅ Carrusel de tecnologías con Splide.js
+- ✅ Tema oscuro personalizado (#202023)
+- ✅ Animaciones y transiciones suaves
+- ✅ Componentes modulares y reutilizables
+- ✅ Navegación con menú móvil responsive
+- ✅ Sistema de iconos con React Icons
+- ✅ Hero animado con iconos flotantes
+- ✅ Sección de experiencia con timeline
+- ✅ Formulario de contacto
+- ✅ Footer con enlaces a redes sociales
+
+### 🔧 Backend
+- ✅ API RESTful completa
+- ✅ CRUD de proyectos
+- ✅ Filtrado por categoría
+- ✅ Búsqueda por slug y categoría
+- ✅ Almacenamiento en JSON
+- ✅ Manejo de imágenes estáticas
+- ✅ Middleware de CORS configurado
+- ✅ Estructura MVC (Model-View-Controller)
+
+## 📱 Estructura de Páginas
+
+- **Home** (`/`) - Página principal con hero, experiencia y proyectos destacados
+- **About** (`/about`) - Información personal y habilidades
+- **Experience** (`/experience`) - Timeline de experiencia profesional
+- **Projects** (`/projects`) - Listado completo de proyectos
+  - **UX/UI** (`/diseno-centrado-en-el-usuario`) - Proyectos de diseño
+  - **Frontend** (`/desarrollo-front-end`) - Proyectos de desarrollo frontend
+  - **Frameworks** (`/implementacion-de-frameworks`) - Proyectos con frameworks
+- **Contact** (`/contact`) - Formulario de contacto
+- **Plantilla Dinámica** (`/:categoria/:slug`) - Vista detallada de cada proyecto
+
+## 🎯 Últimas Actualizaciones (Diciembre 2025)
+
+### ✨ Cambios Recientes
+- 🔄 Reorganización completa de la estructura del proyecto
+- 📦 Migración del código frontend a carpeta `joDani/`
+- 🗑️ Eliminación de archivos duplicados en la raíz
+- 📝 Actualización de documentación
+- 🔧 Mejora en la configuración de rutas dinámicas
+- 🎨 Refinamiento del sistema de diseño
+- 🖼️ Optimización de imágenes y assets
+- 🌐 Configuración mejorada de variables de entorno
+
+### 🗂️ Archivos Movidos/Reorganizados
+- Todo el código React movido de `src/` a `joDani/src/`
+- Configuraciones de Vite, Tailwind y ESLint consolidadas en `joDani/`
+- Assets e imágenes organizados en `joDani/src/assets/`
+- Componentes estructurados por funcionalidad
+- Eliminada estructura duplicada en la raíz del proyecto
+
+## 🌐 Deployment
+
+**Frontend:** Netlify (recomendado)
+```bash
+cd joDani
+pnpm run build
+# Subir carpeta dist/ a Netlify
+```
+
+**Backend:** Vercel / Railway (recomendado)
+```bash
+cd Portafolio-API
+# Configurar variable PORT en plataforma
+```
+
+Ver guías de deployment detalladas en cada carpeta de proyecto.
+
+## 📦 Repositorio
+
+- 🐙 GitHub: [MrDrogoa/PortafolioWebReact](https://github.com/MrDrogoa/PortafolioWebReact)
+- 👨‍💻 Autor: Daniel Rosales
+- 📧 Contacto: [LinkedIn](https://www.linkedin.com/in/daniel-rosales-1b737a1a9/)
+
+## 🛠️ Tecnologías y Herramientas
+
+### Frontend Stack
+```json
+{
+  "framework": "React 19.1.1",
+  "bundler": "Vite 7.1.7",
+  "styling": "Tailwind CSS 4.1.14",
+  "routing": "React Router DOM 7.9.4",
+  "carousel": "@splidejs/splide 4.1.4",
+  "icons": "react-icons 5.5.0"
+}
+```
+
+### Backend Stack
+```json
+{
+  "runtime": "Node.js",
+  "framework": "Express 5.1.0",
+  "storage": "JSON (fs/promises)",
+  "middleware": ["cors", "multer"],
+  "dev-tool": "nodemon"
+}
+```
+
+## 🤝 Contribuciones
+
+Este es un proyecto personal de portafolio. Si encuentras algún bug o tienes sugerencias, siéntete libre de abrir un issue.
+
+## 📄 Licencia
+
+Este proyecto es de código abierto y está disponible bajo la licencia MIT.
+
+---
+
+⭐ Si te gusta este proyecto, no olvides darle una estrella en GitHub
+- Rama principal: `main`
+
+---
+
+**Última actualización:** Diciembre 10, 2025
 
 # Cambios realizados el 16 de octubre de 2025
 
