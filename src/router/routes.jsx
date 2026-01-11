@@ -2,7 +2,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Projects from "@/pages/Projects";
 import Contact from "@/pages/Contact";
-import ProjectUxUi from "@/pages/ProjectUxUi.jsx";
+import ProjectUxUi from "@/pages/ProjectUxui.jsx";
 import ProjectFrontend from "@/pages/ProjectFrontend.jsx";
 import ProjectFrameworks from "@/pages/ProjectFrameworks.jsx";
 import Plantilla from "@/pages/Plantilla";
