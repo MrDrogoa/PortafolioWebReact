@@ -7,7 +7,7 @@ import Cards from "@/components/main/Cards";
 import Titleh2 from "@/components/Titleh2";
 import ButtonComponents from "@/components/buttons/ButtonComponents";
 import { Link } from "react-router-dom";
-import Cap from "@/assets/img/captura.png";
+import Cap from "@/assets/img/Captura.png";
 
 function MainComponents() {
   return (
