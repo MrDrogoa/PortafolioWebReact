@@ -120,7 +120,7 @@ function Footer() {
           </div>
         </div>
 
-        <span className="flex items-center gap-2 justify-center text-white pt-6 font-medium">
+        <span className="flex items-center gap-2 justify-center font-secondary text-white pt-6 font-medium">
           <CopyrightIcon />
           Copyright 2025
           <CircleIcon className="fa-solid fa-circle text-[#FF6F61] text-[7px]" />

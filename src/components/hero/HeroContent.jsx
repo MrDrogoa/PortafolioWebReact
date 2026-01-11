@@ -10,6 +10,9 @@ function HeroContent() {
       duration: 800, // Duración de la animación
       once: false, // Animar cada vez que scrolleas
       offset: 100,
+      disable: function () {
+        return window.innerWidth < 768;
+      },
     });
   }, []);
 

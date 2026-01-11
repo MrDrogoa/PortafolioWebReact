@@ -16,9 +16,9 @@ function AboutCharacter() {
         {ListCertificates.slice(0, 3).map((certificate) => (
           <div
             key={certificate.id}
-            class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
+            class="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
+            <p class="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>
@@ -29,9 +29,9 @@ function AboutCharacter() {
         {ListCertificates.slice(3, 6).map((certificate) => (
           <div
             key={certificate.id}
-            class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
+            class="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
+            <p class="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>
@@ -42,9 +42,9 @@ function AboutCharacter() {
         {ListCertificates.slice(6, 7).map((certificate) => (
           <div
             key={certificate.id}
-            class="border-2 border-white p-5 hover:text-[#202023] hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
+            class="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center"
           >
-            <p class="font-[DM Sans] font-semibold md:text-lg text-center">
+            <p class="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}
             </p>
           </div>

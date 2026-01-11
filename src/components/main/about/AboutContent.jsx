@@ -16,14 +16,16 @@ function AboutContent({
     <div className="w-full md:w-1/2 flex flex-col items-center p-8 md:p-10">
       {/* Título */}
       <div>
-        <h3 className="font-primary text-white text-center lg:text-start text-xl md:text-2xl font-light mb-8 italic leading-relaxed">
+        <h3 className="font-primary text-white text-center lg:text-start text-lg md:text-2xl font-light mb-4 lg:mb-8 italic leading-relaxed">
           "{title}"
         </h3>
       </div>
 
       {/* Información del autor */}
-      <div className="mb-8 w-full text-center">
-        <p className="text-[#FF6F61] text-sm font-medium ">{designation}</p>
+      <div className="mb-4 md:mb-8 w-full text-center">
+        <p className="text-[#FF6F61] text-sm font-medium font-secondary">
+          {designation}
+        </p>
       </div>
 
       {/* Descripción adicional */}
@@ -36,7 +38,7 @@ function AboutContent({
       )}
 
       {descripcion3 && (
-        <div className="mb-8 w-full">
+        <div className="mb-4 md:mb-8 w-full">
           <p className="text-gray-300 text-sm leading-relaxed font-secondary font-normal text-center lg:text-start">
             {descripcion3}
           </p>

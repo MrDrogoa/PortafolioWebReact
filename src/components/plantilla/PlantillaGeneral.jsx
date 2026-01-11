@@ -121,7 +121,7 @@ function PlantillaGeneral() {
   return (
     <section className="max-w-[1300px] m-auto px-4 lg:px-0 pt-8 md:pt-12 lg:pt-14">
       {/* Header del proyecto */}
-      <div className="px-5 flex flex-col lg:flex-row items-center justify-between ">
+      <div className="px-5 flex flex-col lg:flex-row items-center justify-between">
         <div className="w-full md:w-3/5">
           <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left">
             {project.titulo}
@@ -161,102 +161,58 @@ function PlantillaGeneral() {
                 isEven ? "lg:gap-14" : ""
               } pt-8 sm:pt-10 md:pt-20 lg:pt-25`}
             >
-              {/* Contenido de texto (para secciones pares) */}
-              {isEven && (
-                <>
-                  <div className="border-2 border-white text-white p-11 rounded-md w-full">
-                    <h3 className="font-primary text-[#FF6F61] text-xl md:text-2xl font-semibold text-center">
-                      {section.titulo}
-                    </h3>
-                    <div className="font-secondary text-white font-normal md:text-lg py-3 md:py-4">
-                      <p>{section.descripcion}</p>
-                    </div>
-                  </div>
+              {/* CONTENIDO DE TEXTO - Siempre primero en mobile */}
+              <div
+                className={`border-2 border-white text-white p-7 md:p-11 rounded-md w-full ${
+                  !isEven ? "lg:order-2" : ""
+                }`}
+              >
+                <h3 className="font-primary text-[#FF6F61] text-xl md:text-2xl font-semibold text-center">
+                  {section.titulo}
+                </h3>
+                <div className="font-secondary text-white font-normal text-sm md:text-lg py-3 md:py-4">
+                  <p>{section.descripcion}</p>
+                </div>
+              </div>
 
-                  {/* Flecha mobile después del texto */}
-                  <div className="lg:hidden block">
-                    <img
-                      src={ArrowBottom}
-                      alt="arrow-bottom"
-                      className="w-3/4 md:w-full"
-                    />
-                  </div>
-                </>
-              )}
-
-              {/* Imagen (para secciones impares) */}
-              {!isEven && (
-                <>
-                  <div className="w-full">
-                    <img
-                      src={`${API_BASE_URL}${section.url}`}
-                      alt={section.titulo}
-                      className="rounded-md m-auto lg:m-0 w-full"
-                    />
-                  </div>
-
-                  {/* Flecha mobile después de la imagen */}
-                  <div className="lg:hidden block">
-                    <img
-                      src={ArrowBottom}
-                      alt="arrow-bottom"
-                      className="w-3/4 md:w-full"
-                    />
-                  </div>
-                </>
-              )}
+              {/* Flecha mobile después del texto */}
+              <div className="lg:hidden block">
+                <img
+                  src={ArrowBottom}
+                  alt="arrow-bottom"
+                  className="w-3/4 md:w-full"
+                />
+              </div>
 
               {/* Flecha para desktop */}
-              <div className="w-1/4 hidden lg:block">
+              <div
+                className={`w-1/4 hidden lg:block ${
+                  !isEven ? "lg:order-1" : ""
+                }`}
+              >
                 <img
                   src={isEven ? ArrowRight : ArrowLeft}
                   alt={`arrow-${isEven ? "right" : "left"}`}
                 />
               </div>
 
-              {/* Imagen (para secciones pares) */}
-              {isEven && (
-                <>
-                  <div className="w-full">
-                    <img
-                      src={`${API_BASE_URL}${section.url}`}
-                      alt={section.titulo}
-                      className="rounded-md m-auto lg:m-0 w-full"
-                    />
-                  </div>
-                  {/* Flecha mobile después de la imagen */}
-                  <div className="lg:hidden block">
-                    <img
-                      src={ArrowBottom}
-                      alt="arrow-bottom"
-                      className="w-3/4 md:w-full"
-                    />
-                  </div>
-                </>
-              )}
+              {/* IMAGEN - Siempre segunda en mobile */}
+              <div className={`w-full ${!isEven ? "lg:order-0" : ""}`}>
+                <img
+                  src={`${API_BASE_URL}${section.url}`}
+                  alt={section.titulo}
+                  className="rounded-md m-auto lg:m-0 w-full"
+                />
+              </div>
 
-              {/* Contenido de texto (para secciones impares) */}
-              {!isEven && (
-                <>
-                  <div className="border-2 border-white text-white p-11 rounded-md w-full">
-                    <h3 className="font-primary text-[#FF6F61] text-xl md:text-2xl font-semibold text-center">
-                      {section.titulo}
-                    </h3>
-                    <div className="font-secondary text-white font-normal md:text-lg py-3 md:py-4">
-                      <p>{section.descripcion}</p>
-                    </div>
-                  </div>
-
-                  {/* Flecha mobile después de la imagen */}
-                  <div className="lg:hidden block">
-                    <img
-                      src={ArrowBottom}
-                      alt="arrow-bottom"
-                      className="w-3/4 md:w-full"
-                    />
-                  </div>
-                </>
-              )}
+              {/* Flecha mobile después de la imagen */}
+              <div className="lg:hidden block">
+                <img
+                  src={ArrowBottom}
+                  alt="arrow-bottom"
+                  className="w-3/4 md:w-full"
+                />
+              </div>
             </div>
 
             {/* Flechas curvas entre secciones (solo desktop) */}
@@ -294,7 +250,7 @@ function PlantillaGeneral() {
             <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold">
               {presentationSection.titulo}
             </h2>
-            <div className="font-secondary font-normal md:text-lg">
+            <div className="font-secondary font-normal text-sm md:text-lg">
               <p>{presentationSection.descripcion}</p>
             </div>
           </div>

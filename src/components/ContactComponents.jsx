@@ -71,7 +71,7 @@ function ContactComponents() {
                 placeholder={input.placeholder}
                 value={formData[input.name]}
                 onChange={handleChange}
-                className="mt-1 block w-full sm:w-3/4 md:w-1/2 m-auto px-3 py-2 focus:outline-none bg-transparent border-2 text-white placeholder:text-white/30"
+                className="font-secondary mt-1 block w-full sm:w-3/4 md:w-1/2 m-auto px-3 py-2 focus:outline-none bg-transparent border-2 text-white placeholder:text-white/30"
                 required
               />
             </div>
@@ -84,7 +84,7 @@ function ContactComponents() {
               placeholder={textarea.placeholder}
               value={formData[textarea.name]}
               onChange={handleChange}
-              className="mt-1 block w-full sm:w-3/4 md:w-1/2 m-auto px-3 py-2 focus:outline-none bg-transparent border-2 text-white resize-none placeholder:text-white/30"
+              className="font-secondary mt-1 block w-full sm:w-3/4 md:w-1/2 m-auto px-3 py-2 focus:outline-none bg-transparent border-2 text-white resize-none placeholder:text-white/30"
               required
             ></textarea>
           </div>

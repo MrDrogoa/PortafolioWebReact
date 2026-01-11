@@ -26,13 +26,13 @@ function ProjectsDeveloper() {
         {ideaProcess.map((item, index) => (
           <div
             key={index}
-            className="flex flex-col text-white border-2 px-6 py-14 md:px-4 md:py-10 max-w-sm w-full"
+            className="flex flex-col text-white border-2 px-5 md:px-6 py-10 max-w-sm w-full"
           >
             <h3 className="font-primary text-xl md:text-2xl font-semibold">
               {item.step}
             </h3>
             <p
-              className="font-secondary font-normal md:text-lg pb-2"
+              className="font-secondary font-normal text-gray-300 text-sm md:text-lg pb-2"
               dangerouslySetInnerHTML={{ __html: item.description }}
             />
           </div>

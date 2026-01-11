@@ -101,7 +101,7 @@ function Experience() {
               to={experience.path}
               className="text-white flex justify-end mt-auto"
             >
-              <ArrowRightIcon className="text-2xl lg:hover:translate-x-2 transition-transform duration-300" />
+              <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl lg:hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
         ))}
