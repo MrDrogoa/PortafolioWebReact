@@ -14,7 +14,7 @@ import Airplane from "@/assets/images/airplane.svg";
 // bike
 import Bike from "@/assets/images/bike.svg";
 
-import "@/css/HeroIcons.css";
+import "@/css/Heroicons.css";
 
 function HeroIcons() {
   return (
