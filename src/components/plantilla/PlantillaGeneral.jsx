@@ -119,7 +119,7 @@ function PlantillaGeneral() {
   const presentationSection = project.content?.slice(-1)[0] || null;
 
   return (
-    <section className="max-w-[1300px] m-auto pt-8 md:pt-12 lg:pt-14">
+    <section className="max-w-[1300px] m-auto px-4 lg:px-0 pt-8 md:pt-12 lg:pt-14">
       {/* Header del proyecto */}
       <div className="px-5 flex flex-col lg:flex-row items-center justify-between ">
         <div className="w-full md:w-3/5">
