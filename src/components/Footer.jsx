@@ -9,8 +9,20 @@ import {
   WhatsappIcon,
 } from "@/components/icons/Icons";
 import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Footer() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 800, // Duración de la animación
+      once: true, // Animar cada vez que scrolleas
+      offset: 100,
+      disable: function () {
+        return window.innerWidth < 768;
+      },
+    });
+  }, []);
   const linkWhatsapp = [
     {
       Icon: WhatsappIcon,
@@ -55,7 +67,11 @@ function Footer() {
             <p className="font-secondary text-white font-medium md:text-lg lg:text-xl w-40 md:w-52 text-center md:text-start py-2 md:py-4">
               ¡Creemos Juntos Tu Presencia Digital!
             </p>
-            <div className="text-center md:text-start ">
+            <div
+              className="text-center md:text-start "
+              data-aos="fade-right"
+              data-aos-delay="100"
+            >
               {linkWhatsapp.map(({ href, label }) => (
                 <a
                   key={href}

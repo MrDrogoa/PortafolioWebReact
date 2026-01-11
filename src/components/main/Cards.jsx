@@ -12,8 +12,20 @@ import {
   CssIcon,
   DatabaseIcon,
 } from "@/components/icons/Icons";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function Cards() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 800, // Duración de la animación
+      once: true, // Animar cada vez que scrolleas
+      offset: 100,
+      disable: function () {
+        return window.innerWidth < 768;
+      },
+    });
+  }, []);
   const cardData = [
     {
       id: 1,
@@ -54,10 +66,12 @@ function Cards() {
   return (
     <section>
       <div className="flex flex-col md:flex-row flex-wrap justify-center px-5 w-full gap-5">
-        {cardData.map((card) => (
+        {cardData.map((card, index) => (
           <div
             key={card.id}
             className="card flex flex-col border-2 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0"
+            data-aos="zoom-in"
+            data-aos-delay={index * 150}
           >
             <Link to={card.path} className="group overflow-hidden">
               <img
@@ -70,7 +84,7 @@ function Cards() {
             <div className="px-6 pb-6 pt-5 flex flex-col">
               <Link
                 to={card.path}
-                className="hover:text-[#ce4c40] font-primary text-[#FF6F61] font-semibold md:text-lg transition-colors"
+                className="lg:hover:text-[#ce4c40] font-primary text-[#FF6F61] font-semibold md:text-lg transition-colors"
               >
                 {card.title}
               </Link>

@@ -16,7 +16,7 @@ function ButtonArrowReturnComponents() {
       className="lg:hover:-translate-x-2 transition-all duration-300 ease-in-out cursor-pointer"
       aria-label="Volver atrás"
     >
-      <ArrowLeftIcon className="text-white text-2xl" />
+      <ArrowLeftIcon className="text-white text-lg md:text-xl lg:text-2xl" />
     </button>
   );
 }

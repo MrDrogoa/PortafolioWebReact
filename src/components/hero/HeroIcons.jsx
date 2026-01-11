@@ -1,20 +1,20 @@
 import React from "react";
 // moon
-import Moon from "../../assets/images/moon.svg";
+import Moon from "@/assets/images/moon.svg";
 // music
-import Music from "../../assets/images/music.svg";
+import Music from "@/assets/images/music.svg";
 // notebook
-import Notebook from "../../assets/images/notebook.svg";
+import Notebook from "@/assets/images/notebook.svg";
 // sun
-import Sun from "../../assets/images/sun.svg";
+import Sun from "@/assets/images/sun.svg";
 // code
-import Code from "../../assets/images/code.svg";
+import Code from "@/assets/images/code.svg";
 // airplane
-import Airplane from "../../assets/images/airplane.svg";
+import Airplane from "@/assets/images/airplane.svg";
 // bike
-import Bike from "../../assets/images/bike.svg";
+import Bike from "@/assets/images/bike.svg";
 
-import "../../css/HeroIcons.css";
+import "@/css/HeroIcons.css";
 
 function HeroIcons() {
   return (

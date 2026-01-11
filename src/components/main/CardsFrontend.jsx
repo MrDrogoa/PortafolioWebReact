@@ -64,7 +64,7 @@ function Cards() {
             <div className="px-6 pb-6 pt-5 flex flex-col">
               <Link
                 to={card.path}
-                className="hover:text-[#ce4c40] font-primary text-[#FF6F61] font-semibold md:text-lg transition-colors"
+                className="lg:hover:text-[#ce4c40] font-primary text-[#FF6F61] font-semibold md:text-lg transition-colors"
               >
                 {card.title}
               </Link>

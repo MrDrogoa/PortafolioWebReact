@@ -8,6 +8,7 @@ import ArrowLeft from "@/assets/img/arrow/arrow-left.svg";
 import ArrowCurve2 from "@/assets/img/arrow/arrow-curve-2.svg";
 import ArrowCurveFinal from "@/assets/img/arrow/arrow-curve-final.svg";
 import ButtonComponents from "@/components/buttons/ButtonComponents";
+import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
 import {
   CodeIcon,
   FigmaIcon,
@@ -24,6 +25,9 @@ import {
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:4000";
+
+// En producción: https://jodani.cl (el proxy .htaccess redirige /api/* al puerto 3001)
+// En desarrollo: http://localhost:4000
 
 // Función para obtener el icono según el nombre de la tecnología
 const getTechIcon = (techName) => {
@@ -312,6 +316,7 @@ function PlantillaGeneral() {
           </ButtonComponents>
         </Link>
       </section>
+      <ButtonArrowReturnComponents />
     </section>
   );
 }

@@ -2,8 +2,20 @@ import React from "react";
 import ButtonComponents from "../buttons/ButtonComponents";
 import { Link } from "react-router-dom";
 import Titleh2 from "@/components/Titleh2";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 function About() {
+  React.useEffect(() => {
+    AOS.init({
+      duration: 800, // Duración de la animación
+      once: true, // Animar cada vez que scrolleas
+      offset: 100,
+      disable: function () {
+        return window.innerWidth < 768;
+      },
+    });
+  }, []);
   return (
     <section class="max-w-[1300px] m-auto pt-8 sm:pt-10 md:pt-30 px-4 relative">
       <div class="flex justify-center items-center flex-col w-full md:w-96 text-white m-auto text-center">
@@ -15,7 +27,12 @@ function About() {
           experiencia del usuario y transformar ideas en productos digitales
           eficientes para emprendimientos y empresas emergentes.
         </p>
-        <Link to="/about" className="flex justify-center">
+        <Link
+          to="/about"
+          className="flex justify-center"
+          data-aos="fade-left"
+          data-aos-delay="100"
+        >
           <ButtonComponents>Ver más</ButtonComponents>
         </Link>
       </div>

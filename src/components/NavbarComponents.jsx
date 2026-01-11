@@ -6,7 +6,7 @@ function NavbarComponents() {
   return (
     // Navbar container
     <nav className="font-primary">
-      <section className="max-w-[1300px] mx-auto flex items-center justify-between px-4 py-6">
+      <section className="max-w-[1300px] mx-auto flex items-center justify-between px-4 lg:px-0 py-6">
         {/* Logo */}
         <Navimg />
         {/* Navigation Links */}

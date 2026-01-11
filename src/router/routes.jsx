@@ -7,6 +7,7 @@ import ProjectFrontend from "@/pages/ProjectFrontend.jsx";
 import ProjectFrameworks from "@/pages/ProjectFrameworks.jsx";
 import Plantilla from "@/pages/Plantilla";
 import Experience from "@/pages/Experience";
+import Error404 from "@/pages/Error404";
 
 const routes = [
   { path: "/", element: <Home /> },
@@ -34,6 +35,10 @@ const routes = [
   {
     path: "/project/:id",
     element: <Plantilla />,
+  },
+  {
+    path: "/404",
+    element: <Error404 />,
   },
 ];
 

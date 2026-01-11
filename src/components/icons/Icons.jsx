@@ -24,6 +24,7 @@ import {
   FaFirefoxBrowser,
   FaBook,
   FaCpanel,
+  FaArrowUp,
 } from "react-icons/fa";
 import { HiMenuAlt3 } from "react-icons/hi";
 import { AiOutlineClose } from "react-icons/ai";
@@ -88,7 +89,7 @@ export const AnimationIcon = (props) => <MdOutlineAnimation {...props} />;
 export const ScrollRevealIcon = (props) => <SiScrollreveal {...props} />;
 export const PostmanIcon = (props) => <SiPostman {...props} />;
 export const CpanelIcon = (props) => <FaCpanel {...props} />;
-
+export const ArrowUpIcon = (props) => <FaArrowUp {...props} />;
 // Exporta todos los iconos juntos como un objeto por defecto
 
 export default {
@@ -133,4 +134,5 @@ export default {
   ScrollRevealIcon,
   PostmanIcon,
   CpanelIcon,
+  ArrowUpIcon,
 };

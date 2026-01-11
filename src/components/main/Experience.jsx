@@ -84,7 +84,9 @@ function Experience() {
               {experience.projects.map((project, index) => (
                 <React.Fragment key={index}>
                   <Link to={project.path}>
-                    <p className="font-secondary">{project.name}</p>
+                    <p className="font-secondary lg:hover:text-[#ce4c40] ">
+                      {project.name}
+                    </p>
                   </Link>
 
                   {index < experience.projects.length - 1 && <span>-</span>}
@@ -99,7 +101,7 @@ function Experience() {
               to={experience.path}
               className="text-white flex justify-end mt-auto"
             >
-              <ArrowRightIcon className="text-2xl hover:text-[#FF6F61] transition-colors" />
+              <ArrowRightIcon className="text-2xl lg:hover:translate-x-2 transition-transform duration-300" />
             </Link>
           </div>
         ))}
