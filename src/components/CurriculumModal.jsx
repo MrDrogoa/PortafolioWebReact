@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { IoClose, IoDownload } from "react-icons/io5";
+import pdf from "@/assets/images/Daniel rosales.pdf";
 
 function CurriculumModal({ isOpen, onClose }) {
   // Prevenir scroll del body cuando el modal está abierto
@@ -37,7 +38,7 @@ function CurriculumModal({ isOpen, onClose }) {
 
   const handleDownload = () => {
     const link = document.createElement("a");
-    link.href = "/src/assets/images/Daniel rosales.pdf";
+    link.href = pdf;
     link.download = "Daniel_Rosales_CV.pdf";
     link.click();
   };
@@ -83,7 +84,7 @@ function CurriculumModal({ isOpen, onClose }) {
         {/* Contenedor del PDF */}
         <div className="flex-1 overflow-auto p-4 sm:p-6">
           <iframe
-            src="/src/assets/images/Daniel rosales.pdf"
+            src={pdf}
             className="w-full h-full min-h-[400px] sm:min-h-[500px] md:min-h-[600px] rounded-lg bg-white"
             title="Curriculum Vitae - Daniel Rosales"
           />
