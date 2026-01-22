@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import ButtonComponents from "../buttons/ButtonComponents";
 import { Link } from "react-router-dom";
 import Titleh2 from "@/components/Titleh2";
+import CurriculumModal from "@/components/CurriculumModal";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 function About() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   React.useEffect(() => {
     AOS.init({
       duration: 800, // Duración de la animación
@@ -27,15 +30,26 @@ function About() {
           experiencia del usuario y transformar ideas en productos digitales
           eficientes para emprendimientos y empresas emergentes.
         </p>
-        <Link
-          to="/about"
-          className="flex justify-center"
-          data-aos="fade-left"
-          data-aos-delay="100"
-        >
-          <ButtonComponents>Ver más</ButtonComponents>
-        </Link>
+        <div className="flex gap-4">
+          <Link
+            to="/about"
+            className=""
+            // data-aos="fade-left"
+            // data-aos-delay="100"
+          >
+            <ButtonComponents>Ver más</ButtonComponents>
+          </Link>
+          <ButtonComponents onClick={() => setIsModalOpen(true)}>
+            Currículum
+          </ButtonComponents>
+        </div>
       </div>
+
+      {/* Modal del Currículum */}
+      <CurriculumModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+      />
     </section>
   );
 }

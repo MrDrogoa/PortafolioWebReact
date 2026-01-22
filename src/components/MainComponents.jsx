@@ -27,7 +27,7 @@ function MainComponents() {
         <img src={Cap} alt="Cap" className="relative opacity-20 w-[450px]" />
       </div>
 
-      <div className="pt-8 sm:pt-10 md:pt-30 relative z-30">
+      <div className="pt-8 sm:pt-10 md:pt-30 relative z-10">
         <Titleh2 className="mb-8 md:mb-16">Proyectos</Titleh2>
         <Cards />
         <div className="flex items-center justify-center mt-3 md:mt-5">
