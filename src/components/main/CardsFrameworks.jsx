@@ -3,11 +3,16 @@ import { Link } from "react-router-dom";
 import Firma from "@/assets/img/frameworks/firma-card.webp";
 import Habitissimo from "@/assets/img/frameworks/habitissimo-card.webp";
 import Spotify from "@/assets/img/frameworks/spotify-card.webp";
+import Arventis from "@/assets/img/frameworks/arventis.webp";
 import {
   JavascriptIcon,
   PhpIcon,
   WordpressIcon,
   DatabaseIcon,
+  VueIcon,
+  AnimationIcon,
+  ScrollRevealIcon,
+  FigmaIcon,
 } from "@/components/icons/Icons";
 
 function Cards() {
@@ -52,6 +57,20 @@ function Cards() {
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
         { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
         { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+      ],
+    },
+    {
+      id: 4,
+      title: "Reediseño Arventis",
+      description:
+        "Rediseñé el sitio web corporativo de Arventis con Vue.js, optimizando su estructura...",
+      image: Arventis,
+      path: "/implementacion-de-frameworks/proyecto-arventis",
+      icon: [
+        { Icon: VueIcon, color: "text-[#42B883]" },
+        { Icon: FigmaIcon, color: "text-white" },
+        { Icon: AnimationIcon, color: "text-red-800" },
+        { Icon: ScrollRevealIcon, color: "text-blue-800" },
       ],
     },
   ];

@@ -21,6 +21,8 @@ import {
   PhpIcon,
   WordpressIcon,
   DatabaseIcon,
+  AnimationIcon,
+  ScrollRevealIcon,
 } from "@/components/icons/Icons";
 
 const API_BASE_URL =
@@ -43,6 +45,8 @@ const getTechIcon = (techName) => {
     React: { Icon: ReactIcon, color: "text-[#61DAFB]" },
     Vue: { Icon: VueIcon, color: "text-[#42B883]" },
     Angular: { Icon: ReactIcon, color: "text-[#DD0031]" },
+    Animation: { Icon: AnimationIcon, color: "text-red-800" },
+    ScrollReveal: { Icon: ScrollRevealIcon, color: "text-blue-800" },
   };
 
   const techData = iconMap[techName];
@@ -71,7 +75,7 @@ function PlantillaGeneral() {
       if (categoria && slug) {
         data = await projectsService.getProjectByCategoryAndSlug(
           categoria,
-          slug
+          slug,
         );
       }
       // Si solo tenemos ID, usar la ruta por ID (retrocompatibilidad)
