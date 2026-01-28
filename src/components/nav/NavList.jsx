@@ -105,6 +105,24 @@ function MobileMenu({ items }) {
     };
   }, [open]);
 
+  // Close menu on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      if (open) {
+        setOpen(false);
+        setOpenDropdown(null);
+      }
+    };
+
+    if (open) {
+      window.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [open]);
+
   return (
     <div ref={menuRef}>
       <button

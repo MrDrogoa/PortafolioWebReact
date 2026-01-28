@@ -1,4 +1,8 @@
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+const API_URL =
+  import.meta.env.VITE_API_URL ||
+  (import.meta.env.MODE === "production"
+    ? "https://jodani-api-backend.vercel.app/api"
+    : "http://localhost:4000/api");
 
 class ProjectsService {
   // Obtener todos los proyectos
@@ -17,7 +21,7 @@ class ProjectsService {
   async getProjectsByCategory(categoria) {
     try {
       const response = await fetch(
-        `${API_URL}/projects?categoria=${categoria}`
+        `${API_URL}/projects?categoria=${categoria}`,
       );
       const data = await response.json();
       return data.data || [];

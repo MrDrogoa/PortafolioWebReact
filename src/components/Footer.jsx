@@ -52,6 +52,10 @@ function Footer() {
       label: "WhatsApp",
     },
   ];
+
+  function getCurrentYear() {
+    return new Date().getFullYear();
+  }
   return (
     <footer className="border-t-2 border-white mt-8 sm:mt-10 md:mt-30 px-6 lg:px-4">
       <section className="max-w-[1300px] m-auto md:px-5 pb-14 md:pb-10 pt-16">
@@ -122,7 +126,7 @@ function Footer() {
 
         <span className="flex items-center gap-2 justify-center font-secondary text-white pt-6 font-medium">
           <CopyrightIcon />
-          Copyright 2025
+          Copyright {getCurrentYear()}
           <CircleIcon className="fa-solid fa-circle text-[#FF6F61] text-[7px]" />
           Daniel Rosales
         </span>

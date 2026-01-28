@@ -11,6 +11,7 @@ node_modules
 dist
 dist-ssr
 *.local
+# NO ignorar .env.production para Vercel
 
 # Editor directories and files
 .vscode/*
