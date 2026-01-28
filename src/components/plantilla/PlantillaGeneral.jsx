@@ -130,9 +130,10 @@ function PlantillaGeneral() {
           <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left">
             {project.titulo}
           </h2>
-          <div className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0">
-            <p>{project.descripcion}</p>
-          </div>
+
+          <p className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0">
+            {project.descripcion}
+          </p>
         </div>
 
         <div>
@@ -149,6 +150,15 @@ function PlantillaGeneral() {
                   <div key={index}>{getTechIcon(tech)}</div>
                 ))}
               </div>
+              <a
+                href={project.demo_url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-secondary font-semibold text-sm md:text-base lg:text-lg text-[#FFEA00] hover:text-[#FFEE39] mt-2"
+              >
+                {" "}
+                {project.demo_url}
+              </a>
             </div>
           )}
         </div>
