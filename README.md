@@ -1796,3 +1796,72 @@ Próximos pasos
 6. ⏳ Actualizar VITE_API_URL en Netlify para producción
 7. ⏳ Testing completo de todas las rutas en producción
 
+---
+
+# Cambios realizados el 23 de marzo de 2026
+
+Resumen de lo implementado hoy (frontend `joDani`) para el sistema de modo claro/oscuro:
+
+- Implementación de estado global de tema (Fase 1)
+  - Se creó un `ThemeProvider` para centralizar el estado `theme` y evitar manejo local por componente.
+  - Se agregó persistencia con `localStorage` usando la key `portfolio-theme`.
+  - Se incorporó detección inicial de tema:
+    1. Valor guardado en `localStorage`
+    2. Preferencia del sistema (`prefers-color-scheme`)
+    3. Fallback por defecto
+  - Se sincroniza el tema activo en `document.documentElement` con `data-theme`.
+
+- Estructura de contexto corregida para Fast Refresh
+  - **Problema detectado**: subrayado rojo en `useTheme` por regla de Fast Refresh/ESLint (`only-export-components`).
+  - **Solución aplicada**: separación de responsabilidades en tres archivos:
+    - `src/context/ThemeContext.jsx` → solo `ThemeProvider`
+    - `src/context/ThemeContext.js` → `createContext`
+    - `src/context/useTheme.js` → hook `useTheme`
+  - Resultado: sin errores de editor en archivos de tema.
+
+- Integración global del provider
+  - `src/main.jsx` fue actualizado para envolver `<App />` con `<ThemeProvider>`.
+  - Esto permite que cualquier componente del árbol consuma `theme`, `setTheme` y `toggleTheme`.
+
+- Integración del botón de modo en navbar
+  - El botón ya estilizado (`ButtonModeComponents`) fue conectado al contexto global.
+  - Se eliminó el control local aislado y ahora usa `useTheme` + `toggleTheme`.
+  - El componente permanece ubicado en `NavbarComponents` como control principal de cambio de tema.
+
+- Fase 2: Tokens CSS y base de tema visual
+  - Se añadieron variables CSS semánticas en `src/index.css` para modo claro y oscuro:
+    - `--bg-page`, `--bg-surface`, `--text-main`, `--text-muted`, `--border-main`, `--accent`
+  - Se declararon variantes por tema en:
+    - `:root` (light)
+    - `html[data-theme="dark"]` (dark)
+  - Se agregaron utilidades semánticas reutilizables:
+    - `.theme-page`, `.theme-surface`, `.theme-text`, `.theme-border`
+
+- Ajuste inicial en layout para tema dinámico
+  - `src/layout/Layout.jsx` se movió hacia clase semántica de tema para desacoplar el fondo del hardcode.
+  - Esto habilita que el contenedor principal responda al tema activo.
+
+- Documentación creada para continuidad del trabajo
+  - Se creó el archivo `readmeModos.md` con plan por fases (Fase 1 a Fase 5), buenas prácticas y guía de mantenimiento.
+  - Objetivo: retomar implementación por bloques sin perder contexto técnico.
+
+Archivos tocados en esta iteración de modos
+
+- `src/context/ThemeContext.jsx`
+- `src/context/ThemeContext.js`
+- `src/context/useTheme.js`
+- `src/main.jsx`
+- `src/components/buttons/ButtonModeComponents.jsx`
+- `src/components/NavbarComponents.jsx`
+- `src/index.css`
+- `src/layout/Layout.jsx`
+- `readmeModos.md`
+
+Lecciones y prácticas aplicadas
+
+- El tema debe vivir en estado global, no en estado local del botón.
+- La UI (switch) y la lógica (context/provider) deben estar separadas.
+- Para evitar warnings de Fast Refresh, separar hooks/utilidades de archivos que exportan componentes.
+- Centralizar colores en variables CSS para edición manual posterior sin tocar React.
+- Migrar componentes por fases para reducir regresiones visuales.
+

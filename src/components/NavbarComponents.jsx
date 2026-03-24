@@ -1,6 +1,7 @@
 import React from "react";
 import Navimg from "./nav/Navimg";
 import NavList from "./nav/NavList";
+import ButtonModeComponents from "./buttons/ButtonModeComponents";
 
 function NavbarComponents() {
   return (
@@ -13,6 +14,7 @@ function NavbarComponents() {
         <div className="flex-1 flex justify-end lg:justify-center">
           <NavList />
         </div>
+        <ButtonModeComponents />
       </section>
     </nav>
   );

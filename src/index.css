@@ -1,10 +1,47 @@
 @import "tailwindcss";
 
-/* Custom Fonts */
+:root {
+  --bg-page: #f6f7fb;
+  --bg-surface: #ffffff;
+  --text-main: #1c1e22;
+  --text-muted: #4b5563;
+  --border-main: #d1d5db;
+  --accent: #ff6f61;
+}
+
+html[data-theme="dark"] {
+  --bg-page: #202023;
+  --bg-surface: #2a2a2a;
+  --text-main: #ffffff;
+  --text-muted: #c7c9d1;
+  --border-main: #ffffff;
+  --accent: #ff6f61;
+}
+
+body {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+
+/* utilidades semanticas */
+.theme-page {
+  background: var(--bg-page);
+  color: var(--text-main);
+}
+.theme-surface {
+  background: var(--bg-surface);
+}
+.theme-text {
+  color: var(--text-main);
+}
+.theme-border {
+  border-color: var(--border-main);
+}
+
+/* fuentes existentes */
 .font-primary {
   font-family: "Montserrat", sans-serif;
 }
-
 .font-secondary {
   font-family: "DM Sans", sans-serif;
 }

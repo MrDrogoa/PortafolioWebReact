@@ -27,7 +27,7 @@ function HeroContent() {
           Daniel <span className="text-[#FF6F61] ">R</span>osales
         </h1>
         <p className="font-secondary text-white font-semibold text-lg sm:text-xl md:text-2xl mb-3 md:mb-4 text-center z-10">
-          Diseñador UX UI & desarrollador Front-End
+          Diseñador UX UI & Desarrollador Front-End
         </p>
         <Link to="/projects" className="flex justify-center">
           <ButtonComponents>Ver más</ButtonComponents>

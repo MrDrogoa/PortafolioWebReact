@@ -1,0 +1,53 @@
+.mode-star {
+  position: absolute;
+  height: 5px;
+  width: 5px;
+  border-radius: 9999px;
+  background-color: #ffffff;
+}
+
+.mode-star-1 {
+  left: 42px;
+  top: 8px;
+}
+
+.mode-star-2 {
+  left: 37px;
+  top: 20px;
+}
+
+.mode-star-3 {
+  left: 50px;
+  top: 15px;
+}
+
+.mode-cloud {
+  position: absolute;
+  left: -4px;
+  height: 16px;
+  width: 38px;
+  border-radius: 9999px;
+  background: #ffffff;
+}
+
+.mode-cloud::before,
+.mode-cloud::after {
+  position: absolute;
+  content: "";
+  border-radius: 9999px;
+  background: #ffffff;
+}
+
+.mode-cloud::before {
+  left: 2px;
+  bottom: 8px;
+  height: 14px;
+  width: 14px;
+}
+
+.mode-cloud::after {
+  left: 14px;
+  bottom: 10px;
+  height: 12px;
+  width: 12px;
+}
