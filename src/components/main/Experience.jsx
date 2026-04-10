@@ -75,9 +75,9 @@ function Experience() {
         {experienceData.map((experience, index) => (
           <div
             key={index}
-            className="flex flex-col border-2 border-white  px-3 py-6 sm:px-4 md:py-8 md:px-6 lg:py-10 lg:px-8 gap-3 max-w-sm m-auto md:m-0"
+            className="flex flex-col border-3 border-white px-3 py-6 sm:px-4 md:py-8 md:px-6 lg:py-10 lg:px-8 gap-3 max-w-sm m-auto md:m-0 main-mode-card"
           >
-            <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold">
+            <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold main-mode-title">
               {experience.title}
             </h3>
             <div className="flex flex-wrap gap-2 font-secondary text-[#FF6F61] font-medium text-xs sm:text-sm">
@@ -93,13 +93,13 @@ function Experience() {
                 </React.Fragment>
               ))}
             </div>
-            <p className="font-secondary text-white font-normal text-sm md:text-lg">
+            <p className="font-secondary text-white font-normal text-sm md:text-lg main-mode-paragraph">
               {experience.paragraph}
             </p>
             <div className="flex justify-end"></div>
             <Link
               to={experience.path}
-              className="text-white flex justify-end mt-auto"
+              className="text-white flex justify-end mt-auto main-mode-button"
             >
               <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl lg:hover:translate-x-2 transition-transform duration-300" />
             </Link>

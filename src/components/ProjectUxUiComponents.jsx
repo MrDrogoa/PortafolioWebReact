@@ -2,6 +2,7 @@ import React from "react";
 import TitleSection from "@/components/TitleSection";
 import CardsUxUi from "@/components/main/CardsUxUi";
 import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function ProjectUxUiComponents() {
   return (

@@ -1,21 +1,77 @@
 @import "tailwindcss";
 
 :root {
-  --bg-page: #f6f7fb;
+  --bg-page: #f8f9fa;
   --bg-surface: #ffffff;
   --text-main: #1c1e22;
   --text-muted: #4b5563;
   --border-main: #d1d5db;
-  --accent: #ff6f61;
+  --accent: #202023;
+
+  /* Hero */
+  --hero-title: #202023;
+  --hero-subtitle: #3f3f46;
+  --hero-link-bg: #202023;
+  --hero-link-icon: #ffffff;
+
+  /* Navbar */
+  --nav-link-color: #202023;
+  --bg-navbar: #ffffff;
+
+  /* Main Mode */
+  --main-mode-base: #16bcf9;
+  --main-mode-wordpress: #006089;
+  --main-mode-card: #202023;
+  --main-mode-title: #202023;
+  --main-paragraph: #52525b;
+  --main-mode-experience-paragraph: #52525b;
+  --main-card-experience: #f8f9fa;
+  --icon-arrows: #ffffff;
+  --main-imputs: #2020234d;
+
+  /* Footer */
+  --footer-mode-title: #202023;
+  --footer-mode-text: #52525b;
+  --footer-mode-subtitle: #3f3f46;
+  --footer-mode-border: #202023;
+  --footer-link-icon: #ffffff;
 }
 
-html[data-theme="dark"] {
+html.theme-dark {
   --bg-page: #202023;
   --bg-surface: #2a2a2a;
   --text-main: #ffffff;
   --text-muted: #c7c9d1;
   --border-main: #ffffff;
   --accent: #ff6f61;
+
+  /* Hero */
+  --hero-title: #ffffff;
+  --hero-subtitle: #ffffff;
+  --hero-link-bg: #ffffff;
+  --hero-link-icon: #202023;
+
+  /* Navbar */
+  --nav-link-color: #ffffff;
+  --bg-navbar: #202023;
+
+  /* Main Mode */
+  --main-mode-base: #ffffff;
+  --main-mode-wordpress: #ffffff;
+  --main-mode-card: #ffffff;
+  --main-mode-title: #ffffff;
+  --main-paragraph: #ffffff;
+  --main-mode-experience-paragraph: #d1d5dc;
+  --main-card-experience: #202023;
+  --icon-arrows: #202023;
+  --main-imputs: #ffffff4d;
+
+  /* Footer */
+  --footer-mode-title: #ffffff;
+  --footer-mode-text: #ffffff;
+  --footer-mode-subtitle: #ffffff;
+  --footer-mode-border: #ffffff;
+  --footer-link-icon: #202023;
 }
 
 body {
@@ -36,6 +92,11 @@ body {
 }
 .theme-border {
   border-color: var(--border-main);
+}
+
+/* button return */
+.btn-return {
+  color: var(--hero-title);
 }
 
 /* fuentes existentes */

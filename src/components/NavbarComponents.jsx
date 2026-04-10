@@ -1,7 +1,8 @@
 import React from "react";
-import Navimg from "./nav/Navimg";
-import NavList from "./nav/NavList";
-import ButtonModeComponents from "./buttons/ButtonModeComponents";
+import Navimg from "@/components/nav/Navimg";
+import NavList from "@/components/nav/NavList";
+import ButtonModeComponents from "@/components/buttons/ButtonModeComponents";
+import "@/css/ModeLight/navbar/NavbarModeLight.css";
 
 function NavbarComponents() {
   return (

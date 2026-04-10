@@ -9,6 +9,8 @@ import ButtonComponents from "@/components/buttons/ButtonComponents";
 import { Link } from "react-router-dom";
 import Cap from "@/assets/img/Captura.png";
 
+import "@/css/ModeLight/mainhome/MainModelight.css";
+
 function MainComponents() {
   return (
     <section className="max-w-[1300px] m-auto px-4 relative">

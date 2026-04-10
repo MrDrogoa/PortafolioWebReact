@@ -34,7 +34,9 @@ function Cards() {
         "metodología que prioriza las necesidades y expectativas del usuario...",
       image: Diseno,
       path: "/diseno-centrado-en-el-usuario",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+      icon: [
+        { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
+      ],
     },
     {
       id: 2,
@@ -58,8 +60,16 @@ function Cards() {
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+        {
+          Icon: DatabaseIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-base",
+        },
+        {
+          Icon: WordpressIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-wordpress",
+        },
       ],
     },
   ];
@@ -69,7 +79,7 @@ function Cards() {
         {cardData.map((card, index) => (
           <div
             key={card.id}
-            className="card flex flex-col border-2 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0"
+            className="card flex flex-col border-3 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 main-mode-card"
             data-aos="zoom-in"
             data-aos-delay={index * 150}
           >
@@ -89,7 +99,7 @@ function Cards() {
                 {card.title}
               </Link>
 
-              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2">
+              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2 main-mode-paragraph">
                 {card.description}
               </p>
 
@@ -97,10 +107,9 @@ function Cards() {
                 {card.icon.map((ic, index) => {
                   const IconComp = ic.Icon;
                   return (
-                    <Link to={card.path}>
+                    <Link to={card.path} key={`${card.id}-${index}`}>
                       <IconComp
-                        key={index}
-                        className={`${ic.color} text-2xl lg:text-3xl ml-2`}
+                        className={`${ic.color} ${ic.class} text-2xl lg:text-3xl ml-2`}
                       />
                     </Link>
                   );

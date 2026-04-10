@@ -3,9 +3,15 @@ import { Link } from "react-router-dom";
 import Libros from "@/assets/img/disenouxui/libros.webp";
 import Pet from "@/assets/img/disenouxui/pet-card.webp";
 import Womad from "@/assets/img/disenouxui/womad-card.webp";
+import WomadLight from "@/assets/img/disenouxui/womad-card-light.webp";
+
 import { FigmaIcon } from "@/components/icons/Icons";
+import { useTheme } from "@/context/useTheme";
 
 function Cards() {
+  const { theme } = useTheme();
+  const WomadGeneral = theme === "light" ? WomadLight : Womad;
+
   const cardData = [
     {
       id: 1,
@@ -14,7 +20,9 @@ function Cards() {
         "En las primeras etapas de nuestro trabajo con el brief y el benchmark, llevamos...",
       image: Libros,
       path: "/diseno-centrado-en-el-usuario/proyecto-libros",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+      icon: [
+        { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
+      ],
     },
     {
       id: 2,
@@ -23,16 +31,20 @@ function Cards() {
         "En el trabajo desarrollamos una solución para combatir el abandono de perros...",
       image: Pet,
       path: "/diseno-centrado-en-el-usuario/petmatch-diseno",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+      icon: [
+        { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
+      ],
     },
     {
       id: 3,
       title: "Womad - Rediseño",
       description:
         "En este proyecto pude conocer mas a fondo las metodologias que se usan...",
-      image: Womad,
+      image: WomadGeneral,
       path: "/diseno-centrado-en-el-usuario/womad-rediseno",
-      icon: [{ Icon: FigmaIcon, color: "text-white" }],
+      icon: [
+        { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
+      ],
     },
   ];
   return (
@@ -41,7 +53,7 @@ function Cards() {
         {cardData.map((card) => (
           <div
             key={card.id}
-            className="card flex flex-col border-2 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0"
+            className="card flex flex-col border-3 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 main-mode-card"
           >
             <Link to={card.path} className="group overflow-hidden">
               <img
@@ -59,7 +71,7 @@ function Cards() {
                 {card.title}
               </Link>
 
-              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2">
+              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2 main-mode-paragraph">
                 {card.description}
               </p>
 
@@ -69,7 +81,7 @@ function Cards() {
                   return (
                     <Link to={card.path} key={index}>
                       <IconComp
-                        className={`${ic.color} text-2xl lg:text-3xl ml-2`}
+                        className={`${ic.color} ${ic.class} text-2xl lg:text-3xl ml-2`}
                       />
                     </Link>
                   );

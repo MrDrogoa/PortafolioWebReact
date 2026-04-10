@@ -27,8 +27,16 @@ function Cards() {
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+        {
+          Icon: DatabaseIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-base",
+        },
+        {
+          Icon: WordpressIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-wordpress",
+        },
       ],
     },
     {
@@ -41,8 +49,16 @@ function Cards() {
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+        {
+          Icon: DatabaseIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-base",
+        },
+        {
+          Icon: WordpressIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-wordpress",
+        },
       ],
     },
     {
@@ -55,8 +71,16 @@ function Cards() {
       icon: [
         { Icon: PhpIcon, color: "text-[#8800FF]" },
         { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
-        { Icon: DatabaseIcon, color: "text-[#FFFFFF]" },
-        { Icon: WordpressIcon, color: "text-[#FFFFFF]" },
+        {
+          Icon: DatabaseIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-base",
+        },
+        {
+          Icon: WordpressIcon,
+          color: "text-[#FFFFFF]",
+          class: "main-mode-wordpress",
+        },
       ],
     },
     {
@@ -68,7 +92,7 @@ function Cards() {
       path: "/implementacion-de-frameworks/proyecto-arventis",
       icon: [
         { Icon: VueIcon, color: "text-[#42B883]" },
-        { Icon: FigmaIcon, color: "text-white" },
+        { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
         { Icon: AnimationIcon, color: "text-red-800" },
         { Icon: ScrollRevealIcon, color: "text-blue-800" },
       ],
@@ -80,7 +104,7 @@ function Cards() {
         {cardData.map((card) => (
           <div
             key={card.id}
-            className="card flex flex-col border-2 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0"
+            className="card flex flex-col border-3 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 main-mode-card"
           >
             <Link to={card.path} className="group overflow-hidden">
               <img
@@ -98,7 +122,7 @@ function Cards() {
                 {card.title}
               </Link>
 
-              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2">
+              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2 main-mode-paragraph">
                 {card.description}
               </p>
 
@@ -108,7 +132,7 @@ function Cards() {
                   return (
                     <Link to={card.path} key={index}>
                       <IconComp
-                        className={`${ic.color} text-2xl lg:text-3xl ml-2`}
+                        className={`${ic.color} ${ic.class} text-2xl lg:text-3xl ml-2`}
                       />
                     </Link>
                   );

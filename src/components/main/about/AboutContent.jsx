@@ -16,7 +16,7 @@ function AboutContent({
     <div className="w-full md:w-1/2 flex flex-col items-center p-8 md:p-10">
       {/* Título */}
       <div>
-        <h3 className="font-primary text-white text-center lg:text-start text-lg md:text-2xl font-light mb-4 lg:mb-8 italic leading-relaxed">
+        <h3 className="font-primary text-white text-center lg:text-start text-lg md:text-2xl font-light mb-4 lg:mb-8 italic leading-relaxed main-mode-title">
           "{title}"
         </h3>
       </div>
@@ -31,7 +31,7 @@ function AboutContent({
       {/* Descripción adicional */}
       {descripcion2 && (
         <div className="mb-6 w-full">
-          <p className="text-gray-300 text-sm leading-relaxed font-secondary font-normal text-center lg:text-start">
+          <p className="text-gray-300 text-sm leading-relaxed font-secondary font-normal text-center lg:text-start main-mode-experience-paragraph">
             {descripcion2}
           </p>
         </div>
@@ -39,7 +39,7 @@ function AboutContent({
 
       {descripcion3 && (
         <div className="mb-4 md:mb-8 w-full">
-          <p className="text-gray-300 text-sm leading-relaxed font-secondary font-normal text-center lg:text-start">
+          <p className="text-gray-300 text-sm leading-relaxed font-secondary font-normal text-center lg:text-start main-mode-experience-paragraph">
             {descripcion3}
           </p>
         </div>
@@ -65,7 +65,7 @@ function AboutContent({
       <div className="flex items-center gap-6">
         <button
           onClick={onPrev}
-          className="navigation-button flex justify-center items-center rounded-full p-2 bg-white text-[#202023] cursor-pointer transition-colors lg:hover:bg-[#FF6F61] lg:hover:text-[#202023] duration-300 "
+          className="navigation-button flex justify-center items-center rounded-full p-2 bg-white text-[#202023] cursor-pointer transition-colors lg:hover:!bg-[#FF6F61] lg:hover:text-[#202023] duration-300 arrows-about"
           aria-label="Previous testimonial"
         >
           <ArrowLeftIcon size={24} />
@@ -75,7 +75,7 @@ function AboutContent({
         </p>
         <button
           onClick={onNext}
-          className="navigation-button flex justify-center items-center rounded-full p-2 bg-white text-[#202023] cursor-pointer transition-colors lg:hover:bg-[#FF6F61] lg:hover:text-[#202023] duration-300 "
+          className="navigation-button flex justify-center items-center rounded-full p-2 bg-white text-[#202023] cursor-pointer transition-colors lg:hover:!bg-[#FF6F61] lg:hover:text-[#202023] duration-300  arrows-about"
           aria-label="Next testimonial"
         >
           <ArrowRightIcon size={24} />

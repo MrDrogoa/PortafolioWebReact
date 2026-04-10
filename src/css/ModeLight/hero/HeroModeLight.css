@@ -1,0 +1,27 @@
+/*
+  HeroModeLight.css
+  Solo override de colores para Hero.
+  No cambia layout, spacing, tipografia ni tamanos.
+
+  Uso recomendado:
+  1) Importar este archivo en el componente Hero principal o en HeroContent/HeroLinks.
+  2) Envolver la seccion Hero con className="hero-mode".
+  3) El tema global debe poner className="theme-light" o className="theme-dark" en html.
+  4) Agregar clases semanticas en elementos puntuales para reemplazar colores hardcodeados.
+*/
+
+.hero-mode-title {
+  color: var(--hero-title);
+}
+
+.hero-mode-subtitle {
+  color: var(--hero-subtitle);
+}
+
+.hero-border {
+  background-color: var(--hero-link-bg);
+}
+
+.hero-icon {
+  color: var(--hero-link-icon);
+}

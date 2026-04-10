@@ -1865,3 +1865,433 @@ Lecciones y prácticas aplicadas
 - Centralizar colores en variables CSS para edición manual posterior sin tocar React.
 - Migrar componentes por fases para reducir regresiones visuales.
 
+---
+
+# Cambios realizados el 29 de marzo de 2026
+
+Resumen de lo implementado hoy (frontend `joDani`) para continuar con el sistema de modo claro/oscuro por componente:
+
+- Estructura de estilos por componente (Hero)
+  - Se creó la carpeta objetivo para estilos de modo por componente: `src/css/ModeLight/`.
+  - Se creó el archivo `src/css/ModeLight/HeroModeLight.css` para manejar colores del bloque Hero sin tocar layout ni tamaños.
+  - Se definió un enfoque por variables CSS semánticas dentro de `.hero-mode`:
+    - `--hero-title`, `--hero-subtitle`, `--hero-accent`
+    - `--hero-icon-color`, `--hero-icon-bg`, etc.
+
+- Integración del scope de Hero
+  - `src/components/HeroComponents.jsx` quedó configurado con:
+    - import de `@/css/ModeLight/HeroModeLight.css`
+    - clase raíz `hero-mode` en el `section` del Hero
+  - Esto permite que los overrides de color afecten solo al Hero y no al resto de la app.
+
+- Aplicación de clases semánticas en enlaces sociales
+  - En `src/components/hero/HeroLinks.jsx` se mantuvo el estilo base existente y se añadieron clases para modo:
+    - `hero-border` para fondo por tema
+    - `hero-icon` para color de icono por tema
+  - Se mantuvo `bg-white` como color base inicial para los botones sociales.
+
+- Fix de prioridad CSS entre `hero-border` y `bg-white`
+  - **Problema detectado**: `hero-border` sobrescribía siempre `bg-white`, por cascada/orden de estilos.
+  - **Solución aplicada**: limitar la regla de `hero-border` solo a light:
+    - `html[data-theme="light"] .hero-border { ... }`
+  - Resultado:
+    - En dark, `bg-white` vuelve a funcionar como color base.
+    - En light, el color se reemplaza por la variable del modo.
+
+- Limpieza de JSX en HeroLinks
+  - Se ajustó el render del `map` para usar `link` directamente y evitar warning de analizador sobre el icono.
+  - Resultado: archivo sin errores de compilación/lint en la revisión posterior.
+
+Archivos creados hoy
+
+- `src/css/ModeLight/HeroModeLight.css` (NUEVO)
+
+Archivos modificados hoy
+
+- `src/components/HeroComponents.jsx`
+- `src/components/hero/HeroLinks.jsx`
+- `src/css/ModeLight/HeroModeLight.css`
+- `README.md`
+
+Patrón aplicado para continuar manualmente en otros componentes
+
+1. Crear archivo en `src/css/ModeLight/ComponenteModeLight.css`.
+2. Definir variables dentro de un scope local (`.componente-mode`).
+3. Agregar reglas por tema con `html[data-theme="light"]` y/o `html[data-theme="dark"]`.
+4. Reemplazar solo clases de color en el JSX (sin tocar spacing/layout).
+5. Mantener clases base de Tailwind y usar CSS semántico solo para override de color.
+
+Cómo validar rápidamente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verificar:
+1. Toggle de modo cambia entre light/dark.
+2. En HeroLinks, `bg-white` se conserva donde corresponde.
+3. Los overrides en `HeroModeLight.css` aplican solo en el tema definido.
+
+---
+
+# Cambios realizados el 1 de abril de 2026
+
+Resumen de lo implementado hoy (frontend `joDani`) para mejorar el sistema de tema claro/oscuro y hacerlo mas mantenible:
+
+- Migracion de selector de tema: de `data-theme` a clases globales en `html`
+  - **Objetivo**: reducir selectores largos tipo `html[data-theme="light"]` y simplificar overrides.
+  - **Cambio aplicado**:
+    - Antes: `document.documentElement.setAttribute("data-theme", theme)`
+    - Ahora: `document.documentElement.classList.add("theme-light" | "theme-dark")`
+  - **Resultado**: reglas mas limpias con `html.theme-light` y `html.theme-dark`.
+
+- Mejora del `ThemeProvider` para evitar parpadeo inicial
+  - Se cambió `useEffect` por `useLayoutEffect` en el provider de tema.
+  - Con esto la clase del tema se aplica antes del paint inicial.
+  - Se mantiene la persistencia con `localStorage` (`portfolio-theme`).
+
+- Centralizacion de variables de color en `src/index.css`
+  - Se consolidaron variables globales por tema para que Hero y Navbar consuman tokens comunes.
+  - Variables agregadas para Hero:
+    - `--hero-title`
+    - `--hero-subtitle`
+    - `--hero-link-bg`
+    - `--hero-link-icon`
+  - Variable agregada para Navbar:
+    - `--nav-link-color`
+  - Cada token tiene su valor en `:root` (light) y en `html.theme-dark` (dark).
+
+- Refactor de estilos de Hero a consumo puro de variables
+  - En `HeroModeLight.css` se eliminaron reglas largas dependientes de `html[data-theme=...]`.
+  - Se dejaron clases semanticas reutilizables:
+    - `.hero-mode-title`
+    - `.hero-mode-subtitle`
+    - `.hero-border`
+    - `.hero-icon`
+  - Estas clases ahora solo consumen variables globales del tema.
+
+- Fix de prioridad CSS para el hover en enlaces de Hero
+  - **Problema**: en modo light, `hero-border` podia pisar el `hover:bg` del componente.
+  - **Solucion**: se hizo explicita la prioridad del hover en JSX con Tailwind:
+    - `hover:!bg-[#FF6F61]`
+  - **Resultado**: el hover se mantiene visible en frontend sin duplicar reglas `:hover` en CSS.
+
+- Ajustes de Navbar para que use variables globales
+  - `NavbarModeLight.css` se ajusto para consumir variables semanticas en lugar de colores hardcodeados.
+  - Se alineo el enfoque con Hero para que ambos componentes respondan al tema por tokens.
+
+- Cambio dinamico de logo segun tema (light/dark)
+  - En `Navimg.jsx` se implemento seleccion de imagen segun contexto de tema con `useTheme`.
+  - Logica aplicada:
+    - `theme === "light"` -> `logolight.svg`
+    - caso contrario -> `logo.svg`
+  - Se renderiza una sola imagen (buena practica), evitando duplicar dos `<img>` y ocultar una con CSS.
+
+Archivos modificados hoy
+
+- `src/context/ThemeContext.jsx`
+- `src/index.css`
+- `src/css/ModeLight/hero/HeroModeLight.css`
+- `src/css/ModeLight/navbar/NavbarModeLight.css`
+- `src/components/hero/HeroLinks.jsx`
+- `src/components/nav/Navimg.jsx`
+- `README.md`
+
+---
+
+# Cambios realizados el 3 de abril de 2026
+
+Resumen de lo implementado hoy (frontend `joDani`) para corregir colores de iconos en el carousel segun modo claro/oscuro:
+
+- Correccion del problema principal en `Carousel.jsx`
+  - **Problema**: aunque el arreglo `tools` tenia clases para `Figma`, `Database` y `WordPress`, esas clases no se estaban aplicando al componente del icono.
+  - **Causa raiz**:
+    1. La propiedad `class` del arreglo no se concatenaba en `className` del icono renderizado.
+    2. El `style={{ color: ... }}` inline tenia prioridad sobre el CSS, impidiendo overrides por tema.
+  - **Solucion aplicada**:
+    - Se concateno la clase opcional del arreglo en el icono (`${tool.class || ""}`).
+    - Se aplico color inline solo cuando el icono NO tiene clase personalizada.
+  - **Resultado**: solo los 3 iconos objetivo (`main-mode-figma`, `main-mode-base`, `main-mode-wordpress`) quedan controlados por CSS/variables; el resto mantiene su color individual del arreglo.
+
+- Ajustes en estilos de modo para iconos especiales
+  - Archivo: `src/css/ModeLight/main/MainModeLight.css`
+  - Se dejo el comportamiento esperado por clase:
+    - `.main-mode-figma` usa el color de texto del tema.
+    - `.main-mode-base` usa `--main-mode-base`.
+    - `.main-mode-wordpress` usa `--main-mode-wordpress`.
+  - **Fix adicional**: se corrigio variable inexistente (`--color-text`) por variable global real (`--text-main`).
+
+- Correccion de variables globales para comportamiento Light/Dark
+  - Archivo: `src/index.css`
+  - **Problema detectado**: `--main-mode-base` y `--main-mode-wordpress` estaban definidos dentro de `html.theme-dark`, por eso en dark seguian coloreados y no blancos.
+  - **Solucion aplicada**:
+    - Se movieron los valores de color personalizados a `:root` (modo light).
+    - Se sobrescribieron en `html.theme-dark` con `#ffffff` para que en dark se muestren blancos.
+  - **Resultado final por modo**:
+    - Light: Database `#16bcf9`, WordPress `#006089`.
+    - Dark: Database y WordPress en blanco.
+    - Figma responde al color de texto del tema.
+
+- Validacion y estado
+  - Se revisaron errores de sintaxis en los archivos modificados.
+  - Resultado de validacion: sin errores en `Carousel.jsx`, `MainModeLight.css` e `index.css`.
+
+Archivos modificados hoy
+
+- `src/components/main/Carousel.jsx`
+- `src/css/ModeLight/main/MainModeLight.css`
+- `src/index.css`
+- `README.md`
+
+Estado final
+
+- ✅ Tema controlado por clases globales (`theme-light` / `theme-dark`)
+- ✅ Variables de color centralizadas y reutilizables
+- ✅ Hero y Navbar conectados a variables globales
+- ✅ Hover de Hero funcionando correctamente en light mode
+- ✅ Logo cambia automaticamente segun el tema
+
+Como validar rapidamente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verificar:
+1. Cambiar de tema con el boton de modo.
+2. En light mode, el logo de navbar debe ser `logolight.svg`.
+3. En dark mode, el logo debe volver a `logo.svg`.
+4. En HeroLinks, el hover coral debe verse al pasar el mouse.
+5. Titulos y colores de Hero/Navbar deben responder al tema sin tocar JSX adicional.
+
+---
+
+# Cambios realizados el 6 de abril de 2026
+
+Resumen de lo trabajado hoy (frontend `joDani`) para documentar y entender el sistema de tema por variables CSS:
+
+- Documentación funcional del sistema de variables globales en `index.css`
+  - Se dejó claro el rol de `:root` como fuente de valores por defecto (base del tema claro).
+  - Se explicó que todas las variables (`--bg-page`, `--text-main`, `--hero-title`, etc.) viven ahí para evitar colores hardcodeados por componente.
+  - Se confirmó que `body` y las clases utilitarias (`.theme-page`, `.theme-surface`, `.theme-text`, `.theme-border`) consumen esas variables con `var(...)`.
+
+- Documentación del override de tema en `html.theme-dark`
+  - Se registró que `html.theme-dark` redefine las mismas variables para modo oscuro.
+  - Se explicó la lógica de cascada: si `html` tiene clase `theme-dark`, esos valores reemplazan los de `:root` automáticamente.
+  - Se detalló que esto permite cambiar toda la interfaz sin reescribir estilos por componente.
+
+- Trazabilidad de activación del tema desde React
+  - Se documentó el flujo en `ThemeContext.jsx`:
+    - `root.classList.remove("theme-light", "theme-dark")`
+    - `root.classList.add(`theme-${theme}`)`
+  - Se dejó explícito que este cambio de clase en `document.documentElement` es el disparador real del cambio visual global.
+
+- Mapeo variable -> componente afectado
+  - Se identificó qué áreas usan cada grupo de variables:
+    - Hero: `--hero-title`, `--hero-subtitle`, `--hero-link-bg`, `--hero-link-icon`
+    - Navbar: `--nav-link-color`
+    - Main: `--main-mode-base`, `--main-mode-wordpress`, `--main-mode-card`
+    - Footer: `--footer-mode-title`, `--footer-mode-text`, `--footer-mode-subtitle`, `--footer-mode-border`
+  - Se registró que `--accent` está declarado pero no se estaba consumiendo en otros archivos al momento de la revisión.
+
+- Criterio de mantenimiento para próximos cambios
+  - Para modificar colores de componentes sin romper light/dark:
+    1. editar valor en `:root` (modo base)
+    2. editar su equivalente en `html.theme-dark`
+    3. mantener en componentes el uso de `var(--token)` en vez de colores fijos
+
+Archivos revisados hoy
+
+- `src/index.css`
+- `src/context/ThemeContext.jsx`
+- `src/css/ModeLight/hero/HeroModeLight.css`
+- `src/css/ModeLight/navbar/NavbarModeLight.css`
+- `src/css/ModeLight/main/MainModeLight.css`
+- `src/css/ModeLight/footer/FooterModeLight.css`
+- `README.md`
+
+Estado al cierre
+
+- ✅ Sistema de tema documentado con responsabilidades claras por bloque.
+- ✅ Flujo de activación (`ThemeContext` -> clase en `html` -> override de variables) validado.
+- ✅ Guía práctica definida para modificar componentes sin romper consistencia entre temas.
+
+---
+
+# Cambios realizados el 9 de abril de 2026
+
+Resumen de lo implementado hoy (frontend `joDani`) para extender el modo claro/oscuro a mas componentes y mejorar consistencia visual:
+
+- Tema global y variables en `index.css`
+  - Se amplió la capa de tokens para Hero, Navbar, Main y Footer.
+  - Se mantuvo el enfoque con clase global en `html` (`theme-light` / `theme-dark`).
+  - Se agregaron/ajustaron variables como:
+    - `--hero-title`, `--hero-subtitle`, `--hero-link-bg`, `--hero-link-icon`
+    - `--nav-link-color`, `--bg-navbar`
+    - `--main-mode-base`, `--main-mode-wordpress`, `--main-mode-card`, `--main-mode-title`, `--main-paragraph`, `--main-mode-experience-paragraph`, `--main-card-experience`
+    - `--footer-mode-title`, `--footer-mode-text`, `--footer-mode-subtitle`, `--footer-mode-border`, `--footer-link-icon`
+  - Se agregó la clase utilitaria `.btn-return` para sincronizar el color del botón de retorno con el tema.
+
+- Provider de tema
+  - `ThemeContext.jsx` mantiene persistencia y aplica clase de tema en `document.documentElement` removiendo/agregando `theme-light` y `theme-dark`.
+
+- Estilos por módulo para modo light/dark
+  - Se consolidaron archivos de estilos semánticos por bloque:
+    - `src/css/ModeLight/hero/HeroModeLight.css`
+    - `src/css/ModeLight/navbar/NavbarModeLight.css`
+    - `src/css/ModeLight/mainhome/MainModeLight.css`
+    - `src/css/ModeLight/footer/FooterModeLight.css`
+  - Se estandarizó el consumo de clases semánticas:
+    - Hero: `hero-mode-title`, `hero-mode-subtitle`, `hero-border`, `hero-icon`
+    - Navbar: `nav-mode-text`, `nav-mode-list`
+    - Main/Experience: `main-mode-title`, `main-mode-paragraph`, `main-mode-card`, `main-mode-button`, `line-experience`, `card-experience`, `main-mode-experience-paragraph`
+    - Footer: `footer-mode-title`, `footer-mode-subtitle`, `footer-mode-link`, `footer-mode-border`, `footer-mode-paragraph`, `footer-border`, `footer-icon`
+
+- Hero actualizado para modo claro/oscuro
+  - `HeroComponents.jsx` ahora usa imports con alias `@`, integra `HeroModeLight.css` y define scope raíz `hero-mode`.
+  - `HeroContent.jsx` aplica clases semánticas para título/subtítulo y limpieza menor de clases.
+  - `HeroLinks.jsx` se refactorizó para map dinámico con `link`, clases semánticas y hover con prioridad (`hover:!bg`).
+  - `HeroIcons.jsx` fue actualizado para alternar imágenes por tema usando `useTheme`.
+    - Modo dark: assets base.
+    - Modo light: assets `*Light`.
+
+- Navbar y logo por tema
+  - `NavbarComponents.jsx` migró imports a alias `@` e integró estilos de modo para navbar.
+  - `NavList.jsx` recibió clases semánticas para texto/listas y ajustes de hover/bordes en desktop y mobile dropdown.
+  - `Navimg.jsx` ahora selecciona logo dinámico por tema con `useTheme` (`logo.svg` / `logoLight.svg`).
+
+- Main y secciones de experiencia
+  - `MainComponents.jsx` importa estilos de `mainhome` y aplica clase de tema al título principal.
+  - `Cards.jsx`:
+    - Se añadieron clases semánticas para card, títulos y párrafos.
+    - Íconos especiales (`Figma`, `Database`, `WordPress`) quedaron preparados para color por variable.
+    - Ajuste de `key` en render de íconos.
+  - `Carousel.jsx`:
+    - Se añadieron clases semánticas para títulos/textos/flechas.
+    - Se mejoró el render de color para respetar clases de modo cuando corresponda.
+  - `Experience.jsx`:
+    - Se aplicaron clases semánticas en título, tarjetas, párrafos y botón.
+    - Se ajustó borde visual (de `border-2` a `border-3` en cards).
+  - `ExperienceComponents.jsx`:
+    - Integración de estilos de `mainhome`.
+    - Título y descripción migrados a clases semánticas del tema.
+  - `Timeline.jsx`:
+    - Líneas, puntos, títulos, tarjetas y párrafos migrados a clases semánticas para soportar light/dark de forma consistente.
+    - Ajustes de borde/tarjeta para mantener contraste por tema.
+
+- Footer en modo temático completo
+  - `Footer.jsx` ahora:
+    - Cambia logo por tema con `useTheme`.
+    - Usa `Link` a home en lugar de `<a href="">`.
+    - Aplica clases semánticas en títulos, subtítulo, enlaces, íconos, bordes y copyright.
+    - Ajusta hover con prioridad en botones sociales y enlaces para preservar comportamiento entre temas.
+
+- Ajustes de calidad de código y consistencia
+  - `TitleSection.jsx`: fix en concatenación de `className` (espacio faltante antes de `className` recibido por props).
+  - `ButtonModeComponents.jsx`: se agregó `cursor-pointer` al switch.
+  - `ButtonArrowReturnComponents.jsx`: icono conectado a clase semántica `btn-return`.
+  - `HomeAbout.jsx` y `AboutCharacter.jsx`: corrección de `class` a `className` en JSX.
+  - `eslint.config.js`:
+    - Estandarización de formato.
+    - Regla `no-unused-vars` extendida con `argsIgnorePattern: "^[A-Z_]"` para evitar falsos positivos con args intencionalmente ignorados.
+  - Se eliminó `src/components/hero/HeroSignature.jsx` (componente en desuso).
+
+- Nuevos assets agregados para modo claro
+  - `src/assets/images/logoLight.svg`
+  - `src/assets/images/moonLight.svg`
+  - `src/assets/images/musicLight.svg`
+  - `src/assets/images/notebookLight.svg`
+  - `src/assets/images/sunLight.svg`
+  - `src/assets/images/codeLight.svg`
+  - `src/assets/images/airplaneLight.svg`
+  - `src/assets/images/bikeLight.svg`
+  - `src/assets/images/RuMLight.svg`
+
+Resumen de impacto de hoy
+
+- 25 archivos modificados
+- 512 inserciones y 130 eliminaciones
+- Cobertura del sistema de tema extendida a Hero, Navbar, Main, Experience y Footer
+
+Cómo validar rápidamente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Validar:
+1. Cambio de modo desde el switch (light/dark) sin parpadeos.
+2. Cambio de logo en Navbar y Footer según tema.
+3. Cambio de íconos decorativos del Hero según tema.
+4. Colores de títulos, párrafos, bordes e íconos en Main/Experience/Footer respondiendo al tema.
+5. Navbar desktop/mobile conserva hover y contraste correcto en ambos temas.
+
+---
+
+# Cambios realizados el 10 de abril de 2026
+
+Resumen de lo trabajado hoy en el frontend `joDani` para cerrar el sistema visual de modo claro/oscuro y ajustar detalles de interacción:
+
+- Ajuste global de tema
+  - Se consolidó el proveedor de tema para seguir aplicando `theme-light` y `theme-dark` en `html` con persistencia en `localStorage`.
+  - Se mantuvo la estrategia de variables CSS para evitar colores hardcodeados por componente.
+  - Se revisó el uso de opacidades semitransparentes en Tailwind y sus equivalentes en CSS, como `text-white/30` y su variante para light mode.
+
+- Variables y colores semánticos
+  - Se afinó `src/index.css` con tokens para héroe, navbar, main, footer y formularios.
+  - Se dejó centralizado el color de inputs y placeholders con `--main-imputs`.
+  - Se mantuvo `--accent` como color base de acciones y acentos.
+
+- Hover y microinteracciones
+  - Se corrigió el botón de volver arriba para que el hover suba en lugar de bajar usando `lg:hover:-translate-y-2`.
+  - Se conservaron las clases semánticas para el botón (`arrows-up`, `icon-up`) y el resto de estados visuales.
+  - Se mantuvo la prioridad de hover en enlaces y botones con `!` donde era necesario para no perder el estilo por tema.
+
+- Formularios y contraste
+  - Se ajustó el formulario de contacto para que los campos usen clases temáticas en lugar de depender solo de valores fijos.
+  - El placeholder quedó alineado con el tema claro/oscuro mediante `main-imputs`.
+  - Se evitó mezclar colores fijos con colores de tema en los inputs para que el contraste sea consistente.
+
+- Arquitectura de estilos por bloque
+  - Se siguió usando la carpeta `src/css/ModeLight/` para separar overrides visuales sin tocar layout.
+  - Quedaron organizados los estilos por bloque: Hero, Navbar, Main, Footer y variantes del modo claro.
+  - El objetivo fue mantener una sola fuente de verdad para colores, bordes y textos por tema.
+
+- Refactor y limpieza general
+  - Se continuó migrando componentes a imports con alias `@`.
+  - Se mantuvieron las correcciones de JSX en componentes que usan `className` y `key` correctamente.
+  - Se dejaron listos varios assets nuevos para light mode: logos, íconos del Hero, flechas y variantes visuales de cards.
+
+Archivos tocados hoy de forma más visible
+
+- `src/index.css`
+- `src/context/ThemeContext.jsx`
+- `src/components/buttons/ButtonArrowUpComponents.jsx`
+- `src/components/ContactComponents.jsx`
+- `src/css/ModeLight/mainhome/MainModeLight.css`
+- `src/css/ModeLight/hero/HeroModeLight.css`
+- `src/css/ModeLight/navbar/NavbarModeLight.css`
+- `src/css/ModeLight/footer/FooterModeLight.css`
+
+Notas de validación
+
+1. `text-white/30` sigue siendo el blanco con transparencia usado en dark mode.
+2. Para light mode se mantuvo una variante semitransparente oscura equivalente para placeholders e inputs.
+3. El botón de subir ahora hace el salto hacia arriba en hover, no hacia abajo.
+
+Cómo validar rápidamente
+
+```bash
+cd c:/Users/danie/Desktop/PortafolioWeb/joDani
+pnpm run dev
+```
+
+Verificar:
+1. Cambiar entre tema claro y oscuro.
+2. Revisar el formulario de contacto y sus placeholders.
+3. Pasar el mouse sobre el botón de volver arriba para confirmar el movimiento hacia arriba.
+4. Confirmar que los colores de los textos e iconos siguen el tema activo.
+

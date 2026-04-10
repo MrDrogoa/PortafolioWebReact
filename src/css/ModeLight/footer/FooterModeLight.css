@@ -1,0 +1,24 @@
+.footer-mode-title,
+.footer-mode-paragraph {
+  color: var(--footer-mode-title);
+}
+
+.footer-mode-subtitle {
+  color: var(--footer-mode-subtitle);
+}
+
+.footer-mode-border {
+  border-color: var(--footer-mode-border);
+}
+
+.footer-mode-link {
+  color: var(--footer-mode-text);
+}
+
+.footer-border {
+  background-color: var(--footer-mode-border);
+}
+
+.footer-icon {
+  color: var(--footer-link-icon);
+}

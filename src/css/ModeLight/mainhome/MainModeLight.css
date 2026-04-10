@@ -1,0 +1,63 @@
+.main-mode-title,
+.main-mode-button,
+.main-mode-figma {
+  color: var(--main-mode-title);
+}
+
+.main-mode-paragraph {
+  color: var(--main-paragraph);
+}
+
+.main-mode-wordpress {
+  color: var(--main-mode-wordpress);
+}
+
+.main-mode-base {
+  color: var(--main-mode-base);
+}
+
+.main-mode-card {
+  border-color: var(--main-mode-card);
+}
+
+.main-mode-experience-paragraph {
+  color: var(--main-mode-experience-paragraph);
+}
+
+.line-experience {
+  background-color: var(--main-mode-card);
+}
+
+.card-experience {
+  background-color: var(--main-card-experience);
+}
+
+.arrows-about {
+  color: var(--icon-arrows);
+  background-color: var(--main-mode-card);
+}
+
+.arrows-up {
+  background-color: var(--accent);
+}
+
+.icon-up {
+  color: var(--icon-arrows);
+}
+
+.main-mode-character {
+  border-color: var(--main-mode-card);
+}
+
+.main-mode-character:hover {
+  color: var(--icon-arrows);
+  background-color: var(--main-mode-card);
+}
+
+.main-imputs {
+  color: var(--main-mode-title);
+}
+
+.main-imputs::placeholder {
+  color: var(--main-imputs);
+}

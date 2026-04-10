@@ -4,6 +4,7 @@ import Cards from "@/components/main/Cards";
 import Titleh2 from "@/components/Titleh2";
 import ProjectsDeveloper from "@/components/main/projects/ProjectsDeveloper";
 import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function ProjectsComponents() {
   return (

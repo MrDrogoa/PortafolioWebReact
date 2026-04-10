@@ -297,7 +297,7 @@ function Timeline() {
         <div key={year} className="mb-12">
           {/* Separador de año */}
           <div className="flex items-center justify-center mb-8 md:mb-16">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-primary">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-primary main-mode-title">
               {year}
             </h3>
           </div>
@@ -305,10 +305,10 @@ function Timeline() {
           {/* Timeline items */}
           <div className="relative">
             {/* Línea vertical central en desktop */}
-            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-white -translate-x-1/2"></div>
+            <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-0.5 bg-white -translate-x-1/2 line-experience"></div>
 
             {/* Línea vertical centrada en mobile */}
-            <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-0.5 bg-white -translate-x-1/2"></div>
+            <div className="md:hidden absolute left-1/2 top-0 bottom-0 w-0.5 bg-white -translate-x-1/2 line-experience"></div>
 
             {groupedByYear[year].map((exp, index) => {
               const isLeft = index % 2 === 0;
@@ -321,12 +321,12 @@ function Timeline() {
                       <>
                         {/* Tarjeta izquierda - ancho fijo del 50% */}
                         <div className="w-1/2 flex justify-end pr-12">
-                          <div className="w-full max-w-sm lg:max-w-md border-2 border-white rounded-lg p-6 bg-[#202023]">
-                            <h4 className="font-primary text-white text-lg md:text-xl font-semibold mb-2">
+                          <div className="w-full max-w-sm lg:max-w-md border-3 border-white rounded-lg p-6 main-mode-card">
+                            <h4 className="font-primary text-white text-lg md:text-xl font-semibold mb-2 main-mode-title">
                               {exp.title}
                             </h4>
                             <p
-                              className="text-gray-300 text-sm mb-4 font-secondary"
+                              className="text-gray-300 text-sm mb-4 font-secondary main-mode-experience-paragraph"
                               dangerouslySetInnerHTML={{
                                 __html: exp.description,
                               }}
@@ -348,7 +348,7 @@ function Timeline() {
                         </div>
                         {/* Punto y flecha sobre la línea - posición absoluta */}
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 flex flex-col items-center">
-                          <div className="w-4 h-4 bg-white rounded-full z-10 mb-2"></div>
+                          <div className="w-4 h-4 bg-white rounded-full z-10 mb-2 line-experience"></div>
                           <div className="flex justify-center absolute top-20"></div>
                         </div>
                         {/* Espacio vacío derecha - ancho fijo del 50% */}
@@ -360,17 +360,17 @@ function Timeline() {
                         <div className="w-1/2"></div>
                         {/* Punto y flecha sobre la línea - posición absoluta */}
                         <div className="absolute left-1/2 top-1/2 -translate-x-1/2 flex flex-col items-center">
-                          <div className="w-4 h-4 bg-white rounded-full z-10 mb-2"></div>
+                          <div className="w-4 h-4 bg-white rounded-full z-10 mb-2 line-experience"></div>
                           <div className="flex justify-center absolute top-20"></div>
                         </div>
                         {/* Tarjeta derecha - ancho fijo del 50% */}
                         <div className="w-1/2 flex justify-start pl-12">
-                          <div className="w-full max-w-sm lg:max-w-md border-2 border-white rounded-lg p-6 bg-[#202023]">
-                            <h4 className="text-lg font-bold text-white mb-2 font-primary">
+                          <div className="w-full max-w-sm lg:max-w-md border-3 border-white rounded-lg p-6 main-mode-card">
+                            <h4 className="text-lg font-bold text-white mb-2 font-primary main-mode-title">
                               {exp.title}
                             </h4>
                             <p
-                              className="text-gray-300 text-sm mb-4 font-secondary"
+                              className="text-gray-300 text-sm mb-4 font-secondary main-mode-experience-paragraph"
                               dangerouslySetInnerHTML={{
                                 __html: exp.description,
                               }}
@@ -398,17 +398,17 @@ function Timeline() {
                   <div className="md:hidden flex flex-col items-center">
                     {/* Punto y flecha arriba centrados */}
                     <div className="flex flex-col items-center mb-3">
-                      <div className="w-4 h-4 bg-white rounded-full mb-2"></div>
+                      <div className="w-4 h-4 bg-white rounded-full mb-2 line-experience"></div>
                     </div>
 
                     {/* Tarjeta centrada */}
                     <div className="w-full max-w-sm px-4">
-                      <div className="border-2 border-white rounded-lg p-4 bg-[#202023]">
-                        <h4 className="text-base font-bold text-white mb-2 font-primary">
+                      <div className="border-3 border-white rounded-lg p-4 main-mode-card card-experience">
+                        <h4 className="text-base font-bold text-white mb-2 font-primary main-mode-title">
                           {exp.title}
                         </h4>
                         <p
-                          className="text-gray-300 text-sm mb-3 font-secondary"
+                          className="text-gray-300 text-sm mb-3 font-secondary main-mode-experience-paragraph"
                           dangerouslySetInnerHTML={{
                             __html: exp.description,
                           }}

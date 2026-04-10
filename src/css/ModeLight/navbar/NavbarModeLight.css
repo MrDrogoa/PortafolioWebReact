@@ -1,0 +1,8 @@
+.nav-mode-text {
+  color: var(--nav-link-color);
+}
+
+.nav-mode-list {
+  background-color: var(--bg-navbar);
+  border-color: var(--hero-link-bg);
+}

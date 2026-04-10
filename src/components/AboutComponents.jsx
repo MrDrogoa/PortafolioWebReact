@@ -4,6 +4,7 @@ import AboutCharacter from "@/components/main/about/AboutCharacter";
 import AnimatedTestimonialsDemo from "@/components/main/about/AnimatedTestimonialsDemo";
 import Carousel from "@/components/main/Carousel";
 import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function AboutComponents() {
   return (

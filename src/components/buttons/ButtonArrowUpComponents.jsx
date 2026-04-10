@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { ArrowUpIcon } from "@/components/icons/Icons";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function ButtonArrowUpComponents() {
   const [isVisible, setIsVisible] = useState(false);
@@ -32,14 +33,14 @@ function ButtonArrowUpComponents() {
   return (
     <button
       onClick={scrollToTop}
-      className={`lg:hover:bg-[#ce4c40] bg-[#FF6F61] px-2 md:px-3 py-2 rounded-full transition-all duration-300 ease-in-out fixed bottom-5 md:bottom-12 right-6 md:right-8 lg:right-12 cursor-pointer z-50 ${
+      className={`lg:hover:-translate-y-2 bg-[#FF6F61] px-2 md:px-3 py-2 rounded-full transition-all duration-300 ease-in-out fixed bottom-5 md:bottom-12 right-6 md:right-8 lg:right-12 cursor-pointer z-50 arrows-up ${
         isVisible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-16 pointer-events-none"
       }`}
       aria-label="Volver arriba"
     >
-      <ArrowUpIcon className="text-[#202023] text-lg md:text-xl lg:text-2xl" />
+      <ArrowUpIcon className="text-[#202023] text-lg md:text-xl lg:text-2xl icon-up" />
     </button>
   );
 }

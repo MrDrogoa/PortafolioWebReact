@@ -51,7 +51,7 @@ function Carousel() {
     { name: "JavaScript", Icon: JavascriptIcon, color: "#EFD81D" }, // Componente de icono
     { name: "Tailwind CSS", Icon: TailwindIcon, color: "#00BCFF" }, // Componente de icono
     { name: "Node.js", Icon: NodeIcon, color: "#57A745" }, // Componente de icono
-    { name: "Figma", Icon: FigmaIcon, color: "#FFF" }, // Componente de icono
+    { name: "Figma", Icon: FigmaIcon, color: "#FFF", class: "main-mode-figma" }, // Componente de icono
     { name: "Git", Icon: GitIcon, color: "#F05133" }, // Componente de icono
     { name: "Firebase", Icon: FireIcon, color: "#DD2C00" }, // Componente de icono
     { name: "Vue.js", Icon: VueIcon, color: "#42b883" }, // Componente de icono
@@ -60,8 +60,18 @@ function Carousel() {
     { name: "HTML5", Icon: HtmlIcon, color: "#E44D26" }, // Componente de icono
     { name: "MySQL", Icon: MysqlIcon, color: "#006089" }, // Componente de icono
     { name: "PHP", Icon: PhpIcon, color: "#8800FF" }, // Componente de icono
-    { name: "Database", Icon: DatabaseIcon, color: "#FFF" }, // Componente de icono
-    { name: "WordPress", Icon: WordpressIcon, color: "#FFF" }, // Componente de icono
+    {
+      name: "Database",
+      Icon: DatabaseIcon,
+      color: "#FFF",
+      class: "main-mode-base",
+    }, // Componente de icono
+    {
+      name: "WordPress",
+      Icon: WordpressIcon,
+      color: "#FFF",
+      class: "main-mode-wordpress",
+    }, // Componente de icono
   ];
 
   return (
@@ -78,11 +88,11 @@ function Carousel() {
                   <div className="h-full flex flex-col items-center justify-center">
                     <div className="mb-4">
                       <tool.Icon
-                        className="w-10 h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 mx-auto"
-                        style={{ color: tool.color }}
+                        className={`w-10 h-10 lg:w-11 lg:h-11 xl:w-12 xl:h-12 mx-auto ${tool.class || ""}`}
+                        style={tool.class ? undefined : { color: tool.color }}
                       />
                     </div>
-                    <p className="text-white font-primary text-lg font-semibold">
+                    <p className="text-white font-primary text-lg font-semibold main-mode-paragraph">
                       {tool.name}
                     </p>
                   </div>
@@ -97,14 +107,14 @@ function Carousel() {
             className="absolute left-0 top-1/2 transform -translate-y-1/2"
             aria-label="Previous slide"
           >
-            <ArrowLeftIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:text-[#FF6F61] transition-colors" />
+            <ArrowLeftIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
           </button>
           <button
             onClick={() => splideInstance.current?.go(">")}
             className="absolute right-0 top-1/2 transform -translate-y-1/2"
             aria-label="Next slide"
           >
-            <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:text-[#FF6F61] transition-colors" />
+            <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
           </button>
         </div>
       </article>

@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "@/assets/images/logo.svg";
+import logolight from "@/assets/images/logolight.svg";
 import { CopyrightIcon, CircleIcon } from "@/components/icons/Icons";
 import Button2Components from "@/components/buttons/Button2Components";
 import {
@@ -11,8 +12,12 @@ import {
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import "@/css/Modelight/footer/FooterModelight.css";
+import { useTheme } from "@/context/useTheme";
 
 function Footer() {
+  const { theme } = useTheme();
+  const logosrc = theme === "light" ? logolight : Logo;
   React.useEffect(() => {
     AOS.init({
       duration: 800, // Duración de la animación
@@ -57,18 +62,18 @@ function Footer() {
     return new Date().getFullYear();
   }
   return (
-    <footer className="border-t-2 border-white mt-8 sm:mt-10 md:mt-30 px-6 lg:px-4">
+    <footer className="border-t-3 border-white mt-8 sm:mt-10 md:mt-30 px-6 lg:px-4 footer-mode-border">
       <section className="max-w-[1300px] m-auto md:px-5 pb-14 md:pb-10 pt-16">
         <div className="flex flex-col justify-center items-center md:items-stretch md:flex-row md:justify-between gap-6 md:gap-0">
           <div className="card-footer-1">
-            <a href="">
+            <Link to="/">
               <img
-                src={Logo}
+                src={logosrc}
                 alt="logo"
                 className="w-24 md:w-32 m-auto md:m-0"
               />
-            </a>
-            <p className="font-secondary text-white font-medium md:text-lg lg:text-xl w-40 md:w-52 text-center md:text-start py-2 md:py-4">
+            </Link>
+            <p className="font-secondary text-white font-medium md:text-lg lg:text-xl w-40 md:w-52 text-center md:text-start py-2 md:py-4 footer-mode-subtitle">
               ¡Creemos Juntos Tu Presencia Digital!
             </p>
             <div
@@ -92,7 +97,7 @@ function Footer() {
 
           <div className="flex md:flex-row gap-10 sm:gap-15 md:gap-20">
             <div className="card-footer-2">
-              <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold text-center md:text-start">
+              <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold text-center md:text-start footer-mode-title">
                 Redes
               </h3>
               <div className="flex text-white mt-2 md:mt-4 gap-2 md:gap-4">
@@ -103,20 +108,20 @@ function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={label}
-                    className="bg-white rounded-md p-1 flex items-center justify-center lg:hover:bg-[#FF6F61] transition-colors duration-300 focus-visible:ring-2"
+                    className="bg-white rounded-md p-1 flex items-center justify-center lg:hover:!bg-[#FF6F61] transition-colors duration-300 focus-visible:ring-2 footer-border"
                   >
-                    <Icon className="text-2xl text-[#202023]" />
+                    <Icon className="text-2xl text-[#202023] footer-icon" />
                   </a>
                 ))}
               </div>
             </div>
             <div className="flex flex-col md:block card-footer-3">
-              <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold text-center md:text-start">
+              <h3 className="font-primary text-white text-lg sm:text-xl md:text-2xl font-semibold text-center md:text-start footer-mode-title">
                 Contacto
               </h3>
               <Link
                 to="/contact"
-                className="text-center md:text-start text-white mt-2 md:mt-4 lg:hover:text-[#ff6e61e5] text-sm md:text-base font-primary transition-colors"
+                className="text-center md:text-start text-white mt-2 md:mt-4 lg:hover:!text-[#ff6e61e5] text-sm md:text-base font-primary transition-colors footer-mode-link"
               >
                 mensaje
               </Link>
@@ -124,7 +129,7 @@ function Footer() {
           </div>
         </div>
 
-        <span className="flex items-center gap-2 justify-center font-secondary text-white pt-6 font-medium">
+        <span className="flex items-center gap-2 justify-center font-secondary text-white pt-6 font-medium footer-mode-paragraph">
           <CopyrightIcon />
           Copyright {getCurrentYear()}
           <CircleIcon className="fa-solid fa-circle text-[#FF6F61] text-[7px]" />

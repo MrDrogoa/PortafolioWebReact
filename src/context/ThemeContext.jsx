@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo, useState } from "react";
 import { ThemeContext } from "./ThemeContext";
 
 const STORAGE_KEY = "portfolio-theme";
@@ -16,8 +16,11 @@ function getInitialTheme() {
 export function ThemeProvider({ children }) {
   const [theme, setTheme] = useState(getInitialTheme);
 
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+
+    root.classList.remove("theme-light", "theme-dark");
+    root.classList.add(`theme-${theme}`);
     window.localStorage.setItem(STORAGE_KEY, theme);
   }, [theme]);
 

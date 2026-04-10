@@ -2,6 +2,7 @@ import React from "react";
 import TitleSection from "@/components/TitleSection";
 import CardsFrameworks from "@/components/main/CardsFrameworks";
 import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function ProjectFrameworksComponents() {
   return (

@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import projectsService from "@/services/projectsService";
+// Importar imágenes de flechas
 import ArrowRight from "@/assets/img/arrow/arrow-right.svg";
+import ArrowRightLight from "@/assets/img/arrow/arrow-right-light.svg";
 import ArrowBottom from "@/assets/img/arrow/arrow-bottom.svg";
+import ArrowBottomLight from "@/assets/img/arrow/arrow-bottom-light.svg";
 import ArrowCurve from "@/assets/img/arrow/arrow-curve-1.svg";
+import ArrowCurveLight from "@/assets/img/arrow/arrow-curve-1-light.svg";
 import ArrowLeft from "@/assets/img/arrow/arrow-left.svg";
+import ArrowLeftLight from "@/assets/img/arrow/arrow-left-light.svg";
 import ArrowCurve2 from "@/assets/img/arrow/arrow-curve-2.svg";
+import ArrowCurve2Light from "@/assets/img/arrow/arrow-curve-2-light.svg";
 import ArrowCurveFinal from "@/assets/img/arrow/arrow-curve-final.svg";
+import ArrowCurveFinalLight from "@/assets/img/arrow/arrow-curve-final-light.svg";
+
 import ButtonComponents from "@/components/buttons/ButtonComponents";
 import ButtonArrowReturnComponents from "@/components/buttons/ButtonArrowReturnComponents";
 import {
@@ -24,6 +32,8 @@ import {
   AnimationIcon,
   ScrollRevealIcon,
 } from "@/components/icons/Icons";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
+import { useTheme } from "@/context/useTheme";
 
 const API_BASE_URL =
   import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:4000";
@@ -34,13 +44,17 @@ const API_BASE_URL =
 // Función para obtener el icono según el nombre de la tecnología
 const getTechIcon = (techName) => {
   const iconMap = {
-    Figma: { Icon: FigmaIcon, color: "text-white" },
+    Figma: { Icon: FigmaIcon, color: "text-white", class: "main-mode-figma" },
     HTML: { Icon: HtmlIcon, color: "text-[#E44D26]" },
     CSS: { Icon: CssIcon, color: "text-[#1E3FDA]" },
     JavaScript: { Icon: JavascriptIcon, color: "text-[#EFD81D]" },
     PHP: { Icon: PhpIcon, color: "text-[#8800FF]" },
-    Wordpress: { Icon: WordpressIcon, color: "text-white" },
-    MySQL: { Icon: DatabaseIcon, color: "text-white" },
+    Wordpress: {
+      Icon: WordpressIcon,
+      color: "text-white",
+      class: "main-mode-wordpress",
+    },
+    MySQL: { Icon: DatabaseIcon, color: "text-white", class: "main-mode-base" },
     Bootstrap: { Icon: BootstrapIcon, color: "text-[#7952B3]" },
     React: { Icon: ReactIcon, color: "text-[#61DAFB]" },
     Vue: { Icon: VueIcon, color: "text-[#42B883]" },
@@ -51,10 +65,12 @@ const getTechIcon = (techName) => {
 
   const techData = iconMap[techName];
   if (techData) {
-    const { Icon, color } = techData;
+    const { Icon, color, class: techClass } = techData;
     return (
       <>
-        <Icon className={`${color} text-3xl md:text-4xl lg:text-5xl`} />
+        <Icon
+          className={`${color} ${techClass} text-3xl md:text-4xl lg:text-5xl`}
+        />
       </>
     );
   }
@@ -62,6 +78,15 @@ const getTechIcon = (techName) => {
 };
 
 function PlantillaGeneral() {
+  const { theme } = useTheme();
+  const arrowBottom = theme === "light" ? ArrowBottomLight : ArrowBottom;
+  const arrowRight = theme === "light" ? ArrowRightLight : ArrowRight;
+  const arrowLeft = theme === "light" ? ArrowLeftLight : ArrowLeft;
+  const arrowCurve = theme === "light" ? ArrowCurveLight : ArrowCurve;
+  const arrowCurve2 = theme === "light" ? ArrowCurve2Light : ArrowCurve2;
+  const arrowCurveFinal =
+    theme === "light" ? ArrowCurveFinalLight : ArrowCurveFinal;
+
   const { id, categoria, slug } = useParams(); // Obtener parámetros desde la URL
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -127,11 +152,11 @@ function PlantillaGeneral() {
       {/* Header del proyecto */}
       <div className="px-5 flex flex-col lg:flex-row items-center justify-between">
         <div className="w-full md:w-3/5">
-          <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left">
+          <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left main-mode-title">
             {project.titulo}
           </h2>
 
-          <p className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0">
+          <p className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0 main-mode-paragraph">
             {project.descripcion}
           </p>
         </div>
@@ -177,14 +202,14 @@ function PlantillaGeneral() {
             >
               {/* CONTENIDO DE TEXTO - Siempre primero en mobile */}
               <div
-                className={`border-2 border-white text-white p-7 md:p-11 rounded-md w-full ${
+                className={`border-3 border-white text-white p-7 md:p-11 rounded-md w-full main-mode-card ${
                   !isEven ? "lg:order-2" : ""
                 }`}
               >
                 <h3 className="font-primary text-[#FF6F61] text-xl md:text-2xl font-semibold text-center">
                   {section.titulo}
                 </h3>
-                <div className="font-secondary text-white font-normal text-sm md:text-lg py-3 md:py-4">
+                <div className="font-secondary text-white font-normal text-sm md:text-lg py-3 md:py-4 main-mode-paragraph">
                   <p>{section.descripcion}</p>
                 </div>
               </div>
@@ -192,7 +217,7 @@ function PlantillaGeneral() {
               {/* Flecha mobile después del texto */}
               <div className="lg:hidden block">
                 <img
-                  src={ArrowBottom}
+                  src={arrowBottom}
                   alt="arrow-bottom"
                   className="w-3/4 md:w-full"
                 />
@@ -205,7 +230,7 @@ function PlantillaGeneral() {
                 }`}
               >
                 <img
-                  src={isEven ? ArrowRight : ArrowLeft}
+                  src={isEven ? arrowRight : arrowLeft}
                   alt={`arrow-${isEven ? "right" : "left"}`}
                 />
               </div>
@@ -215,14 +240,14 @@ function PlantillaGeneral() {
                 <img
                   src={`${API_BASE_URL}${section.url}`}
                   alt={section.titulo}
-                  className="rounded-md m-auto lg:m-0 w-full"
+                  className="rounded-md m-auto lg:m-0 w-full sm:w-130"
                 />
               </div>
 
               {/* Flecha mobile después de la imagen */}
               <div className="lg:hidden block">
                 <img
-                  src={ArrowBottom}
+                  src={arrowBottom}
                   alt="arrow-bottom"
                   className="w-3/4 md:w-full"
                 />
@@ -238,7 +263,7 @@ function PlantillaGeneral() {
                   }`}
                 >
                   <img
-                    src={index % 2 === 0 ? ArrowCurve : ArrowCurve2}
+                    src={index % 2 === 0 ? arrowCurve : arrowCurve2}
                     alt={`arrow-curve-${index}`}
                   />
                 </div>
@@ -249,7 +274,7 @@ function PlantillaGeneral() {
             {index === contentSections.length - 1 && (
               <div className="lg:flex lg:justify-center hidden relative">
                 <div className="absolute -bottom-[100px]">
-                  <img src={ArrowCurveFinal} alt="arrow-final" />
+                  <img src={arrowCurveFinal} alt="arrow-final" />
                 </div>
               </div>
             )}
@@ -261,10 +286,10 @@ function PlantillaGeneral() {
       {presentationSection && (
         <section className="max-w-[1300px] m-auto ">
           <div className="flex justify-center items-center flex-col w-72 md:w-1/2 lg:w-3/4 text-white m-auto text-center gap-3 pt-8 sm:pt-10 md:pt-20 lg:pt-30">
-            <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold">
+            <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold main-mode-title">
               {presentationSection.titulo}
             </h2>
-            <div className="font-secondary font-normal text-sm md:text-lg">
+            <div className="font-secondary font-normal text-sm md:text-lg main-mode-paragraph">
               <p>{presentationSection.descripcion}</p>
             </div>
           </div>
