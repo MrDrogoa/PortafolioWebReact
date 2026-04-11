@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "@/assets/images/logo.svg";
-import logolight from "@/assets/images/logolight.svg";
+import logolight from "@/assets/images/logoLight.svg";
 import { Link } from "react-router-dom";
 import { useTheme } from "@/context/useTheme";
 

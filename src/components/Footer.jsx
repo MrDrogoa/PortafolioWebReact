@@ -1,6 +1,6 @@
 import React from "react";
 import Logo from "@/assets/images/logo.svg";
-import logolight from "@/assets/images/logolight.svg";
+import logolight from "@/assets/images/logoLight.svg";
 import { CopyrightIcon, CircleIcon } from "@/components/icons/Icons";
 import Button2Components from "@/components/buttons/Button2Components";
 import {

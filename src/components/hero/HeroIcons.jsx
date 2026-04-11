@@ -2,31 +2,31 @@ import React from "react";
 // moon
 import Moon from "@/assets/images/moon.svg";
 // moon light
-import MoonLight from "@/assets/images/moonlight.svg";
+import MoonLight from "@/assets/images/moonLight.svg";
 // music
 import Music from "@/assets/images/music.svg";
 // music light
-import MusicLight from "@/assets/images/musiclight.svg";
+import MusicLight from "@/assets/images/musicLight.svg";
 // notebook
 import Notebook from "@/assets/images/notebook.svg";
 // notebook light
-import NotebookLight from "@/assets/images/notebooklight.svg";
+import NotebookLight from "@/assets/images/notebookLight.svg";
 // sun
 import Sun from "@/assets/images/sun.svg";
 // sun light
-import SunLight from "@/assets/images/sunlight.svg";
+import SunLight from "@/assets/images/sunLight.svg";
 // code
 import Code from "@/assets/images/code.svg";
 // code light
-import CodeLight from "@/assets/images/codelight.svg";
+import CodeLight from "@/assets/images/codeLight.svg";
 // airplane
 import Airplane from "@/assets/images/airplane.svg";
 // airplane light
-import AirplaneLight from "@/assets/images/airplanelight.svg";
+import AirplaneLight from "@/assets/images/airplaneLight.svg";
 // bike
 import Bike from "@/assets/images/bike.svg";
 // bike light
-import BikeLight from "@/assets/images/bikelight.svg";
+import BikeLight from "@/assets/images/bikeLight.svg";
 
 import "@/css/Heroicons.css";
 
