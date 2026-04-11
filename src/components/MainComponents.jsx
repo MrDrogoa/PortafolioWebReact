@@ -9,11 +9,11 @@ import ButtonComponents from "@/components/buttons/ButtonComponents";
 import { Link } from "react-router-dom";
 import Cap from "@/assets/img/Captura.png";
 
-import "@/css/ModeLight/mainhome/MainModelight.css";
+import "@/css/ModeLight/mainhome/MainModeLight.css";
 
 function MainComponents() {
   return (
-    <section className="max-w-[1300px] m-auto px-4 relative">
+    <section className="max-w-[1300px] m-auto px-4 relative theme-text">
       <div className="relative z-30">
         <Signature />
         <Carousel />
@@ -24,7 +24,10 @@ function MainComponents() {
       {/* Decorative background image with shadow */}
       <div className="hidden xl:block xl:absolute -right-15 -translate-x-1/4 top-[1470px] z-0 pointer-events-none">
         {/* Shadow layer */}
-        <div className="absolute inset-0 bg-[#202023] blur-[100px] opacity-10 scale-110"></div>
+        <div
+          className="absolute inset-0 blur-[100px] opacity-10 scale-110"
+          style={{ backgroundColor: "var(--accent)" }}
+        ></div>
         {/* Image */}
         <img src={Cap} alt="Cap" className="relative opacity-20 w-[450px]" />
       </div>

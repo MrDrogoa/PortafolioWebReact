@@ -4,7 +4,7 @@ import ButtonArrowUpComponents from "@/components/buttons/ButtonArrowUpComponent
 
 function Layout({ children }) {
   return (
-    <div className="bg-[#202023] theme-page">
+    <div className="theme-page">
       <Header /> {/* Cabecera */}
       <main>
         {children}

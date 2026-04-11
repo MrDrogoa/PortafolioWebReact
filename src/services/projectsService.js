@@ -1,8 +1,4 @@
-const API_URL =
-  import.meta.env.VITE_API_URL ||
-  (import.meta.env.MODE === "production"
-    ? "https://jodani-api-backend.vercel.app/api"
-    : "http://localhost:4000/api");
+import { API_URL } from "@/services/apiConfig";
 
 class ProjectsService {
   // Obtener todos los proyectos

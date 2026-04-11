@@ -31,7 +31,7 @@ function HeroLinks() {
   ];
 
   return (
-    <div className="hidden lg:flex justify-center flex-col items-center gap-4 py-6 px-3 border-3 rounded-lg  absolute left-5 top-1/2 -translate-y-1/2 z-10">
+    <div className="hidden lg:flex justify-center flex-col items-center gap-4 py-6 px-3 border-3 rounded-lg absolute left-5 top-1/2 -translate-y-1/2 z-10 theme-border">
       {links.map((link) => (
         <a
           key={link.href}
@@ -40,9 +40,9 @@ function HeroLinks() {
           // Ensure security when opening new tabs
           rel="noopener noreferrer"
           aria-label={link.label}
-          className="bg-white rounded-md p-1 flex items-center justify-center hover:!bg-[#FF6F61] transition-colors duration-300 focus-visible:ring-2 hero-border"
+          className="rounded-md p-1 flex items-center justify-center hover:!bg-[#FF6F61] transition-colors duration-300 focus-visible:ring-2 hero-border"
         >
-          <link.Icon className="text-2xl text-[#202023] hero-icon" />
+          <link.Icon className="text-2xl hero-icon" />
         </a>
       ))}
     </div>

@@ -16,7 +16,7 @@ const Switch = () => {
       title={isDark ? "Cambiar a modo claro" : "Cambiar a modo oscuro"}
       onClick={toggleTheme}
       className={`relative inline-block h-7 lg:h-[37px] w-7 lg:w-[68px] rounded-[30px] shadow-[0_0_10px_rgba(0,0,0,0.1)] cursor-pointer transition-colors duration-[350ms] ease-in-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-sky-400 overflow-hidden ${
-        isDark ? "bg-[#2a2a2a] border-2 border-white" : "bg-[#00a6ff]"
+        isDark ? "bg-[#2a2a2a] border-2 theme-border" : "bg-[#00a6ff]"
       }`}
     >
       <span className="sr-only">Modo claro y oscuro</span>

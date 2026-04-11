@@ -34,9 +34,7 @@ import {
 } from "@/components/icons/Icons";
 import "@/css/ModeLight/mainhome/MainModeLight.css";
 import { useTheme } from "@/context/useTheme";
-
-const API_BASE_URL =
-  import.meta.env.VITE_API_URL?.replace("/api", "") || "http://localhost:4000";
+import { API_BASE_URL } from "@/services/apiConfig";
 
 // En producción: https://jodani.cl (el proxy .htaccess redirige /api/* al puerto 3001)
 // En desarrollo: http://localhost:4000
@@ -121,7 +119,7 @@ function PlantillaGeneral() {
     return (
       <section className="max-w-[1300px] m-auto py-8 md:py-12 lg:py-14">
         <div className="flex justify-center items-center h-96">
-          <p className="text-white text-xl">Cargando proyecto...</p>
+          <p className="theme-text text-xl">Cargando proyecto...</p>
         </div>
       </section>
     );
@@ -131,7 +129,7 @@ function PlantillaGeneral() {
     return (
       <section className="max-w-[1300px] m-auto py-8 md:py-12 lg:py-14">
         <div className="flex justify-center items-center h-96 flex-col gap-4">
-          <p className="text-white text-xl">Proyecto no encontrado</p>
+          <p className="theme-text text-xl">Proyecto no encontrado</p>
           <Link
             to="/projects"
             className="text-[#FFEA00] hover:text-[#FFEE39] underline"
@@ -148,15 +146,15 @@ function PlantillaGeneral() {
   const presentationSection = project.content?.slice(-1)[0] || null;
 
   return (
-    <section className="max-w-[1300px] m-auto px-4 lg:px-0 pt-8 md:pt-12 lg:pt-14">
+    <section className="max-w-[1300px] m-auto px-4 lg:px-0 pt-8 md:pt-12 lg:pt-14 theme-text">
       {/* Header del proyecto */}
       <div className="px-5 flex flex-col lg:flex-row items-center justify-between">
         <div className="w-full md:w-3/5">
-          <h2 className="font-primary text-white text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left main-mode-title">
+          <h2 className="font-primary text-4xl md:text-5xl lg:text-6xl font-extrabold text-center lg:text-left main-mode-title">
             {project.titulo}
           </h2>
 
-          <p className="font-secondary font-normal md:text-lg text-center lg:text-start text-white py-3 pb-6 lg:pb-0 main-mode-paragraph">
+          <p className="font-secondary font-normal md:text-lg text-center lg:text-start py-3 pb-6 lg:pb-0 main-mode-paragraph">
             {project.descripcion}
           </p>
         </div>
@@ -166,7 +164,7 @@ function PlantillaGeneral() {
             <div className="flex flex-col  justify-center items-center gap-3">
               <div className="flex items-center gap-2 text-[#FF6F61]">
                 <CodeIcon className="text-2xl" />
-                <span className="font-secondary font-semibold text-lg">
+                <span className="font-secondary font-semibold text-lg theme-text">
                   Tecnologías
                 </span>
               </div>
@@ -179,7 +177,7 @@ function PlantillaGeneral() {
                 href={project.demo_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="font-secondary font-semibold text-sm md:text-base lg:text-lg text-[#FFEA00] hover:text-[#FFEE39] mt-2"
+                className="font-secondary font-semibold text-sm md:text-base lg:text-lg lg:hover:-translate-y-1 transition-all duration-300 ease-in-out mt-2 main-link-projects"
               >
                 {" "}
                 {project.demo_url}
@@ -202,14 +200,14 @@ function PlantillaGeneral() {
             >
               {/* CONTENIDO DE TEXTO - Siempre primero en mobile */}
               <div
-                className={`border-3 border-white text-white p-7 md:p-11 rounded-md w-full main-mode-card ${
+                className={`border-3 p-7 md:p-11 rounded-md w-full main-mode-card ${
                   !isEven ? "lg:order-2" : ""
                 }`}
               >
                 <h3 className="font-primary text-[#FF6F61] text-xl md:text-2xl font-semibold text-center">
                   {section.titulo}
                 </h3>
-                <div className="font-secondary text-white font-normal text-sm md:text-lg py-3 md:py-4 main-mode-paragraph">
+                <div className="font-secondary font-normal text-sm md:text-lg py-3 md:py-4 main-mode-paragraph">
                   <p>{section.descripcion}</p>
                 </div>
               </div>
@@ -285,8 +283,8 @@ function PlantillaGeneral() {
       {/* Sección de presentación final */}
       {presentationSection && (
         <section className="max-w-[1300px] m-auto ">
-          <div className="flex justify-center items-center flex-col w-72 md:w-1/2 lg:w-3/4 text-white m-auto text-center gap-3 pt-8 sm:pt-10 md:pt-20 lg:pt-30">
-            <h2 className="font-primary text-white text-3xl md:text-4xl font-semibold main-mode-title">
+          <div className="flex justify-center items-center flex-col w-72 md:w-1/2 lg:w-3/4 m-auto text-center gap-3 pt-8 sm:pt-10 md:pt-20 lg:pt-30 theme-text">
+            <h2 className="font-primary text-3xl md:text-4xl font-semibold main-mode-title">
               {presentationSection.titulo}
             </h2>
             <div className="font-secondary font-normal text-sm md:text-lg main-mode-paragraph">

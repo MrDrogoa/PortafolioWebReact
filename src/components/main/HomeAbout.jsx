@@ -21,7 +21,7 @@ function About() {
   }, []);
   return (
     <section className="max-w-[1300px] m-auto pt-8 sm:pt-10 md:pt-30 px-4 relative">
-      <div className="flex justify-center items-center flex-col w-full md:w-96 text-white m-auto text-center">
+      <div className="flex justify-center items-center flex-col w-full md:w-96 m-auto text-center theme-text">
         <Titleh2 className="mb-4 md:mb-5 lg:mb-6">Sobre mí</Titleh2>
         <p className="font-secondary font-normal text-sm md:text-lg mb-3 md:mb-5 main-mode-paragraph">
           Soy desarrollador web y diseñador UX/UI con experiencia en crear

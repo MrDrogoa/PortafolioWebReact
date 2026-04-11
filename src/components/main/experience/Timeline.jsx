@@ -297,7 +297,7 @@ function Timeline() {
         <div key={year} className="mb-12">
           {/* Separador de año */}
           <div className="flex items-center justify-center mb-8 md:mb-16">
-            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white font-primary main-mode-title">
+            <h3 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold font-primary main-mode-title">
               {year}
             </h3>
           </div>
@@ -321,12 +321,12 @@ function Timeline() {
                       <>
                         {/* Tarjeta izquierda - ancho fijo del 50% */}
                         <div className="w-1/2 flex justify-end pr-12">
-                          <div className="w-full max-w-sm lg:max-w-md border-3 border-white rounded-lg p-6 main-mode-card">
-                            <h4 className="font-primary text-white text-lg md:text-xl font-semibold mb-2 main-mode-title">
+                          <div className="w-full max-w-sm lg:max-w-md border-3 rounded-lg p-6 main-mode-card">
+                            <h4 className="font-primary text-lg md:text-xl font-semibold mb-2 main-mode-title">
                               {exp.title}
                             </h4>
                             <p
-                              className="text-gray-300 text-sm mb-4 font-secondary main-mode-experience-paragraph"
+                              className="main-mode-experience-paragraph text-sm mb-4 font-secondary"
                               dangerouslySetInnerHTML={{
                                 __html: exp.description,
                               }}
@@ -365,12 +365,12 @@ function Timeline() {
                         </div>
                         {/* Tarjeta derecha - ancho fijo del 50% */}
                         <div className="w-1/2 flex justify-start pl-12">
-                          <div className="w-full max-w-sm lg:max-w-md border-3 border-white rounded-lg p-6 main-mode-card">
-                            <h4 className="text-lg font-bold text-white mb-2 font-primary main-mode-title">
+                          <div className="w-full max-w-sm lg:max-w-md border-3 rounded-lg p-6 main-mode-card">
+                            <h4 className="text-lg font-bold mb-2 font-primary main-mode-title">
                               {exp.title}
                             </h4>
                             <p
-                              className="text-gray-300 text-sm mb-4 font-secondary main-mode-experience-paragraph"
+                              className="main-mode-experience-paragraph text-sm mb-4 font-secondary"
                               dangerouslySetInnerHTML={{
                                 __html: exp.description,
                               }}
@@ -403,12 +403,12 @@ function Timeline() {
 
                     {/* Tarjeta centrada */}
                     <div className="w-full max-w-sm px-4">
-                      <div className="border-3 border-white rounded-lg p-4 main-mode-card card-experience">
-                        <h4 className="text-base font-bold text-white mb-2 font-primary main-mode-title">
+                      <div className="border-3 rounded-lg p-4 main-mode-card card-experience">
+                        <h4 className="text-base font-bold mb-2 font-primary main-mode-title">
                           {exp.title}
                         </h4>
                         <p
-                          className="text-gray-300 text-sm mb-3 font-secondary main-mode-experience-paragraph"
+                          className="main-mode-experience-paragraph text-sm mb-3 font-secondary"
                           dangerouslySetInnerHTML={{
                             __html: exp.description,
                           }}

@@ -2,7 +2,7 @@
 
 :root {
   --bg-page: #f8f9fa;
-  --bg-surface: #ffffff;
+  --bg-surface: #f8f9fa;
   --text-main: #1c1e22;
   --text-muted: #4b5563;
   --border-main: #d1d5db;
@@ -16,7 +16,7 @@
 
   /* Navbar */
   --nav-link-color: #202023;
-  --bg-navbar: #ffffff;
+  --bg-navbar: #f8f9fa;
 
   /* Main Mode */
   --main-mode-base: #16bcf9;
@@ -39,7 +39,7 @@
 
 html.theme-dark {
   --bg-page: #202023;
-  --bg-surface: #2a2a2a;
+  --bg-surface: #202023;
   --text-main: #ffffff;
   --text-muted: #c7c9d1;
   --border-main: #ffffff;
@@ -86,6 +86,9 @@ body {
 }
 .theme-surface {
   background: var(--bg-surface);
+}
+.theme-navbar {
+  background: var(--bg-navbar);
 }
 .theme-text {
   color: var(--text-main);

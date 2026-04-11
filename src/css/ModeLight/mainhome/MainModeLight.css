@@ -17,6 +17,7 @@
 }
 
 .main-mode-card {
+  background-color: var(--bg-surface);
   border-color: var(--main-mode-card);
 }
 
@@ -60,4 +61,8 @@
 
 .main-imputs::placeholder {
   color: var(--main-imputs);
+}
+
+.main-link-projects {
+  color: var(--accent);
 }

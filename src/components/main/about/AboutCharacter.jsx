@@ -12,11 +12,11 @@ function AboutCharacter() {
   ];
   return (
     <section className="mt-6 sm:mt-10 md:mt-12 lg:mt-14 xl:mt-16">
-      <div className="flex justify-center flex-wrap lg:flex-nowrap gap-6 text-white px-5 w-full main-mode-title">
+      <div className="flex justify-center flex-wrap lg:flex-nowrap gap-6 px-5 w-full main-mode-title theme-text">
         {ListCertificates.slice(0, 3).map((certificate) => (
           <div
             key={certificate.id}
-            className="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
+            className="border-2 p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
           >
             <p className="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}
@@ -25,11 +25,11 @@ function AboutCharacter() {
         ))}
       </div>
 
-      <div className="flex justify-center flex-wrap lg:flex-nowrap gap-6 text-white px-5 w-full mt-6 main-mode-title">
+      <div className="flex justify-center flex-wrap lg:flex-nowrap gap-6 px-5 w-full mt-6 main-mode-title theme-text">
         {ListCertificates.slice(3, 6).map((certificate) => (
           <div
             key={certificate.id}
-            className="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
+            className="border-2 p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
           >
             <p className="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}
@@ -38,11 +38,11 @@ function AboutCharacter() {
         ))}
       </div>
 
-      <div className="flex justify-center mt-6 px-5 text-white main-mode-title">
+      <div className="flex justify-center mt-6 px-5 main-mode-title theme-text">
         {ListCertificates.slice(6, 7).map((certificate) => (
           <div
             key={certificate.id}
-            className="border-2 border-white p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
+            className="border-2 p-5 lg:hover:text-[#202023] lg:hover:bg-white transition-colors w-64 h-32 flex items-center justify-center main-mode-character"
           >
             <p className="font-secondary font-semibold md:text-lg text-center">
               {certificate.name}

@@ -7,8 +7,8 @@ import "@/css/ModeLight/navbar/NavbarModeLight.css";
 function NavbarComponents() {
   return (
     // Navbar container
-    <nav className="font-primary">
-      <section className="max-w-[1300px] mx-auto flex items-center justify-between px-4 lg:px-0 py-6">
+    <nav className="font-primary theme-navbar nav-mode-border md:shadow px-4 xl:px-0">
+      <section className="max-w-[1300px] mx-auto flex items-center justify-between py-6 pb-3 md:mb-0">
         {/* Logo */}
         <Navimg />
         {/* Navigation Links */}

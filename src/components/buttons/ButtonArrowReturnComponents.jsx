@@ -13,10 +13,10 @@ function ButtonArrowReturnComponents() {
   return (
     <button
       onClick={goBack}
-      className="lg:hover:-translate-x-2 transition-all duration-300 ease-in-out cursor-pointer"
+      className="lg:hover:-translate-x-2 transition-all duration-300 ease-in-out cursor-pointer pt-3"
       aria-label="Volver atrás"
     >
-      <ArrowLeftIcon className="text-white text-lg md:text-xl lg:text-2xl btn-return" />
+      <ArrowLeftIcon className="text-lg md:text-xl lg:text-2xl btn-return" />
     </button>
   );
 }

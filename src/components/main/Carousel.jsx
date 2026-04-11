@@ -92,7 +92,7 @@ function Carousel() {
                         style={tool.class ? undefined : { color: tool.color }}
                       />
                     </div>
-                    <p className="text-white font-primary text-lg font-semibold main-mode-paragraph">
+                    <p className="font-primary text-lg font-semibold main-mode-paragraph">
                       {tool.name}
                     </p>
                   </div>
@@ -107,14 +107,14 @@ function Carousel() {
             className="absolute left-0 top-1/2 transform -translate-y-1/2"
             aria-label="Previous slide"
           >
-            <ArrowLeftIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
+            <ArrowLeftIcon className="text-xl md:text-2xl xl:text-3xl cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
           </button>
           <button
             onClick={() => splideInstance.current?.go(">")}
             className="absolute right-0 top-1/2 transform -translate-y-1/2"
             aria-label="Next slide"
           >
-            <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl text-white cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
+            <ArrowRightIcon className="text-xl md:text-2xl xl:text-3xl cursor-pointer lg:hover:!text-[#FF6F61] transition-colors main-mode-button" />
           </button>
         </div>
       </article>

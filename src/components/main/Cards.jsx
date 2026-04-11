@@ -79,7 +79,7 @@ function Cards() {
         {cardData.map((card, index) => (
           <div
             key={card.id}
-            className="card flex flex-col border-3 border-white overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 main-mode-card"
+            className="card flex flex-col border-3 overflow-hidden rounded-md max-w-xs lg:max-w-sm m-auto md:m-0 main-mode-card"
             data-aos="zoom-in"
             data-aos-delay={index * 150}
           >
@@ -99,7 +99,7 @@ function Cards() {
                 {card.title}
               </Link>
 
-              <p className="font-secondary font-normal text-sm md:text-base text-white pb-2 main-mode-paragraph">
+              <p className="font-secondary font-normal text-sm md:text-base pb-2 main-mode-paragraph">
                 {card.description}
               </p>
 

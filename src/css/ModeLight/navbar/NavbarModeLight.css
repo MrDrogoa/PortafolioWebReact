@@ -4,5 +4,9 @@
 
 .nav-mode-list {
   background-color: var(--bg-navbar);
-  border-color: var(--hero-link-bg);
+  border-color: var(--border-main);
+}
+
+.nav-mode-border {
+  border-color: var(--border-main);
 }

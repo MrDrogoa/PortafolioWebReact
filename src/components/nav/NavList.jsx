@@ -33,7 +33,7 @@ function NavList() {
   return (
     <>
       {/* Desktop / large */}
-      <ul className="hidden lg:flex justify-center items-center gap-8 text-sm md:text-base font-primary font-medium text-white">
+      <ul className="hidden lg:flex justify-center items-center gap-8 text-sm md:text-base font-primary font-medium nav-mode-text">
         {items.map((item) => (
           <li
             key={item.to}
@@ -54,7 +54,7 @@ function NavList() {
 
             {/* Dropdown Desktop */}
             {item.hasDropdown && (
-              <ul className="absolute top-full left-0 mt-1 bg-[#202023] border-3 border-white min-w-[200px] rounded-md p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-in-out z-50 nav-mode-list">
+              <ul className="absolute top-full left-0 mt-1 border-3 min-w-[200px] rounded-md p-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible translate-y-[-10px] group-hover:translate-y-0 transition-all duration-300 ease-in-out z-50 nav-mode-list">
                 {item.dropdownItems.map((dropItem) => (
                   <li
                     key={dropItem.to}
@@ -62,7 +62,7 @@ function NavList() {
                   >
                     <Link
                       to={dropItem.to}
-                      className="block px-4 py-2 text-white hover:!text-[#FF6F61] transition-colors rounded nav-mode-text"
+                      className="block px-4 py-2 hover:!text-[#FF6F61] transition-colors rounded nav-mode-text"
                     >
                       {dropItem.label}
                     </Link>
@@ -132,15 +132,15 @@ function MobileMenu({ items }) {
         aria-label={open ? "Cerrar menú" : "Abrir menú"}
       >
         {open ? (
-          <CloseIcon className="w-7 h-7 text-white cursor-pointer transition-transform duration-300 nav-mode-text" />
+          <CloseIcon className="w-7 h-7 cursor-pointer transition-transform duration-300 nav-mode-text" />
         ) : (
-          <MenuIcon className="w-7 h-7 text-white cursor-pointer transition-transform duration-300 nav-mode-text" />
+          <MenuIcon className="w-7 h-7 cursor-pointer transition-transform duration-300 nav-mode-text" />
         )}
       </button>
 
       {/* Mobile dropdown menu with slide animation */}
       <div
-        className={`fixed left-0 right-0 top-[5.5rem] w-full bg-[#202023] nav-mode-list border-t-3 border-b-3 border-[#FF6F61] max-h-96 overflow-auto z-50 transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 right-0 top-[5.5rem] w-full nav-mode-list border-t-3 border-b-3 max-h-96 overflow-auto z-50 transition-all duration-300 ease-in-out ${
           open
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
@@ -155,7 +155,7 @@ function MobileMenu({ items }) {
                     onClick={() =>
                       setOpenDropdown(openDropdown === item.to ? null : item.to)
                     }
-                    className="flex items-center justify-between w-full px-4 py-2 text-sm md:text-base text-white lg:hover:bg-[#202023] rounded nav-mode-text"
+                    className="flex items-center justify-between w-full px-4 py-2 text-sm md:text-base lg:hover:bg-white/10 rounded nav-mode-text"
                   >
                     <Link className="nav-mode-text" to={item.to}>
                       {item.label}
@@ -167,7 +167,7 @@ function MobileMenu({ items }) {
                     />
                   </button>
                   {openDropdown === item.to && (
-                    <ul className="ml-4 mt-2 space-y-1 bg-[#202023] border-3 border-white rounded-md p-2 nav-mode-list">
+                    <ul className="ml-4 mt-2 space-y-1 border-3 rounded-md p-2 nav-mode-list">
                       {item.dropdownItems.map((dropItem) => (
                         <li key={dropItem.to}>
                           <Link
@@ -176,7 +176,7 @@ function MobileMenu({ items }) {
                               setOpen(false);
                               setOpenDropdown(null);
                             }}
-                            className="block px-4 py-2 text-sm text-white hover:text-[#FF6F61] transition-colors rounded nav-mode-text"
+                            className="block px-4 py-2 text-sm hover:text-[#FF6F61] transition-colors rounded nav-mode-text"
                           >
                             {dropItem.label}
                           </Link>
@@ -189,7 +189,7 @@ function MobileMenu({ items }) {
                 <Link
                   to={item.to}
                   onClick={() => setOpen(false)}
-                  className="block px-4 py-2 text-sm md:text-base text-white lg:hover:bg-[#202023] rounded nav-mode-text"
+                  className="block px-4 py-2 text-sm md:text-base lg:hover:bg-white/10 rounded nav-mode-text"
                 >
                   {item.label}
                 </Link>

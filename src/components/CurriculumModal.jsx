@@ -50,12 +50,12 @@ function CurriculumModal({ isOpen, onClose }) {
     >
       {/* Modal Container con animación zoom */}
       <div
-        className="relative w-full max-w-[90%] max-h-[90vh] bg-[#202023] rounded-xl shadow-2xl flex flex-col animate-zoomIn"
+        className="relative w-full max-w-[90%] max-h-[90vh] theme-surface theme-text rounded-xl shadow-2xl flex flex-col animate-zoomIn"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header del Modal */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-gray-700">
-          <h2 className="text-white font-primary font-bold text-lg sm:text-xl md:text-2xl">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b theme-border">
+          <h2 className="font-primary font-bold text-lg sm:text-xl md:text-2xl theme-text">
             Currículum Vitae
           </h2>
 
@@ -73,7 +73,7 @@ function CurriculumModal({ isOpen, onClose }) {
             {/* Botón Cerrar */}
             <button
               onClick={onClose}
-              className="p-2 hover:bg-gray-700 rounded-lg transition-colors duration-200 text-white cursor-pointer"
+              className="p-2 hover:bg-black/10 rounded-lg transition-colors duration-200 theme-text cursor-pointer"
               aria-label="Cerrar modal"
             >
               <IoClose className="w-5 h-5 sm:w-6 sm:h-6" />

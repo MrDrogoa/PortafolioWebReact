@@ -106,7 +106,7 @@ function AnimatedTestimonialsDemo() {
 
   return (
     <div className="w-full mx-auto">
-      <div className="rounded-xl overflow-hidden border-2 border-white lg:hover:!border-[#FF6F61] transition-colors duration-300 main-mode-card">
+      <div className="rounded-xl overflow-hidden border-2 lg:hover:!border-[#FF6F61] transition-colors duration-300 main-mode-card">
         {/* Contenedor principal con flexbox */}
         <div className="flex flex-col md:flex-row">
           <AboutImg
