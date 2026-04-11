@@ -8,7 +8,7 @@ function NavbarComponents() {
   return (
     // Navbar container
     <nav className="font-primary theme-navbar nav-mode-border md:shadow px-4 xl:px-0">
-      <section className="max-w-[1300px] mx-auto flex items-center justify-between py-6 pb-3 md:mb-0">
+      <section className="max-w-[1300px] mx-auto flex items-center justify-between py-3 md:py-4 lg:py-5">
         {/* Logo */}
         <Navimg />
         {/* Navigation Links */}

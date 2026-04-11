@@ -45,12 +45,12 @@ function CurriculumModal({ isOpen, onClose }) {
 
   return (
     <div
-      className="fixed inset-0 z-[9999] flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/70 animate-fadeIn"
+      className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6 md:p-8 bg-black/70 animate-fadeIn"
       onClick={handleOverlayClick}
     >
       {/* Modal Container con animación zoom */}
       <div
-        className="relative w-full max-w-[90%] max-h-[90vh] theme-surface theme-text rounded-xl shadow-2xl flex flex-col animate-zoomIn"
+        className="relative w-full max-w-4xl max-h-[calc(100vh-10rem)] theme-surface theme-text rounded-xl shadow-2xl flex flex-col animate-zoomIn"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header del Modal */}
