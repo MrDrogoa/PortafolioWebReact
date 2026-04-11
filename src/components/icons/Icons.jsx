@@ -36,11 +36,13 @@ import {
 import { TbBrandMysql } from "react-icons/tb";
 import { RiJavascriptFill } from "react-icons/ri";
 import { FaFileExcel, FaFileWord } from "react-icons/fa6";
-import { SiPhp, SiAdobexd, SiScrollreveal, SiPostman } from "react-icons/si";
+import * as SiIcons from "react-icons/si";
 import { FcGoogle } from "react-icons/fc";
 import { IoExtensionPuzzle } from "react-icons/io5";
 import { DiJqueryLogo } from "react-icons/di";
 import { MdOutlineAnimation } from "react-icons/md";
+
+const { SiPhp, SiScrollreveal, SiPostman } = SiIcons;
 
 // Exporta los iconos directamente como componentes re-exportados.
 // No definimos tamaño o color por defecto aquí para que cada componente
@@ -76,7 +78,7 @@ export const ChevronDownIcon = (props) => <FaChevronDown {...props} />;
 export const TrelloIcon = (props) => <FaTrello {...props} />;
 export const WordIcon = (props) => <FaFileWord {...props} />;
 export const ExcelIcon = (props) => <FaFileExcel {...props} />;
-export const AdobeXdIcon = (props) => <SiAdobexd {...props} />;
+export const AdobeXdIcon = (props) => <BiLogoFigma {...props} />;
 export const VisualStudioIcon = (props) => <BiLogoVisualStudio {...props} />;
 export const GoogleIcon = (props) => <FcGoogle {...props} />;
 export const FireFoxIcon = (props) => <FaFirefoxBrowser {...props} />;
