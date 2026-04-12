@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { IoClose, IoDownload } from "react-icons/io5";
-import pdf from "@/assets/images/Daniel Rosales.pdf";
+import pdf from "@/assets/images/DanielRosales.pdf";
 
 function CurriculumModal({ isOpen, onClose }) {
   // Prevenir scroll del body cuando el modal está abierto

@@ -140,7 +140,7 @@ function MobileMenu({ items }) {
 
       {/* Mobile dropdown menu with slide animation */}
       <div
-        className={`fixed left-0 right-0 top-[5.5rem] w-full nav-mode-list border-t-3 border-b-3 max-h-96 overflow-auto z-50 transition-all duration-300 ease-in-out ${
+        className={`fixed left-0 right-0 top-[3.5rem] md:top-[4rem] w-full nav-mode-list border-t-3 border-b-3 max-h-96 overflow-auto z-50 transition-all duration-300 ease-in-out ${
           open
             ? "opacity-100 translate-y-0"
             : "opacity-0 -translate-y-4 pointer-events-none"
