@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { IoClose, IoDownload } from "react-icons/io5";
-import pdf from "@/assets/images/curriculum-frontend.pdf";
+import pdf from "@/assets/images/curriculum-Frontend.pdf";
 
 // Modal para visualizar y descargar el CV en PDF.
 function CurriculumModal({ isOpen, onClose }) {
