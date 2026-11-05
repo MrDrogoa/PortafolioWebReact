@@ -24,6 +24,47 @@ The React Compiler is not enabled on this template because of its impact on dev 
 
 If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
 
+# Cambios realizados el 11 de abril de 2026 (Fase 1 - Comentarios explicativos)
+
+Resumen de lo implementado hoy:
+
+- Objetivo de la fase
+  - Agregar comentarios explicativos en archivos clave de navegación y modal para entender con mayor precisión la función de cada bloque.
+  - Mantener intacta la lógica, estilos y comportamiento del proyecto (sin cambios funcionales).
+
+- Alcance de Fase 1
+  - Se añadieron comentarios en componentes de navegación (desktop/mobile) y en el modal de currículum.
+  - Los comentarios explican estructura, estados, eventos, render condicional, accesibilidad y animaciones.
+
+- Archivos actualizados en esta fase
+  - `src/components/nav/NavList.jsx`
+    - Documentación del array `items`, render dinámico en desktop, dropdown de proyectos y subitems.
+    - Documentación de `MobileMenu`, estados `open/openDropdown`, cierre por clic externo y por scroll.
+    - Comentarios sobre atributos de accesibilidad (`aria-expanded`, `aria-label`) y transiciones visuales.
+
+  - `src/components/NavbarComponents.jsx`
+    - Comentarios del layout principal del navbar: logo, enlaces y botón de modo.
+    - Explicación del contenedor responsive y distribución horizontal.
+
+  - `src/components/nav/Navimg.jsx`
+    - Comentarios de consumo de contexto de tema y selección dinámica de logo por modo.
+    - Explicación del comportamiento del logo como enlace al home.
+
+  - `src/components/CurriculumModal.jsx`
+    - Comentarios sobre bloqueo de scroll del body al abrir el modal.
+    - Comentarios sobre cierre con tecla Escape y limpieza de listeners.
+    - Comentarios sobre cierre por overlay, descarga de PDF y render condicional.
+    - Comentarios en la estructura del modal (header, acciones, iframe).
+    - Comentarios en animaciones locales (`fadeIn`, `zoomIn`) y clases asociadas.
+
+- Criterio aplicado
+  - Solo se agregaron comentarios.
+  - No se modificaron funciones, flujo de datos, clases de estilo ni resultado visual esperado.
+
+- Próxima fase sugerida
+  - Continuar con comentarios explicativos en componentes de Hero, Main y Footer.
+  - Mantener el mismo criterio: comentarios detallados sin tocar comportamiento.
+
 # Cambios realizados el 16 de octubre de 2025
 
 ## Estructura del proyecto
